@@ -1,3 +1,5 @@
+'use strict';
+
 const gulp = require('gulp');
 const del = require('del');
 const browserify = require('browserify');
@@ -7,6 +9,10 @@ const terser = require('gulp-terser');
 const sourcemaps = require('gulp-sourcemaps');
 const nunjucksRender = require('gulp-nunjucks-render');
 const log = require('gulplog');
+
+var sass = require('gulp-sass');
+
+sass.compiler = require('node-sass');
 
 function html() {
     return gulp.src('src/**/*.+(html|nunjucks|njk)')
@@ -31,13 +37,29 @@ function js() {
         .pipe(gulp.dest('target/partials/'));
 }
 
+function css() {
+    return gulp.src('src/**/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('target/partials/'));
+}
+
 function clean() {
     return del([
         'target/'
     ]);
 }
 
+const def = gulp.series(gulp.parallel(js, css), html);
+
+function watch() {
+    gulp.watch(["src/**/*", "templates/**/*"],
+               {ignoreInitial: false},
+               def
+              );
+}
+
 exports.html = html;
 exports.clean = clean;
 exports.js = js;
-exports.default = gulp.series(js, html);
+exports.watch = watch;
+exports.default = def;
