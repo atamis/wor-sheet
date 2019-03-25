@@ -21,6 +21,8 @@ function html() {
         })).pipe(gulp.dest('target'));
 }
 
+html.description = "Compile HTML from src and partials from templates to target.";
+
 function js() {
     var b = browserify({
         entries: './src/entry.js',
@@ -37,11 +39,15 @@ function js() {
         .pipe(gulp.dest('target/partials/'));
 }
 
+js.description = "Browserify, transpile, and minify JS from ./src/entry.js to target/partials/app.js";
+
 function css() {
     return gulp.src('src/**/*.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('target/partials/'));
 }
+
+css.description = "Compile SASS from src/ to target/partials/";
 
 function clean() {
     return del([
@@ -49,7 +55,11 @@ function clean() {
     ]);
 }
 
+clean.description = "Clean the target directory.";
+
 const def = gulp.series(gulp.parallel(js, css), html);
+
+def.description = "Compile everything.";
 
 function watch() {
     gulp.watch(["src/**/*", "templates/**/*"],
@@ -57,6 +67,8 @@ function watch() {
                def
               );
 }
+
+watch.description = "Watch src and templates and recompile with the default task.";
 
 exports.html = html;
 exports.clean = clean;
