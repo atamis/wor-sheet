@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8">
     <title>WoR Sheet</title>
-    <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
     {% include "sheet.html.njk" %}
@@ -11,6 +10,12 @@
     <style>
      {% include "style.css" %}
     </style>
+
+    <script>
+     wor = {state: 'full'}
+     
+      globalWorker = new Worker('./partials/worker.js');
+    </script>
 
     <script>
      {% include "app.js" %}

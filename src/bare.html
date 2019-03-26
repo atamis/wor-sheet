@@ -4,7 +4,12 @@
  {% include "style.css" %}
 </style>
 
+<script type="text/worker">
+  {% include "worker.js" %}
+</script>
+
 <script>
+ wor = {state: 'sheet'}
  {% include "app.js" %}
 </script>
 

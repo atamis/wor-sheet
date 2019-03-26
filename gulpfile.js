@@ -9,6 +9,7 @@ const terser = require('gulp-terser');
 const sourcemaps = require('gulp-sourcemaps');
 const nunjucksRender = require('gulp-nunjucks-render');
 const log = require('gulplog');
+const es = require('event-stream');
 
 var sass = require('gulp-sass');
 
@@ -23,20 +24,34 @@ function html() {
 
 html.description = "Compile HTML from src and partials from templates to target.";
 
-function js() {
-    var b = browserify({
-        entries: './src/entry.js',
-        debug: true
+var maps = true;
+var minify = true;
+
+function js(done) {
+    var entries = ['app.js', 'worker.js'];
+    
+    var tasks = entries.map((entry) => {
+        var task =  browserify({entries: ['./src/' + entry], debug: true})
+            .bundle()
+            .pipe(source(entry))
+            .pipe(buffer());
+
+        if (maps) {
+            task = task.pipe(sourcemaps.init({loadMaps: true}));
+        }
+
+        if (minify) {
+            task = task.pipe(terser())
+                .on('error', log.error);
+        }
+        if (maps) {
+            task = task.pipe(sourcemaps.write('./'));
+        }
+
+        return task.pipe(gulp.dest('target/partials/'));
     });
 
-    return b.bundle()
-        .pipe(source('app.js'))
-        .pipe(buffer())
-        .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(terser())
-        .on('error', log.error)
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('target/partials/'));
+    return es.merge.apply(null, tasks).on('end', done);
 }
 
 js.description = "Browserify, transpile, and minify JS from ./src/entry.js to target/partials/app.js";
