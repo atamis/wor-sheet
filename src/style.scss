@@ -19,10 +19,24 @@ div {
 
 }
 
-#full-sheet > div {
+#full-sheet > div, #leftWrapper > div, #rightWrapper > div {
 	border: 2px dashed black;
 	margin: 2px;
 	height: fit-content;
+}
+
+#leftWrapper, #rightWrapper {
+	display: grid;
+	justify-content: left;
+	grid-auto-flow:column;
+
+	border: none !important;
+}
+
+#rightWrapper {
+	grid-column-start:3;
+	grid-column-end:5;
+	grid-row-start:3
 }
 
 #header-fields {

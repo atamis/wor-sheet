@@ -7,14 +7,38 @@
 		Portrait goes here
 	</div>
 
-	<div id="abilities" class="header-table">
-		{% set abilities = [["STR","Strength"],["DEX","Dexterity"],["CON","Constitution"],["INT","Intelligence"],["WIS","Wisdom"],["CHA","Charisma"]] %}
 
-		{% for ability in abilities %}
-		<div class="ability">
-			{{ability[1]}}
+	<div id="leftWrapper">
+		<div id="abilities" class="header-table">
+			{% set abilities = [["STR","Strength"],["DEX","Dexterity"],["CON","Constitution"],["INT","Intelligence"],["WIS","Wisdom"],["CHA","Charisma"]] %}
+
+			{% for ability in abilities %}
+			<div class="ability">
+				{{ability[1]}}
+			</div>
+			{% endfor %}
 		</div>
-		{% endfor %}
+
+		<div id="conditions">
+			{# All checkboxes are the same class. Pick left or right side for all boxes #}
+			<div class="checkbox">
+				Fatigued
+				{# Again, some way of adding description/header. Or just a <h3> etc tag? #}
+			</div>
+
+			<div class="checkbox">
+				Exhausted
+			</div>
+
+			<div class="checkbox">
+				Bloodied
+			</div>
+
+			<div class="checkbox">
+				Wounded
+			</div>
+
+		</div>
 	</div>
 
 	<div id="skills" class="header-table">
@@ -31,61 +55,87 @@
 		Languages
 	</div>
 
-	<div id="hit-points">
-		<div class="top-box" id="totalhp">
-			Hit Points
+	<div id="rightWrapper">
+
+		<div id="hit-points">
+			<div class="top-box" id="totalhp">
+				Hit Points
+			</div>
+
+			<div class="top-box" id="damage">
+				DMG Taken
+			</div>
+
+			<div class="top-box" id="wounds-scars">
+				Wounds and Scars
+			</div>
+
+			<div class="side-box" id="bloodied-at">
+				Bloodied at:
+				{# Should have something for below-box too... #}
+			</div>
+
+			<div class="side-box" id="wounded-at">
+				Wounded at:
+				{# Should have something for below-box too... #}
+			</div>
+
+			<div id="death-saves">
+				XXXX
+				XXX
+			</div>
+
+			<div class="side-box" id="recovery-dice">
+				Recovery Dice:			
+			</div>
+
+			<div class="side-box" id="recovery-dice-used">
+				Used:
+			</div>
+
 		</div>
 
-		<div class="top-box" id="damage">
-			DMG Taken
+		<div id="armor">
+
+			<div id="armor-header">
+				{# Maybe I need a better way of doing these plus-box-type-things #}
+			</div>
+
+			<div id="armor-box" class="armor-box topbar-table">
+				Armor
+			</div>
+
+			<div id="shield-box" class="armor-box topbar-table">
+				Shield
+			</div>
+
+
 		</div>
 
-		<div class="top-box" id="wounds-scars">
-			Wounds and Scars
+		<div id="saving-throws">
+
+			<div id="saves-header">
+
+			</div>
+
+			{% set saves = ["Charm","Reflex","Death","Fear","Spell"] %}
+
+			{% for save in saves %}
+			<div class="save">
+				{{save}}
+			</div>
+			{% endfor %}
+
+			<div id="conditional-mods">
+
+			</div>
+
 		</div>
 
-		<div class="side-box" id="bloodied-at">
-			Bloodied at:
-			{# Should have something for below-box too... #}
-		</div>
+		<div id="special-abilities">
 
-		<div class="side-box" id="wounded-at">
-			Wounded at:
-			{# Should have something for below-box too... #}
-		</div>
+			{# Do something cool here. Like feats. But what? #}
 
-		<div id="death-saves">
-			XXXX
-			XXX
-		</div>
-
-		<div class="side-box" id="recovery-dice">
-			Recovery Dice:			
-		</div>
-
-		<div class="side-box" id="recovery-dice-used">
-			Used:
-		</div>
-
-	</div>
-
-	<div id="conditions">
-		{# All checkboxes are the same class. Pick left or right side for all boxes #}
-		<div class="checkbox">
-			Fatigued
-			{# Again, some way of adding description/header. Or just a <h3> etc tag? #}
-		</div>
-
-		<div class="checkbox">
-			Exhausted
-		</div>
-
-		<div class="checkbox">
-			Bloodied
-		</div>
-
-		<div class="checkbox">
-			Wounded
 		</div>
 
 	</div>
@@ -131,52 +181,10 @@
 		{% endfor %}
 	</div>
 
-	<div id="armor">
-
-		<div id="armor-header">
-			{# Maybe I need a better way of doing these plus-box-type-things #}
-		</div>
-
-		<div id="armor-box" class="armor-box topbar-table">
-			Armor
-		</div>
-
-		<div id="shield-box" class="armor-box topbar-table">
-			Shield
-		</div>
-
-
-	</div>
-
 	<div id="feats">
 		Feats
 		{# Do something nice here. But may have to be just a js thing? #}
 	</div>
 
-	<div id="saving-throws">
-
-		<div id="saves-header">
-
-		</div>
-
-		{% set saves = ["Charm","Reflex","Death","Fear","Spell"] %}
-
-		{% for save in saves %}
-		<div class="save">
-			{{save}}
-		</div>
-		{% endfor %}
-
-		<div id="conditional-mods">
-
-		</div>
-
-	</div>
-
-	<div id="special-abilities">
-
-		{# Do something cool here. Like feats. But what? #}
-
-	</div>
 
 </div>
