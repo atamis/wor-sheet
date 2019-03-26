@@ -10,6 +10,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const nunjucksRender = require('gulp-nunjucks-render');
 const log = require('gulplog');
 const es = require('event-stream');
+const rename = require('gulp-rename');
 
 var sass = require('gulp-sass');
 
@@ -34,6 +35,9 @@ function js(done) {
         var task =  browserify({entries: ['./src/' + entry], debug: true})
             .bundle()
             .pipe(source(entry))
+            .pipe(rename({
+                extname: '.bundle.js'
+            }))
             .pipe(buffer());
 
         if (maps) {
@@ -48,7 +52,8 @@ function js(done) {
             task = task.pipe(sourcemaps.write('./'));
         }
 
-        return task.pipe(gulp.dest('target/partials/'));
+        return task
+            .pipe(gulp.dest('target/partials/'));
     });
 
     return es.merge.apply(null, tasks).on('end', done);
