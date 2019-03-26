@@ -39,18 +39,18 @@ The base output (just the sheet, not a full HTML page) can be found in
 
 HTML is compiled with
 [`nunjucks`](https://mozilla.github.io/nunjucks/getting-started.html). The main
-templates can be found in `src/`, but you shouldn't need to edit the directly.
-Both templates import `templates/sheet.html.njk`, which in turn can import other
-partials from the `templates` directory, which is where you can put other
+templates or "entrypoints" can be found in `templates/`, but you shouldn't need to edit the directly.
+Both templates import `src/sheet.html.njk`, which in turn can import other
+partials from the `src` directory, which is where you can put other
 partial templates. The `.njk` extension is suggested but not required.
 
-All HTML partial templates are in the `templates/` directory, so
+All HTML partial templates are in the `src/` directory, so
 
 ```
 {% include "sheet.html.njk" %}
 ```
 
-Processes then includes the file at `templates/sheet.html.njk`.
+Processes then includes the file at `src/sheet.html.njk`.
 
 ### JS
 

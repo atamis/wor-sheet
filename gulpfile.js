@@ -16,13 +16,13 @@ var sass = require('gulp-sass');
 sass.compiler = require('node-sass');
 
 function html() {
-    return gulp.src('src/**/*.+(html|nunjucks|njk)')
+    return gulp.src('templates/**/*.+(html|nunjucks|njk)')
         .pipe(nunjucksRender({
-            path: ['templates', 'target/partials']
+            path: ['src', 'target/partials']
         })).pipe(gulp.dest('target'));
 }
 
-html.description = "Compile HTML from src and partials from templates to target.";
+html.description = "Compile pages from templates and partials from src to target.";
 
 var maps = true;
 var minify = true;
