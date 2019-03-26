@@ -5,7 +5,98 @@
   margin: 0 auto;
 }
 
+div {
+	display: block;
+}
+
 #full-sheet {
 	display: grid;
 	justify-content: center;
+	grid-auto-flow:column;
+
+	grid-template-columns: 30% 20% 20% 30%;
+	grid-template-rows: 100px 100px auto;
+
+}
+
+#full-sheet > div {
+	border: 2px dashed black;
+	margin: 2px;
+	height: fit-content;
+}
+
+#header-fields {
+	grid-column-start:1;
+	grid-column-end:4;
+	grid-row-start:1;
+	grid-row-end:2;
+}
+
+#portrait {
+	grid-column-start:4;
+	grid-column-end:5;
+	grid-row-start:1;
+	grid-row-end:3;
+	height: calc(#{width} * .3); // TODO, for now grid-row?
+}
+
+#abilities {
+	grid-column-start:1;
+	grid-column-end:2;
+	grid-row-start:span 2;
+}
+
+#skills {
+	grid-column-start:2;
+	grid-column-end:3;
+	grid-row-start:span 2;
+}
+
+#languages {
+	grid-column-start:3;
+	grid-column-end:4;
+	grid-row-start:2;
+	grid-row-end:3;
+}
+
+#hit-points {
+	grid-column-start:3;
+	grid-column-end:5;
+	grid-row-start:span 2;
+}
+
+#conditions {
+	grid-column-start:1;
+	grid-column-end:2;
+	grid-row-end: span 2;
+}
+
+#attacks {
+	grid-column-start:1;
+	grid-column-end:3;
+	grid-row-end: span 2;
+}
+
+#armor {
+	grid-column-start:3;
+	grid-column-end:5;
+	grid-row-end: span 2;
+}
+
+#feats {
+	grid-column-start:1;
+	grid-column-end:3;
+	grid-row-end: span 2;
+}
+
+#saving-throws {
+	grid-column-start:3;
+	grid-column-end:5;
+	grid-row-end: span 2;
+}
+
+#special-abilities {
+	grid-column-start:3;
+	grid-column-end:5;
+	grid-row-end: span 2;
 }
