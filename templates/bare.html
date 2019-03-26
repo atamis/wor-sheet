@@ -5,11 +5,12 @@
 </style>
 
 <script type="text/worker">
-  {% include "worker.js" %}
+ wor = {state: 'sheet'}
+  {% include "worker.bundle.js" %}
 </script>
 
 <script>
  wor = {state: 'sheet'}
- {% include "app.js" %}
+ {% include "app.bundle.js" %}
 </script>
 

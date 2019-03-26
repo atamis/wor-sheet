@@ -6,9 +6,6 @@ console.log("Hello, world");
 
 mod.hello();
 
-console.log(elementify);
-console.log(wor);
-
 r20.on("change:strength", function() {
     console.log("Strength changed");
 });

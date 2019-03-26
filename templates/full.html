@@ -11,10 +11,22 @@
      {% include "style.css" %}
     </style>
 
+    <script type="text/worker">
+     wor = {state: 'full'};
+     {% include "worker.bundle.js" %}
+    </script>
+
     <script>
-     wor = {state: 'full'}
-     
-      globalWorker = new Worker('./partials/worker.bundle.js');
+     wor = {state: 'full'};
+
+     // Assigns globalWorker to the last worker script.
+     document.querySelectorAll("script").forEach(function(item) {
+       if (item.type === "text/worker") {
+         var blob = new Blob([item.textContent], { type: "text/javascript" });
+         globalWorker = new Worker(window.URL.createObjectURL(blob));
+       }
+     });
+
     </script>
 
     <script>
