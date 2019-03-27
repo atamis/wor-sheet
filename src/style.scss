@@ -27,6 +27,22 @@ div {
 
 #header-fields {
 	grid-area: Header;
+	display:flex;
+	flex-wrap:wrap
+}
+
+#header-fields > input {
+	display:inline-block;
+	width: 10em;
+	position:relative;
+	top: -3em;
+}
+
+#header-fields > label {
+	display:inline-block;
+	width: 10em;
+	margin-right:.5em;
+	padding-top:1.5em;
 }
 
 #portrait {
@@ -104,4 +120,8 @@ $squareSize: 25px;
 
 .skill {
 	grid-column-start:Name;
+}
+
+.skills > input {
+	grid-column-start:Value;
 }

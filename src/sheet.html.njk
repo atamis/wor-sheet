@@ -27,7 +27,17 @@
 
 <div id="full-sheet">
 	<div id="header-fields">
-		Header fields!
+		<label>Character Name<input type="text" name="Character Name"></label>
+		<label>Class and Level<input type="text" name="Class and Level"></label>
+		<label>Race<input type="text" name="Race"></label>
+		<label>Movement<input type="text" name="Movement"></label>
+		<label>Age<input type="text" name="Age"></label>
+		<label>Gender<input type="text" name="Gender"></label>
+		<label>Height<input type="text" name="Height"></label>
+		<label>Weight<input type="text" name="Weight"></label>
+		<label>Eyes<input type="text" name="Eyes"></label>
+		<label>Hair<input type="text" name="Hair"></label>
+		<label>Skin<input type="text" name="Skin"></label>
 	</div>
 
 	<div id="portrait">
@@ -36,9 +46,8 @@
 
 	<div id="abilities" class="header-table">
 
-		<a href="https://www.google.com" class="rollButton ability1st">
+		<h3> ABILITIES </h3></br>
 
-		</a>
 		<div id="abilityTitleName ability2nd">
 			AbilityName
 		</div>
@@ -63,41 +72,49 @@
 	</div>
 
 	<div id="conditions">
+
+		<h3>CONDITIONS</h3></br>
+
 		{# All checkboxes are the same class. Pick left or right side for all boxes #}
-		<div class="checkbox">
+		<input type="checkbox" name="fatiguedCondition">
 			Fatigued
 			{# Again, some way of adding description/header. Or just a <h3> etc tag? #}
-		</div>
 
-		<div class="checkbox">
+		<input type="checkbox" name="exhaustedCondition">
 			Exhausted
-		</div>
 
-		<div class="checkbox">
+		<input type="checkbox" name="bloodiedCondition">
 			Bloodied
-		</div>
-
-		<div class="checkbox">
+		
+		<input type="checkbox" name="woundedCondition">
 			Wounded
-		</div>
+
+		Encumbrance:<input type="text" name="encumbranceCondition">
 
 	</div>
 
 	<div id="skills" class="header-table">
+
+		<h3>SKILLS</h3></br>
+
 		{% set skills = ["Acrobatics","Appraise","Bluff","Climb","Concentration","Decipher Script","Diplomacy","Disguise","Escape Artist","Fly","Forgery","Gather Information","Handle Animal","Heal","Intimidate","Perception","Ride","Search","Sense Motive","Sleight of Hand","Spellcraft","Stealth","Survival","Swim","Tamper"] %}
 
 		{% for skill in skills %}
+		<a href="https://www.google.com" class="rollButton"></a>
 		<div class="skill">
 			{{skill}}
 		</div>
+		<input type="text" name="skill-{{skill}}">
 		{% endfor %}
 	</div>
 
 	<div id="languages" class="header-table">
-		Languages
+		<h3>LANGUAGES</h3></br>
+		<input type="text" name="languages">
 	</div>
 
 	<div id="hit-points">
+		<h3>HIT POINTS</h3></br>
 		<div class="top-box" id="totalhp">
 			Hit Points
 		</div>
@@ -137,6 +154,8 @@
 
 	<div id="armor">
 
+		<h3>ARMOR CLASS</h3></br>
+
 		<div id="armor-header">
 			{# Maybe I need a better way of doing these plus-box-type-things #}
 		</div>
@@ -153,6 +172,8 @@
 	</div>
 
 	<div id="saving-throws">
+
+		<h3>SAVING THROWS</h3></br>
 
 		<div id="saves-header">
 
@@ -174,11 +195,16 @@
 
 	<div id="special-abilities">
 
+		<h3>SPECIAL ABILITIES</h3></br>
+
 		{# Do something cool here. Like feats. But what? #}
 
 	</div>
 
 	<div id="attacks">
+
+		<h3> ATTACKS </h3></br>
+
 		<div id="attacks-header">
 			<div id="bcb" class="side-box">
 				BCB
@@ -220,7 +246,7 @@
 	</div>
 
 	<div id="feats">
-		Feats
+		<h3>FEATS</h3></br>
 		{# Do something nice here. But may have to be just a js thing? #}
 	</div>
 
