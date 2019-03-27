@@ -17,11 +17,14 @@ div {
   grid-template-columns: 1.35fr 0.83fr 0.7fr 1.2fr;
   grid-template-rows: 0.7fr 0.8fr 1fr 0.6fr 0.6fr 2.4fr 1.2fr 0.4fr 1.4fr;
   grid-template-areas: "Header Header Header Portrait" "Abilities Skills Languages Portrait" "Abilities Skills Hit-Points Hit-Points" "Conditions Skills Hit-Points Hit-Points" "Conditions Skills Armor-Class Armor-Class" "Attacks Attacks Armor-Class Armor-Class" "Attacks Attacks Saving-Throws Saving-Throws" "Feats Feats Saving-Throws Saving-Throws" "Feats Feats Special-Abilities Special-Abilities";
+  max-height:200vh;
+  max-width:100vh;
 }
 
 #full-sheet > div, #leftWrapper > div, #rightWrapper > div {
 	border: 2px dashed black;
 	margin: 2px;
+	overflow: auto;
 }
 //
 
@@ -47,19 +50,20 @@ div {
 
 #portrait {
 	grid-area: Portrait;
-	// Proper height TODO, for now grid-row?
+	height: 0;
+	padding-top:100%;
 }
 
 #abilities {
   display: grid;
-  grid-template-columns: 0.6fr [Ability-Name] 0.8fr [Total-Score] 0.8fr [Mod] 1.8fr [Base-Score] 1fr [Temp-Mod] 1fr;
+  grid-template-columns: minmax(0,0.6fr) [Ability-Name] minmax(0,0.8fr) [Total-Score] minmax(0,0.8fr) [Mod] minmax(0,1.8fr) [Base-Score] minmax(0,1fr) [Temp-Mod] minmax(0,1fr);
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-area: Abilities;
 }
 
 #skills {
   display: grid;
-  grid-template-columns: 0.5fr [Name] 1.5fr [Value] 1fr;
+  grid-template-columns: minmax(0,0.5fr) [Name] minmax(0,1.5fr) [Value] minmax(0,1fr);
   grid-template-rows: 1fr 1fr;
 	grid-area: Skills;
 }
@@ -70,7 +74,7 @@ div {
 
 #hit-points {
   display: grid;
-  grid-template-columns: 0.6fr 0.6fr 1.1fr 1.7fr;
+  grid-template-columns: minmax(0,0.6fr) minmax(0,0.6fr) minmax(0,1.1fr) minmax(0,1.7fr);
   grid-template-rows: 0.6fr 1fr 1fr 1.4fr;
   grid-template-areas: ". DMG Wounds-Scars Wounds-Scars" "Bloodied Bloodied Wounds-Scars Wounds-Scars" "Wounded Wounded Death-Saves Death-Saves" "Wounded Wounded Recovery-Dice RD-Used";
   grid-area: Hit-Points;
@@ -94,7 +98,7 @@ div {
 
 #saving-throws {
   display: grid;
-  grid-template-columns: 0.4fr [Name] 0.4fr [Tot] 0.7fr [Base] 1.1fr [Ability] 2.4fr [Misc] 1fr 1fr;
+  grid-template-columns: minmax(0,0.4fr) [Name] minmax(0,0.4fr) [Tot] minmax(0,0.7fr) [Base] minmax(0,1.1fr) [Ability] minmax(0,2.4fr) [Misc] minmax(0,1fr) minmax(0,1fr);
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas: ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods";
   grid-area: Saving-Throws;
