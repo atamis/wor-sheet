@@ -1,3 +1,33 @@
+{# Maybe port these out at some point? #}
+
+{% macro abilityTemplate(abbreviation, name) %}
+  <div class="abilityWrapper">
+    
+    <a href="https://www.google.com" class="rollButton">
+
+    </a>
+    <div class="abilityTitlecard">
+	    <div class="abilityName">
+	      {{ name }}
+	    </div>
+	    
+	    <div class="abilityAbbrev">
+	      {{ abbreviation }}
+	    </div>
+	</div>
+
+    <input class="totAbilityScore" type="text" name="totAbilityScore{{ name }}">
+    <input class="abilityMod" type="text" name="abilityMod{{ name }}">
+    <input class="abilityBase" type="text" name="abilityBase{{ name }}">
+    <input class="tempAbilityScore" type="text" name="tempAbilityScore{{ name }}">    
+    
+  </div>
+{% endmacro %}
+
+
+
+{# End macro section #}
+
 <div id="full-sheet">
 	<div id="header-fields">
 		Header fields!
@@ -10,12 +40,32 @@
 
 	<div id="leftWrapper">
 		<div id="abilities" class="header-table">
+			<div class="abilityWrapper">
+
+				<a href="https://www.google.com" class="rollButton">
+
+				</a>
+				<div id="abilityTitleName">
+					AbilityName
+				</div>
+				<div id="abilityTitleTotal">
+					Total Score
+				</div>
+				<div id="abilityTitleMod">
+					Mod.
+				</div>
+				<div id="abilityTitleBase">
+					Base Score
+				</div>
+				<div id="abilityTitleTemp">
+					Temp Mod.
+				</div>
+
+			</div>
 			{% set abilities = [["STR","Strength"],["DEX","Dexterity"],["CON","Constitution"],["INT","Intelligence"],["WIS","Wisdom"],["CHA","Charisma"]] %}
 
 			{% for ability in abilities %}
-			<div class="ability">
-				{{ability[1]}}
-			</div>
+			{{ abilityTemplate(ability[0], ability[1])}}
 			{% endfor %}
 		</div>
 

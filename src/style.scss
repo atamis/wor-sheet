@@ -27,7 +27,6 @@ div {
 
 #leftWrapper, #rightWrapper {
 	display: grid;
-	justify-content: left;
 	grid-auto-flow:column;
 
 	border: none !important;
@@ -113,4 +112,24 @@ div {
 	grid-column-start:3;
 	grid-column-end:5;
 	grid-row-end: span 2;
+}
+
+.abilityWrapper {
+	display: grid;
+	grid-template-columns: 10%, 40%, 16.666%, 16.666%, auto;
+	grid-auto-flow: row;
+}
+
+.abilityAbbrev {
+}
+
+$squareSize: 25px;
+
+.totAbilityScore, .abilityMod, .abilityBase, .tempAbilityScore, .rollButton {
+	width: $squareSize;
+	height: $squareSize;
+}
+
+.abilityWrapper:nth-child {
+
 }
