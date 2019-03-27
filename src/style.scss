@@ -34,7 +34,7 @@ div {
 	flex-wrap:wrap
 }
 
-#header-fields > input {
+#header-fields > label > input {
 	display:inline-block;
 	width: 10em;
 	position:relative;
@@ -44,9 +44,11 @@ div {
 #header-fields > label {
 	display:inline-block;
 	width: 10em;
-	margin-right:.5em;
 	padding-top:1.5em;
 }
+
+#header-fields > .charName, #header-fields > .charName > input {width:20em}
+
 
 #portrait {
 	grid-area: Portrait;
@@ -57,14 +59,14 @@ div {
 #abilities {
   display: grid;
   grid-template-columns: minmax(0,0.6fr) [Ability-Name] minmax(0,0.8fr) [Total-Score] minmax(0,0.8fr) [Mod] minmax(0,1.8fr) [Base-Score] minmax(0,1fr) [Temp-Mod] minmax(0,1fr);
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: minmax(0,1fr) 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-area: Abilities;
 }
 
 #skills {
   display: grid;
   grid-template-columns: minmax(0,0.5fr) [Name] minmax(0,1.5fr) [Value] minmax(0,1fr);
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: minmax(0,1fr) 1fr 1fr;
 	grid-area: Skills;
 }
 
@@ -75,7 +77,7 @@ div {
 #hit-points {
   display: grid;
   grid-template-columns: minmax(0,0.6fr) minmax(0,0.6fr) minmax(0,1.1fr) minmax(0,1.7fr);
-  grid-template-rows: 0.6fr 1fr 1fr 1.4fr;
+  grid-template-rows: minmax(0,1fr) 0.6fr 1fr 1fr 1.4fr;
   grid-template-areas: ". DMG Wounds-Scars Wounds-Scars" "Bloodied Bloodied Wounds-Scars Wounds-Scars" "Wounded Wounded Death-Saves Death-Saves" "Wounded Wounded Recovery-Dice RD-Used";
   grid-area: Hit-Points;
 }
@@ -99,7 +101,7 @@ div {
 #saving-throws {
   display: grid;
   grid-template-columns: minmax(0,0.4fr) [Name] minmax(0,0.4fr) [Tot] minmax(0,0.7fr) [Base] minmax(0,1.1fr) [Ability] minmax(0,2.4fr) [Misc] minmax(0,1fr) minmax(0,1fr);
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: minmax(0,1fr) 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas: ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods";
   grid-area: Saving-Throws;
 }
@@ -128,4 +130,14 @@ $squareSize: 25px;
 
 .skills > input {
 	grid-column-start:Value;
+}
+
+.sectionHeader {
+    grid-column-start: 1;
+    grid-column-end: -1;
+    background-color: black;
+    color: white;
+    height: fit-content;
+    font-size: 1.5em;
+    padding-bottom: 5px;
 }

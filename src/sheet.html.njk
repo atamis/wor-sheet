@@ -15,10 +15,10 @@
     </div>
 </div>
 
-<input class="totAbilityScore ability3rd" type="text" name="totAbilityScore{{ name }}">
-<input class="abilityMod ability4th" type="text" name="abilityMod{{ name }}">
-<input class="abilityBase ability5th" type="text" name="abilityBase{{ name }}">
-<input class="tempAbilityScore ability6th" type="text" name="tempAbilityScore{{ name }}">    
+<input class="totAbilityScore ability3rd" type="text" name="attr_totAbilityScore{{ name }}" value="10">
+<input class="abilityMod ability4th" type="text" name="attr_abilityMod{{ name }}" value="(@\{ {{ name }} \}-10)/2">
+<input class="abilityBase ability5th" type="text" name="attr_abilityBase{{ name }}">
+<input class="tempAbilityScore ability6th" type="text" name="attr_tempAbilityScore{{ name }}">    
 {% endmacro %}
 
 
@@ -27,17 +27,17 @@
 
 <div id="full-sheet">
 	<div id="header-fields">
-		<label>Character Name<input type="text" name="Character Name"></label>
-		<label>Class and Level<input type="text" name="Class and Level"></label>
-		<label>Race<input type="text" name="Race"></label>
-		<label>Movement<input type="text" name="Movement"></label>
-		<label>Age<input type="text" name="Age"></label>
-		<label>Gender<input type="text" name="Gender"></label>
-		<label>Height<input type="text" name="Height"></label>
-		<label>Weight<input type="text" name="Weight"></label>
-		<label>Eyes<input type="text" name="Eyes"></label>
-		<label>Hair<input type="text" name="Hair"></label>
-		<label>Skin<input type="text" name="Skin"></label>
+		<label class="charName">Character Name<input type="text" name="attr_char_name" /></label>
+		<label class="charName">Class and Level<input type="text" name="attr_class_lvl" /></label>
+		<label class="charName">Race<input type="text" name="attr_race" /></label>
+		<label class="charName">Movement<input type="text" name="attr_movement" /></label>
+		<label class="charName">Age<input type="text" name="attr_age"></label>
+		<label class="charName">Gender<input type="text" name="attr_gender" /></label>
+		<label class="charName">Height<input type="text" name="attr_height" /></label>
+		<label class="charName">Weight<input type="text" name="attr_weight" /></label>
+		<label class="charName">Eyes<input type="text" name="attr_eyes" /></label>
+		<label class="charName">Hair<input type="text" name="attr_hair" /></label>
+		<label class="charName">Skin<input type="text" name="attr_skin" /></label>
 	</div>
 
 	<div id="portrait">
@@ -46,7 +46,7 @@
 
 	<div id="abilities" class="header-table">
 
-		<h3> ABILITIES </h3></br>
+		<div class="sectionHeader"> ABILITIES </div></br>
 
 		<div id="abilityTitleName ability2nd">
 			AbilityName
@@ -73,29 +73,29 @@
 
 	<div id="conditions">
 
-		<h3>CONDITIONS</h3></br>
+		<div class="sectionHeader">CONDITIONS</div></br>
 
 		{# All checkboxes are the same class. Pick left or right side for all boxes #}
-		<input type="checkbox" name="fatiguedCondition">
+		<input type="checkbox" name="attr_fatiguedCondition" value='0'>
 			Fatigued
-			{# Again, some way of adding description/header. Or just a <h3> etc tag? #}
+			{# Again, some way of adding description/header. Or just a <div class="sectionHeader"> etc tag? #}
 
-		<input type="checkbox" name="exhaustedCondition">
+		<input type="checkbox" name="attr_exhaustedCondition" value='0'>
 			Exhausted
 
-		<input type="checkbox" name="bloodiedCondition">
+		<input type="checkbox" name="attr_bloodiedCondition" value='0'>
 			Bloodied
 		
-		<input type="checkbox" name="woundedCondition">
+		<input type="checkbox" name="attr_woundedCondition" value='0'>
 			Wounded
 
-		Encumbrance:<input type="text" name="encumbranceCondition">
+		Encumbrance:<input type="text" name="attr_encumbranceCondition">
 
 	</div>
 
 	<div id="skills" class="header-table">
 
-		<h3>SKILLS</h3></br>
+		<div class="sectionHeader">SKILLS</div></br>
 
 		{% set skills = ["Acrobatics","Appraise","Bluff","Climb","Concentration","Decipher Script","Diplomacy","Disguise","Escape Artist","Fly","Forgery","Gather Information","Handle Animal","Heal","Intimidate","Perception","Ride","Search","Sense Motive","Sleight of Hand","Spellcraft","Stealth","Survival","Swim","Tamper"] %}
 
@@ -104,17 +104,17 @@
 		<div class="skill">
 			{{skill}}
 		</div>
-		<input type="text" name="skill-{{skill}}">
+		<input type="text" name="attr_skill_{{skill}}">
 		{% endfor %}
 	</div>
 
 	<div id="languages" class="header-table">
-		<h3>LANGUAGES</h3></br>
-		<input type="text" name="languages">
+		<div class="sectionHeader">LANGUAGES</div></br>
+		<input type="text" name="attr_languages">
 	</div>
 
 	<div id="hit-points">
-		<h3>HIT POINTS</h3></br>
+		<div class="sectionHeader">HIT POINTS</div></br>
 		<div class="top-box" id="totalhp">
 			Hit Points
 		</div>
@@ -154,7 +154,7 @@
 
 	<div id="armor">
 
-		<h3>ARMOR CLASS</h3></br>
+		<div class="sectionHeader">ARMOR CLASS</div></br>
 
 		<div id="armor-header">
 			{# Maybe I need a better way of doing these plus-box-type-things #}
@@ -173,7 +173,7 @@
 
 	<div id="saving-throws">
 
-		<h3>SAVING THROWS</h3></br>
+		<div class="sectionHeader">SAVING THROWS</div></br>
 
 		<div id="saves-header">
 
@@ -195,7 +195,7 @@
 
 	<div id="special-abilities">
 
-		<h3>SPECIAL ABILITIES</h3></br>
+		<div class="sectionHeader">SPECIAL ABILITIES</div></br>
 
 		{# Do something cool here. Like feats. But what? #}
 
@@ -203,7 +203,7 @@
 
 	<div id="attacks">
 
-		<h3> ATTACKS </h3></br>
+		<div class="sectionHeader"> ATTACKS </div></br>
 
 		<div id="attacks-header">
 			<div id="bcb" class="side-box">
@@ -246,7 +246,7 @@
 	</div>
 
 	<div id="feats">
-		<h3>FEATS</h3></br>
+		<div class="sectionHeader">FEATS</div></br>
 		{# Do something nice here. But may have to be just a js thing? #}
 	</div>
 
