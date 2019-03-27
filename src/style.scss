@@ -10,117 +10,82 @@ div {
 }
 
 #full-sheet {
-	display: grid;
-	justify-content: center;
-	grid-auto-flow:column;
 
-	grid-template-columns: 30% 20% 20% 30%;
-	grid-template-rows: 100px 100px auto;
+	// All grid layout thanks to https://grid.layoutit.com/ after I spent way too long trying to get it to work
 
+  display: grid;
+  grid-template-columns: 1.35fr 0.83fr 0.7fr 1.2fr;
+  grid-template-rows: 0.7fr 0.8fr 1fr 0.6fr 0.6fr 2.4fr 1.2fr 0.4fr 1.4fr;
+  grid-template-areas: "Header Header Header Portrait" "Abilities Skills Languages Portrait" "Abilities Skills Hit-Points Hit-Points" "Conditions Skills Hit-Points Hit-Points" "Conditions Skills Armor-Class Armor-Class" "Attacks Attacks Armor-Class Armor-Class" "Attacks Attacks Saving-Throws Saving-Throws" "Feats Feats Saving-Throws Saving-Throws" "Feats Feats Special-Abilities Special-Abilities";
 }
 
 #full-sheet > div, #leftWrapper > div, #rightWrapper > div {
 	border: 2px dashed black;
 	margin: 2px;
-	height: fit-content;
 }
-
-#leftWrapper, #rightWrapper {
-	display: grid;
-	grid-auto-flow:column;
-
-	border: none !important;
-}
-
-#rightWrapper {
-	grid-column-start:3;
-	grid-column-end:5;
-	grid-row-start:3
-}
+//
 
 #header-fields {
-	grid-column-start:1;
-	grid-column-end:4;
-	grid-row-start:1;
-	grid-row-end:2;
+	grid-area: Header;
 }
 
 #portrait {
-	grid-column-start:4;
-	grid-column-end:5;
-	grid-row-start:1;
-	grid-row-end:3;
-	height: calc(#{width} * .3); // TODO, for now grid-row?
+	grid-area: Portrait;
+	// Proper height TODO, for now grid-row?
 }
 
 #abilities {
-	grid-column-start:1;
-	grid-column-end:2;
-	grid-row-start:span 2;
+  display: grid;
+  grid-template-columns: 0.6fr [Ability-Name] 0.8fr [Total-Score] 0.8fr [Mod] 1.8fr [Base-Score] 1fr [Temp-Mod] 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-area: Abilities;
 }
 
 #skills {
-	grid-column-start:2;
-	grid-column-end:3;
-	grid-row-start:span 2;
+  display: grid;
+  grid-template-columns: 0.5fr [Name] 1.5fr [Value] 1fr;
+  grid-template-rows: 1fr 1fr;
+	grid-area: Skills;
 }
 
 #languages {
-	grid-column-start:3;
-	grid-column-end:4;
-	grid-row-start:2;
-	grid-row-end:3;
+	grid-area: Languages;
 }
 
 #hit-points {
-	grid-column-start:3;
-	grid-column-end:5;
-	grid-row-start:span 2;
+  display: grid;
+  grid-template-columns: 0.6fr 0.6fr 1.1fr 1.7fr;
+  grid-template-rows: 0.6fr 1fr 1fr 1.4fr;
+  grid-template-areas: ". DMG Wounds-Scars Wounds-Scars" "Bloodied Bloodied Wounds-Scars Wounds-Scars" "Wounded Wounded Death-Saves Death-Saves" "Wounded Wounded Recovery-Dice RD-Used";
+  grid-area: Hit-Points;
 }
 
 #conditions {
-	grid-column-start:1;
-	grid-column-end:2;
-	grid-row-end: span 2;
+	grid-area: Conditions;
 }
 
 #attacks {
-	grid-column-start:1;
-	grid-column-end:3;
-	grid-row-end: span 2;
+	grid-area: Attacks;
 }
 
 #armor {
-	grid-column-start:3;
-	grid-column-end:5;
-	grid-row-end: span 2;
+	grid-area: Armor-Class;
 }
 
 #feats {
-	grid-column-start:1;
-	grid-column-end:3;
-	grid-row-end: span 2;
+	grid-area: Feats;
 }
 
 #saving-throws {
-	grid-column-start:3;
-	grid-column-end:5;
-	grid-row-end: span 2;
+  display: grid;
+  grid-template-columns: 0.4fr [Name] 0.4fr [Tot] 0.7fr [Base] 1.1fr [Ability] 2.4fr [Misc] 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods";
+  grid-area: Saving-Throws;
 }
 
 #special-abilities {
-	grid-column-start:3;
-	grid-column-end:5;
-	grid-row-end: span 2;
-}
-
-.abilityWrapper {
-	display: grid;
-	grid-template-columns: 10%, 40%, 16.666%, 16.666%, auto;
-	grid-auto-flow: row;
-}
-
-.abilityAbbrev {
+	grid-area: Special-Abilities;
 }
 
 $squareSize: 25px;
@@ -130,6 +95,13 @@ $squareSize: 25px;
 	height: $squareSize;
 }
 
-.abilityWrapper:nth-child {
+.ability1st {grid-column-start: 1}
+.ability2nd {grid-column-start: Ability-Name}
+.ability3rd {grid-column-start: Total-Score}
+.ability4th {grid-column-start: Mod}
+.ability5th {grid-column-start: Base-Score}
+.ability6th {grid-column-start: Temp-Mod}
 
+.skill {
+	grid-column-start:Name;
 }

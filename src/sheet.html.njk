@@ -1,27 +1,24 @@
 {# Maybe port these out at some point? #}
 
 {% macro abilityTemplate(abbreviation, name) %}
-  <div class="abilityWrapper">
     
-    <a href="https://www.google.com" class="rollButton">
+<a href="https://www.google.com" class="rollButton ability1st">
 
-    </a>
-    <div class="abilityTitlecard">
-	    <div class="abilityName">
-	      {{ name }}
-	    </div>
-	    
-	    <div class="abilityAbbrev">
-	      {{ abbreviation }}
-	    </div>
-	</div>
-
-    <input class="totAbilityScore" type="text" name="totAbilityScore{{ name }}">
-    <input class="abilityMod" type="text" name="abilityMod{{ name }}">
-    <input class="abilityBase" type="text" name="abilityBase{{ name }}">
-    <input class="tempAbilityScore" type="text" name="tempAbilityScore{{ name }}">    
+</a>
+<div class="abilityTitlecard ability2nd">
+    <div class="abilityName">
+      {{ name }}
+    </div>
     
-  </div>
+    <div class="abilityAbbrev">
+      {{ abbreviation }}
+    </div>
+</div>
+
+<input class="totAbilityScore ability3rd" type="text" name="totAbilityScore{{ name }}">
+<input class="abilityMod ability4th" type="text" name="abilityMod{{ name }}">
+<input class="abilityBase ability5th" type="text" name="abilityBase{{ name }}">
+<input class="tempAbilityScore ability6th" type="text" name="tempAbilityScore{{ name }}">    
 {% endmacro %}
 
 
@@ -37,58 +34,53 @@
 		Portrait goes here
 	</div>
 
+	<div id="abilities" class="header-table">
 
-	<div id="leftWrapper">
-		<div id="abilities" class="header-table">
-			<div class="abilityWrapper">
+		<a href="https://www.google.com" class="rollButton ability1st">
 
-				<a href="https://www.google.com" class="rollButton">
-
-				</a>
-				<div id="abilityTitleName">
-					AbilityName
-				</div>
-				<div id="abilityTitleTotal">
-					Total Score
-				</div>
-				<div id="abilityTitleMod">
-					Mod.
-				</div>
-				<div id="abilityTitleBase">
-					Base Score
-				</div>
-				<div id="abilityTitleTemp">
-					Temp Mod.
-				</div>
-
-			</div>
-			{% set abilities = [["STR","Strength"],["DEX","Dexterity"],["CON","Constitution"],["INT","Intelligence"],["WIS","Wisdom"],["CHA","Charisma"]] %}
-
-			{% for ability in abilities %}
-			{{ abilityTemplate(ability[0], ability[1])}}
-			{% endfor %}
+		</a>
+		<div id="abilityTitleName ability2nd">
+			AbilityName
+		</div>
+		<div id="abilityTitleTotal ability3rd">
+			Total Score
+		</div>
+		<div id="abilityTitleMod ability4th">
+			Mod.
+		</div>
+		<div id="abilityTitleBase ability5th">
+			Base Score
+		</div>
+		<div id="abilityTitleTemp ability6th">
+			Temp Mod.
 		</div>
 
-		<div id="conditions">
-			{# All checkboxes are the same class. Pick left or right side for all boxes #}
-			<div class="checkbox">
-				Fatigued
-				{# Again, some way of adding description/header. Or just a <h3> etc tag? #}
-			</div>
+		{% set abilities = [["STR","Strength"],["DEX","Dexterity"],["CON","Constitution"],["INT","Intelligence"],["WIS","Wisdom"],["CHA","Charisma"]] %}
 
-			<div class="checkbox">
-				Exhausted
-			</div>
+		{% for ability in abilities %}
+		{{ abilityTemplate(ability[0], ability[1])}}
+		{% endfor %}
+	</div>
 
-			<div class="checkbox">
-				Bloodied
-			</div>
-
-			<div class="checkbox">
-				Wounded
-			</div>
-
+	<div id="conditions">
+		{# All checkboxes are the same class. Pick left or right side for all boxes #}
+		<div class="checkbox">
+			Fatigued
+			{# Again, some way of adding description/header. Or just a <h3> etc tag? #}
 		</div>
+
+		<div class="checkbox">
+			Exhausted
+		</div>
+
+		<div class="checkbox">
+			Bloodied
+		</div>
+
+		<div class="checkbox">
+			Wounded
+		</div>
+
 	</div>
 
 	<div id="skills" class="header-table">
@@ -105,88 +97,84 @@
 		Languages
 	</div>
 
-	<div id="rightWrapper">
+	<div id="hit-points">
+		<div class="top-box" id="totalhp">
+			Hit Points
+		</div>
 
-		<div id="hit-points">
-			<div class="top-box" id="totalhp">
-				Hit Points
-			</div>
+		<div class="top-box" id="damage">
+			DMG Taken
+		</div>
 
-			<div class="top-box" id="damage">
-				DMG Taken
-			</div>
+		<div class="top-box" id="wounds-scars">
+			Wounds and Scars
+		</div>
 
-			<div class="top-box" id="wounds-scars">
-				Wounds and Scars
-			</div>
+		<div class="side-box" id="bloodied-at">
+			Bloodied at:
+			{# Should have something for below-box too... #}
+		</div>
 
-			<div class="side-box" id="bloodied-at">
-				Bloodied at:
-				{# Should have something for below-box too... #}
-			</div>
+		<div class="side-box" id="wounded-at">
+			Wounded at:
+			{# Should have something for below-box too... #}
+		</div>
 
-			<div class="side-box" id="wounded-at">
-				Wounded at:
-				{# Should have something for below-box too... #}
-			</div>
+		<div id="death-saves">
+			XXXX
+			XXX
+		</div>
 
-			<div id="death-saves">
-				XXXX
-				XXX
-			</div>
+		<div class="side-box" id="recovery-dice">
+			Recovery Dice:			
+		</div>
 
-			<div class="side-box" id="recovery-dice">
-				Recovery Dice:			
-			</div>
+		<div class="side-box" id="recovery-dice-used">
+			Used:
+		</div>
 
-			<div class="side-box" id="recovery-dice-used">
-				Used:
-			</div>
+	</div>
+
+	<div id="armor">
+
+		<div id="armor-header">
+			{# Maybe I need a better way of doing these plus-box-type-things #}
+		</div>
+
+		<div id="armor-box" class="armor-box topbar-table">
+			Armor
+		</div>
+
+		<div id="shield-box" class="armor-box topbar-table">
+			Shield
+		</div>
+
+
+	</div>
+
+	<div id="saving-throws">
+
+		<div id="saves-header">
 
 		</div>
 
-		<div id="armor">
+		{% set saves = ["Charm","Reflex","Death","Fear","Spell"] %}
 
-			<div id="armor-header">
-				{# Maybe I need a better way of doing these plus-box-type-things #}
-			</div>
+		{% for save in saves %}
+		<div class="save">
+			{{save}}
+		</div>
+		{% endfor %}
 
-			<div id="armor-box" class="armor-box topbar-table">
-				Armor
-			</div>
-
-			<div id="shield-box" class="armor-box topbar-table">
-				Shield
-			</div>
-
+		<div id="conditional-mods">
 
 		</div>
 
-		<div id="saving-throws">
+	</div>
 
-			<div id="saves-header">
+	<div id="special-abilities">
 
-			</div>
-
-			{% set saves = ["Charm","Reflex","Death","Fear","Spell"] %}
-
-			{% for save in saves %}
-			<div class="save">
-				{{save}}
-			</div>
-			{% endfor %}
-
-			<div id="conditional-mods">
-
-			</div>
-
-		</div>
-
-		<div id="special-abilities">
-
-			{# Do something cool here. Like feats. But what? #}
-
-		</div>
+		{# Do something cool here. Like feats. But what? #}
 
 	</div>
 
