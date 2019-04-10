@@ -61,15 +61,20 @@ div {
 #abilities {
   display: grid;
   grid-template-columns: minmax(0,0.6fr) [Ability-Name] minmax(0,0.8fr) [Total-Score] minmax(0,0.8fr) [Mod] minmax(0,1.8fr) [Base-Score] minmax(0,1fr) [Temp-Mod] minmax(0,1fr);
-  grid-template-rows: minmax(0,1fr) 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: minmax(0, .75fr) .5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-area: Abilities;
 }
 
 #skills {
   display: grid;
   grid-template-columns: minmax(0,0.5fr) [Name] minmax(0,1.5fr) [Value] minmax(0,1fr);
-  grid-template-rows: minmax(0,1fr) 1fr 1fr;
+  grid-template-rows: 2.1em;
 	grid-area: Skills;
+}
+
+#skills > .skill {
+  font-size: .8em;
+  align-self: center;
 }
 
 #languages {

@@ -2,7 +2,8 @@
 
 {% macro abilityTemplate(abbreviation, name) %}
     
-<a href="https://www.google.com" class="rollButton ability1st">
+
+<button type='roll' value='/roll 1d20' name='roll_ability{{name}}' class='ability1st'></button>
 
 </a>
 <div class="abilityTitlecard ability2nd">
@@ -95,12 +96,12 @@
 
 	<div id="skills" class="header-table">
 
-		<div class="sectionHeader">SKILLS</div></br>
+		<div class="sectionHeader">SKILLS</div>
 
 		{% set skills = ["Acrobatics","Appraise","Bluff","Climb","Concentration","Decipher Script","Diplomacy","Disguise","Escape Artist","Fly","Forgery","Gather Information","Handle Animal","Heal","Intimidate","Perception","Ride","Search","Sense Motive","Sleight of Hand","Spellcraft","Stealth","Survival","Swim","Tamper"] %}
 
 		{% for skill in skills %}
-		<a href="https://www.google.com" class="rollButton"></a>
+		<button type='roll' value='/roll 1d20' name='roll_skill{{skill}}'></button>
 		<div class="skill">
 			{{skill}}
 		</div>
