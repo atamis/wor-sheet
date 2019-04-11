@@ -3,7 +3,7 @@
 {% macro abilityTemplate(abbreviation, name) %}
     
 
-<button type='roll' value='/roll 1d20' name='roll_ability{{name}}' class='ability1st'></button>
+<button type='roll' value='/roll 1d20' name='roll_ability{{name}}' class='ability1st rollButton'></button>
 
 </a>
 <div class="abilityTitlecard ability2nd">
@@ -76,21 +76,36 @@
 
 		<div class="sectionHeader">CONDITIONS</div></br>
 
-		{# All checkboxes are the same class. Pick left or right side for all boxes #}
-		<input type="checkbox" name="attr_fatiguedCondition" value='0'>
-			Fatigued
-			{# Again, some way of adding description/header. Or just a <div class="sectionHeader"> etc tag? #}
 
-		<input type="checkbox" name="attr_exhaustedCondition" value='0'>
-			Exhausted
+		<div id="fatiguedConditionBox">
+			<input type="checkbox" name="attr_fatiguedCondition" value='0'>
+				Fatigued
+		</div>
+				{# Again, some way of adding description/header. Or just a <div class="sectionHeader"> etc tag? #}
 
-		<input type="checkbox" name="attr_bloodiedCondition" value='0'>
-			Bloodied
-		
-		<input type="checkbox" name="attr_woundedCondition" value='0'>
-			Wounded
+		<div id="exhaustedConditionBox">
+			<input type="checkbox" name="attr_exhaustedCondition" value='0'>
+				Exhausted
+		</div>
 
-		Encumbrance:<input type="text" name="attr_encumbranceCondition">
+		<div id="encumbranceConditionBox">
+			Encumbrance:
+				<select name="attr_encumbranceCondition">
+					<option value="light"> Light </option>
+					<option value="medium"> Medium </option>
+					<option value="heavy"> Heavy </option>
+				</select>
+		</div>
+
+		<div id="bloodiedConditionBox">
+			<input type="checkbox" name="attr_bloodiedCondition" value='0'>
+				Bloodied
+		</div>
+
+		<div id="woundedConditionBox">
+			<input type="checkbox" name="attr_woundedCondition" value='0'>
+				Wounded
+		</div>
 
 	</div>
 
@@ -101,7 +116,7 @@
 		{% set skills = ["Acrobatics","Appraise","Bluff","Climb","Concentration","Decipher Script","Diplomacy","Disguise","Escape Artist","Fly","Forgery","Gather Information","Handle Animal","Heal","Intimidate","Perception","Ride","Search","Sense Motive","Sleight of Hand","Spellcraft","Stealth","Survival","Swim","Tamper"] %}
 
 		{% for skill in skills %}
-		<button type='roll' value='/roll 1d20' name='roll_skill{{skill}}'></button>
+		<button type='roll' value='/roll 1d20' name='roll_skill{{skill}}' class='rollButton'></button>
 		<div class="skill">
 			{{skill}}
 		</div>

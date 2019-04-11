@@ -9,6 +9,11 @@ div {
 	display: block;
 }
 
+.rollbutton {
+  max-width: 15px;
+  max-height: 15px;
+}
+
 #full-sheet {
 
 	// All grid layout thanks to https://grid.layoutit.com/ after I spent way too long trying to get it to work
@@ -54,7 +59,6 @@ div {
 
 #portrait {
 	grid-area: Portrait;
-	height: 0;
 	padding-top:100%;
 }
 
@@ -103,6 +107,19 @@ div {
 
 #conditions {
 	grid-area: Conditions;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  grid-auto-flow:column; 
+}
+
+#fatiguedConditionBox, #exhaustedConditionBox {
+  grid-column-start:1;
+  grid-column-end:2;
+}
+
+#bloodiedConditionBox, #woundedConditionBox, #encumbranceConditionBox {
+  grid-column-start:2;
+  grid-column-end:3;
 }
 
 #attacks {
@@ -129,7 +146,7 @@ div {
 	grid-area: Special-Abilities;
 }
 
-.totAbilityScore, .abilityMod, .abilityBase, .tempAbilityScore, .rollButton {
+.totAbilityScore, .abilityMod, .abilityBase, .tempAbilityScore {
 	width: 100%;
 	height: 100%;
 }
