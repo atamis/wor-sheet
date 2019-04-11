@@ -109,9 +109,45 @@ div {
 #hit-points {
   display: grid;
   grid-template-columns: minmax(0,0.6fr) minmax(0,0.6fr) minmax(0,1.1fr) minmax(0,1.7fr);
-  grid-template-rows: minmax(0,1fr) 0.6fr 1fr 1fr 1.4fr;
-  grid-template-areas: ". DMG Wounds-Scars Wounds-Scars" "Bloodied Bloodied Wounds-Scars Wounds-Scars" "Wounded Wounded Death-Saves Death-Saves" "Wounded Wounded Recovery-Dice RD-Used";
+  grid-template-rows: 2.1em minmax(0,1fr) 0.6fr 1fr 1fr;
+  grid-template-areas: "HEADER HEADER HEADER HEADER" "HP DMG Wounds-Scars Wounds-Scars" "Bloodied Bloodied Wounds-Scars Wounds-Scars" "Wounded Wounded Death-Saves Death-Saves" "Wounded Wounded Recovery-Dice RD-Used";
   grid-area: Hit-Points;
+}
+
+#hit-points > .sectionHeader {
+  grid-row-start: 1;
+}
+
+#totalhp {
+  grid-area:HP;
+}
+
+#damage {
+  grid-area:DMG;
+}
+
+#wounds-scars {
+  grid-area: Wounds-Scars;
+}
+
+#bloodied-at {
+  grid-area: Bloodied;
+}
+
+#wounded-at {
+  grid-area:Wounded;
+}
+
+#death-saves {
+  grid-area: Death-Saves;
+}
+
+#recovery-dice {
+  grid-area: Recovery-Dice;
+}
+
+#recovery-dice {
+  grid-area: RD-Used;
 }
 
 #conditions {
@@ -145,17 +181,39 @@ div {
 
 #saving-throws {
   display: grid;
-  grid-template-columns: minmax(0,0.4fr) [Name] minmax(0,0.4fr) [Tot] minmax(0,0.7fr) [Base] minmax(0,1.1fr) [Ability] minmax(0,2.4fr) [Misc] minmax(0,1fr) minmax(0,1fr);
-  grid-template-rows: minmax(0,1fr) 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-areas: ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods";
+  grid-template-columns: minmax(0,0.4fr) [Name] minmax(0,0.4fr) [Tot] minmax(0,0.7fr) [Base] minmax(0,1.1fr) [Ability] minmax(0,2.4fr) [Misc] minmax(0,1fr) 2fr;
+  grid-template-rows: 2.1em .5fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: ". . . . . . ." ". . . . . . ." ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods";
   grid-area: Saving-Throws;
+}
+
+#saving-throws > .totSaveScore, #saving-throws > .saveMod, #saving-throws > .saveBase, #saving-throws > .miscMod {
+  width: 100%;
+  height: 100%;
+}
+
+.save1st {grid-column-start: 1}
+.save2nd {grid-column-start: Name}
+.save3rd {grid-column-start: Tot}
+.save4th {grid-column-start: Base}
+.save5th {grid-column-start: Ability}
+.save6th {grid-column-start: Misc}
+
+#conditional-save-mods {
+  grid-area: Conditional-Mods;
+  max-height: 100%;
+  margin-left:5px;
+}
+
+#conditional-save-mods > input {
+  height:100%;
 }
 
 #special-abilities {
 	grid-area: Special-Abilities;
 }
 
-.totAbilityScore, .abilityMod, .abilityBase, .tempAbilityScore {
+#abilities > .totSaveScore, #abilities > .saveMod, #abilities > .saveBase, #abilities > .tempSaveScore {
 	width: 100%;
 	height: 100%;
 }

@@ -5,7 +5,6 @@
 
 <button type='roll' value='/roll 1d20' name='roll_ability{{name}}' class='ability1st rollButton'></button>
 
-</a>
 <div class="abilityTitlecard ability2nd">
     <div class="abilityName">
       {{ name }}
@@ -20,6 +19,20 @@
 <input class="abilityMod ability4th" type="text" name="attr_abilityMod{{ name }}" value="(@\{ {{ name }} \}-10)/2">
 <input class="abilityBase ability5th" type="text" name="attr_abilityBase{{ name }}">
 <input class="tempAbilityScore ability6th" type="text" name="attr_tempAbilityScore{{ name }}">    
+{% endmacro %}
+
+{% macro saveTemplate(name) %}
+    
+<button type='roll' value='/roll 1d20' name='roll_save{{name}}' class='save1st rollButton'></button>
+
+<div class="saveTitlecard save2nd">
+    {{ name }}
+</div>
+
+<input class="totSaveScore save3rd" type="text" name="attr_totSaveScore{{ name }}" value="10">
+<input class="saveBase save4th" type="text" name="attr_saveBase{{ name }}">
+<input class="saveMod save5th" type="text" name="attr_saveMod{{ name }}" value="(@\{ {{ name }} \}-10)/2">
+<input class="miscMod save6th" type="text" name="attr_miscSaveMod{{ name }}">    
 {% endmacro %}
 
 
@@ -130,7 +143,7 @@
 	</div>
 
 	<div id="hit-points">
-		<div class="sectionHeader">HIT POINTS</div></br>
+		<div class="sectionHeader">HIT POINTS</div>
 		<div class="top-box" id="totalhp">
 			Hit Points
 		</div>
@@ -198,13 +211,11 @@
 		{% set saves = ["Charm","Reflex","Death","Fear","Spell"] %}
 
 		{% for save in saves %}
-		<div class="save">
-			{{save}}
-		</div>
+		{{ saveTemplate(save) }}
 		{% endfor %}
 
-		<div id="conditional-mods">
-
+		<div id="conditional-save-mods">
+			<input type="text" name="attr_conditionalSaveMods"/>
 		</div>
 
 	</div>
