@@ -139,7 +139,7 @@
 
 	<div id="languages" class="header-table">
 		<div class="sectionHeader">LANGUAGES</div>
-		<input type="text" name="attr_languages">
+		<textarea name="attr_languages"></textarea>
 	</div>
 
 	<div id="hit-points">
@@ -157,7 +157,7 @@
 
 		<div class="top-box" id="wounds-scars">
 			<label>Wounds & Scars</label>
-			<input type="text" name="attr_wounds-scars"/>
+			<textarea name="attr_wounds-scars"></textarea>
 		</div>
 
 		<div class="side-box" id="bloodied-at">
@@ -199,18 +199,59 @@
 
 	<div id="armor">
 
-		<div class="sectionHeader">ARMOR CLASS</div></br>
+		<div class="sectionHeader">ARMOR CLASS</div>
 
-		<div id="armor-header">
+		<div id="total-armor">
+			<label>Total<input type="text" name="attr_totalAC" /></label>
+			<div class="plus-label"> = 10 + </div>
+			<label>Dex Mod<input type="text" name="attr_AC-Dex-Mod" /></label>
+			<div class="plus-label">+</div>
+			<label>Armor<input type="text" name="attr_AC-Armor" /></label>
+			<div class="plus-label">+</div>
+			<label>Shield<input type="text" name="attr_AC-Shield" /></label>
+			<div class="plus-label">+</div>
+			<label>Misc<input type="text" name="attr_AC-Misc" /></label>
+			<div class="plus-label">+</div>
+			<label>Cover<input type="text" name="attr_AC-Cover" /></label>
 			{# Maybe I need a better way of doing these plus-box-type-things #}
 		</div>
 
+		<div class="top-box" id="touch-AC">
+			<label>Touch AC</label>
+			<input type="text" name="attr_touch-AC"/>
+			<label>(No armor/shield bonus)</label>
+		</div>
+
+		<div class="top-box" id="off-guard-AC">
+			<label>Off-Guard AC</label>
+			<input type="text" name="attr_off-guard-AC"/>
+			<label>(No Dex bonus)</label>
+		</div>
+
+		<div id="special-defenses">
+			<textarea type="text" name="attr_special-defenses" placeholder="Special Defenses"></textarea>
+		</div>
+
 		<div id="armor-box" class="armor-box topbar-table">
-			Armor
+			<label>Armor<input type="text" name="attr_armor" /></label>
+			<label>Check Pen.<input type="text" name="attr_armor-check-pen" /></label>
+			<label>AC Bonus<input type="text" name="attr_armor-AC-bonux" /></label>
+			<label>Max Dex<input type="text" name="attr_armor-max-dex" /></label>
+			<label>Spell Fail<input type="text" name="attr_spell-fail" /></label>
+			<label>Speed<input type="text" name="attr_armor-max-speed" /></label>
+			<label>Weight<input type="text" name="attr_armor-weight" /></label>
+			<label>Special<input type="text" name="attr_armor-special" /></label>
 		</div>
 
 		<div id="shield-box" class="armor-box topbar-table">
-			Shield
+			<label>Shield<input type="text" name="attr_shield" /></label>
+			<label>Check Pen.<input type="text" name="attr_shield-check-pen" /></label>
+			<label>AC Bonus<input type="text" name="attr_shield-AC-bonux" /></label>
+			<label>Max Dex<input type="text" name="attr_shield-max-dex" /></label>
+			<label>Spell Fail<input type="text" name="attr_spell-fail" /></label>
+			<label>Speed<input type="text" name="attr_shield-max-speed" /></label>
+			<label>Weight<input type="text" name="attr_shield-weight" /></label>
+			<label>Special<input type="text" name="attr_shield-special" /></label>
 		</div>
 
 
