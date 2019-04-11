@@ -144,39 +144,55 @@
 
 	<div id="hit-points">
 		<div class="sectionHeader">HIT POINTS</div>
+
 		<div class="top-box" id="totalhp">
-			Hit Points
+			<label>Hit Points</label>
+			<input type="text" name="attr_totalHP"/>
 		</div>
 
 		<div class="top-box" id="damage">
-			DMG Taken
+			<label>Damage Taken</label>
+			<input type="text" name="attr_dmg"/>
 		</div>
 
 		<div class="top-box" id="wounds-scars">
-			Wounds and Scars
+			<label>Wounds & Scars</label>
+			<input type="text" name="attr_wounds-scars"/>
 		</div>
 
 		<div class="side-box" id="bloodied-at">
-			Bloodied at:
-			{# Should have something for below-box too... #}
+			<label>Bloodied at:</label>
+			<input type="text" name="attr_bloodied-val"/>
+			<label>(-1 on attacks and checks)</label>
 		</div>
 
 		<div class="side-box" id="wounded-at">
-			Wounded at:
-			{# Should have something for below-box too... #}
+			<label>Wounded at:</label>
+			<input type="text" name="attr_wounded-val"/>
+			<label>(Further -1 on attacks and checks)</label>
 		</div>
 
 		<div id="death-saves">
-			XXXX
-			XXX
+			<label id="death-saves-label">Death saves</label>
+			<label class="ds-passes">Pass</label>
+			<label class="ds-fails">Fail</label>
+			<input type="checkbox" name="attr_ds-fail-1" class="ds-fails" value='0'>
+			<input type="checkbox" name="attr_ds-fail-2" class="ds-fails" value='0'>
+			<input type="checkbox" name="attr_ds-fail-3" class="ds-fails" value='0'>
+			<input type="checkbox" name="attr_ds-fail-4" class="ds-fails" value='0'>
+			<input type="checkbox" name="attr_ds-pass-1" class="ds-passes" value='0'>
+			<input type="checkbox" name="attr_ds-pass-2" class="ds-passes" value='0'>
+			<input type="checkbox" name="attr_ds-pass-3" class="ds-passes" value='0'>
 		</div>
 
 		<div class="side-box" id="recovery-dice">
-			Recovery Dice:			
+			<label>Recovery Dice:</label>
+			<input type="text" name="attr_recovery-dice"/>			
 		</div>
 
 		<div class="side-box" id="recovery-dice-used">
-			Used:
+			<label>Recovery Dice Used:</label>
+			<input type="text" name="attr_recovery-dice-used"/>		
 		</div>
 
 	</div>

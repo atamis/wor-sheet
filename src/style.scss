@@ -55,15 +55,18 @@ div {
 }
 
 #header-fields > #charName, #header-fields > #classLevel {
-  flex-basis:36%;
+  flex-basis:35%;
+  flex-grow:1;
 }
 
 #header-fields > #race, #header-fields > #movement {
   flex-basis:12%;
+  flex-grow:1;
 }
 
 #header-fields > #age, #header-fields > #gender, #header-fields > #height, #header-fields > #weight, #header-fields > #eyes, #header-fields > #hair, #header-fields > #skin {
-  flex-basis: 13.5%;
+  flex-basis: 13%;
+  flex-grow:1;
 }
 
 #portrait {
@@ -110,7 +113,7 @@ div {
   display: grid;
   grid-template-columns: minmax(0,0.6fr) minmax(0,0.6fr) minmax(0,1.1fr) minmax(0,1.7fr);
   grid-template-rows: 2.1em minmax(0,1fr) 0.6fr 1fr 1fr;
-  grid-template-areas: "HEADER HEADER HEADER HEADER" "HP DMG Wounds-Scars Wounds-Scars" "Bloodied Bloodied Wounds-Scars Wounds-Scars" "Wounded Wounded Death-Saves Death-Saves" "Wounded Wounded Recovery-Dice RD-Used";
+  grid-template-areas: "HEADER HEADER HEADER HEADER" "HP DMG Wounds-Scars Wounds-Scars" "Bloodied Bloodied Wounds-Scars Wounds-Scars" "Wounded Wounded Death-Saves Death-Saves" ". . Recovery-Dice RD-Used";
   grid-area: Hit-Points;
 }
 
@@ -140,13 +143,30 @@ div {
 
 #death-saves {
   grid-area: Death-Saves;
+  display:grid;
+  grid-template-rows:1fr 1fr;
+}
+
+#death-saves-label {
+  grid-row-start:1;
+  grid-row-end:3;
+}
+
+.ds-fails {
+  grid-row-start:1;
+  grid-row-end:1;
+}
+
+.ds-passes {
+  grid-row-start:2;
+  grid-row-end:2;
 }
 
 #recovery-dice {
   grid-area: Recovery-Dice;
 }
 
-#recovery-dice {
+#recovery-dice-used {
   grid-area: RD-Used;
 }
 
@@ -241,4 +261,37 @@ div {
     height: fit-content;
     font-size: 1.5em;
     padding-bottom: 5px;
+}
+
+.top-box {
+    display: flex;
+    flex-direction: column;
+    padding:5px;
+}
+
+.top-box > :nth-child(2) {
+  flex-grow:1;
+}
+
+.side-box {
+    display: flex;
+    flex-direction: row;
+    padding:5px;
+    flex-wrap:wrap;;
+    max-height: 3em;
+}
+
+.side-box > :nth-child(1) {
+  max-width:75%;
+  max-height: 1.5em;
+}
+
+.side-box > :nth-child(2) {
+  flex-grow:1;
+  width:10%;
+  max-height: 1.5em;
+}
+.side-box > :nth-child(3) {
+  width: 100%;
+  font-size:.5em;
 }
