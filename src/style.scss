@@ -43,19 +43,28 @@ div {
 
 #header-fields > label > input {
 	display:inline-block;
-	width: 10em;
+	width: 100%;
 	position:relative;
 	top: -3em;
 }
 
 #header-fields > label {
 	display:inline-block;
-	width: 10em;
 	padding-top:1.5em;
+  margin-right:5px;
 }
 
-#header-fields > .charName, #header-fields > .charName > input {width:20em}
+#header-fields > #charName, #header-fields > #classLevel {
+  flex-basis:36%;
+}
 
+#header-fields > #race, #header-fields > #movement {
+  flex-basis:12%;
+}
+
+#header-fields > #age, #header-fields > #gender, #header-fields > #height, #header-fields > #weight, #header-fields > #eyes, #header-fields > #hair, #header-fields > #skin {
+  flex-basis: 13.5%;
+}
 
 #portrait {
 	grid-area: Portrait;
