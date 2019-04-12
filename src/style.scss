@@ -4,3 +4,469 @@
   width: 50%;
   margin: 0 auto;
 }
+
+textarea {resize:none}
+
+div {
+	display: block;
+}
+
+.rollbutton {
+  max-width: 15px;
+  max-height: 15px;
+}
+
+#full-sheet {
+
+	// All grid layout thanks to https://grid.layoutit.com/ after I spent way too long trying to get it to work
+
+  display: grid;
+  grid-template-columns: 1.35fr 0.83fr 0.7fr 1.2fr;
+  grid-template-rows: 0.7fr 0.8fr 1fr 0.6fr 0.6fr 2.4fr 1.2fr 0.4fr 1.4fr;
+  grid-template-areas: "Header Header Header Portrait" "Abilities Skills Languages Portrait" "Abilities Skills Hit-Points Hit-Points" "Conditions Skills Hit-Points Hit-Points" "Conditions Skills Armor-Class Armor-Class" "Attacks Attacks Armor-Class Armor-Class" "Attacks Attacks Saving-Throws Saving-Throws" "Feats Feats Saving-Throws Saving-Throws" "Feats Feats Special-Abilities Special-Abilities";
+  max-height:200vh;
+  max-width:100vh;
+  min-width:800px;
+  min-height:1600px;
+}
+
+#full-sheet > div, #leftWrapper > div, #rightWrapper > div {
+	border: 2px dashed black;
+	margin: 2px;
+	overflow: auto;
+}
+//
+
+#header-fields {
+	grid-area: Header;
+	display:flex;
+	flex-wrap:wrap;
+}
+
+#header-fields > label > input {
+	display:inline-block;
+	width: 100%;
+	position:relative;
+	top: -3em;
+}
+
+#header-fields > label {
+	display:inline-block;
+	padding-top:1.5em;
+  margin-right:5px;
+}
+
+#header-fields > #charName, #header-fields > #classLevel {
+  flex-basis:35%;
+  flex-grow:1;
+}
+
+#header-fields > #race, #header-fields > #movement {
+  flex-basis:12%;
+  flex-grow:1;
+}
+
+#header-fields > #age, #header-fields > #gender, #header-fields > #height, #header-fields > #weight, #header-fields > #eyes, #header-fields > #hair, #header-fields > #skin {
+  flex-basis: 13%;
+  flex-grow:1;
+}
+
+#portrait {
+	grid-area: Portrait;
+	padding-top:100%;
+}
+
+#abilities {
+  display: grid;
+  grid-template-columns: minmax(0,0.6fr) [Ability-Name] minmax(0,0.8fr) [Total-Score] minmax(0,0.8fr) [Mod] minmax(0,0.8fr) [Base-Score] minmax(0,.8fr) [Temp-Mod] minmax(0,.8fr);
+  grid-template-rows: minmax(0, .75fr) .5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-area: Abilities;
+}
+
+#skills {
+  display: grid;
+  grid-template-columns: minmax(0,0.5fr) [Name] minmax(0,1.5fr) [Value] minmax(0,1fr);
+  grid-template-rows: 2.1em;
+	grid-area: Skills;
+}
+
+#skills > .skill {
+  font-size: .8em;
+  align-self: center;
+}
+
+#languages {
+	grid-area: Languages;
+	display: grid;
+	align-items: stretch;
+	grid-template-rows: 2em 1fr;
+}
+
+#languages > .sectionHeader {
+	grid-row-start: 1;
+}
+
+#languages > textarea {	grid-row-start: 2}
+
+#hit-points {
+  display: grid;
+  grid-template-columns: minmax(0,0.6fr) minmax(0,0.6fr) minmax(0,1.1fr) minmax(0,1.7fr);
+  grid-template-rows: 2.1em minmax(0,1fr) 0.6fr 1fr 1fr;
+  grid-template-areas: "HEADER HEADER HEADER HEADER" "HP DMG Wounds-Scars Wounds-Scars" "Bloodied Bloodied Wounds-Scars Wounds-Scars" "Wounded Wounded Death-Saves Death-Saves" ". . Recovery-Dice RD-Used";
+  grid-area: Hit-Points;
+}
+
+#hit-points > .sectionHeader {
+  grid-row-start: 1;
+}
+
+#totalhp {
+  grid-area:HP;
+}
+
+#damage {
+  grid-area:DMG;
+}
+
+#wounds-scars {
+  grid-area: Wounds-Scars;
+}
+
+#bloodied-at {
+  grid-area: Bloodied;
+}
+
+#wounded-at {
+  grid-area:Wounded;
+}
+
+#death-saves {
+  grid-area: Death-Saves;
+  display:grid;
+  grid-template-rows:1fr 1fr;
+}
+
+#death-saves-label {
+  grid-row-start:1;
+  grid-row-end:3;
+}
+
+.ds-fails {
+  grid-row-start:1;
+  grid-row-end:1;
+}
+
+.ds-passes {
+  grid-row-start:2;
+  grid-row-end:2;
+}
+
+#recovery-dice {
+  grid-area: Recovery-Dice;
+}
+
+#recovery-dice-used {
+  grid-area: RD-Used;
+}
+
+#conditions {
+	grid-area: Conditions;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  grid-auto-flow:column; 
+}
+
+#fatiguedConditionBox, #exhaustedConditionBox {
+  grid-column-start:1;
+  grid-column-end:2;
+}
+
+#bloodiedConditionBox, #woundedConditionBox, #encumbranceConditionBox {
+  grid-column-start:2;
+  grid-column-end:3;
+}
+
+#attacks {
+	grid-area: Attacks;
+  display:grid;
+  grid-template-rows: 2.5em;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#bcb {
+  grid-column-start:1;
+  grid-column-end:2;
+}
+
+#grapple {
+  grid-column-start:2;
+  grid-column-end:4;
+  display:flex;
+}
+
+#grapple > label {
+  position: relative;
+  top:1em;
+  margin-right: 5px;
+}
+
+#melee-attack {
+  grid-column-start:1;
+  grid-column-end:2;
+}
+
+#ranged-attack {
+  grid-column-start:2;
+  grid-column-end:3;
+}
+
+
+
+#unique-attacks {
+  grid-column-start: 1;
+  grid-column-end:4;
+}
+
+.attack-box > :nth-child(1) {
+  flex-basis:60%;
+  font-size:1em;
+  text-align: left;
+}
+
+.attack-box > :nth-child(1) > :first-child {
+  top:-.25em
+}
+
+.attack-box > :nth-child(2) {flex-basis:15%}
+.attack-box > :nth-child(3) {flex-basis:12%}
+.attack-box > :nth-child(4) {flex-basis:8%}
+.attack-box > :nth-child(5) {flex-basis:15%}
+.attack-box > :nth-child(6) {flex-basis:80%}
+
+
+#armor {
+	grid-area: Armor-Class;
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  grid-template-rows:2.5em;
+  align-items:start;
+  grid-row-gap:10px;
+}
+
+#total-armor {
+  grid-column-start:1;
+  grid-column-end:3;
+}
+
+.addition-wrapper {
+  display:flex;
+}
+
+.addition-wrapper > .plus-label {
+    flex-shrink: 0;
+    padding-top: 1em;
+}
+
+.addition-wrapper > label > input {
+  display:inline-block;
+  width: 100%;
+  position:relative;
+}
+
+.addition-wrapper  > label {
+  display:inline-block;
+  padding-bottom:.5em;
+  margin-right:5px;
+  font-size:.8em;
+}
+
+#touch-AC, #off-guard-AC {
+  grid-column-start:1;
+  grid-column-end:2;
+}
+
+#special-defenses {
+    grid-row-end: span 2;
+    padding:8px;
+    align-self: stretch;
+    grid-column-start: 2;
+    grid-row-start: 3;
+}
+
+#special-defenses > textarea {
+  width:100%;
+  height:100%;
+}
+
+.topbar-table {
+  display:flex;
+  flex-wrap: wrap;
+  padding-bottom:.5em;
+}
+
+.topbar-table > label > input {
+  display:inline-block;
+  width: 100%;
+  position:relative;
+}
+
+.topbar-table > label {
+  display:inline-block;
+  padding-bottom:.5em;
+  margin-right:5px;
+  font-size:.8em;
+}
+
+.topbar-table > * {
+  flex-grow:1;
+  text-align: center;
+}
+
+.armor-box {
+  grid-column-start:1;
+  grid-column-end:3;
+}
+
+.armor-box > :nth-child(1) {
+  flex-basis:45%;
+  font-size:1em;
+  text-align: left;
+}
+
+.armor-box > :nth-child(1) > :first-child {
+  top:-.25em
+}
+
+.armor-box > :nth-child(2) {flex-basis:15%}
+.armor-box > :nth-child(3) {flex-basis:15%}
+.armor-box > :nth-child(4) {flex-basis:15%}
+.armor-box > :nth-child(5) {flex-basis:12%}
+.armor-box > :nth-child(6) {flex-basis:22%}
+.armor-box > :nth-child(7) {flex-basis:15%}
+.armor-box > :nth-child(8) {flex-basis:30%}
+
+#feats {
+  grid-area: Feats;
+  display: grid;
+  align-items: stretch;
+  grid-template-rows: 2em 1fr;
+}
+
+#feats > .sectionHeader {
+  grid-row-start: 1;
+}
+
+#feats > textarea { grid-row-start: 2}
+
+#saving-throws {
+  display: grid;
+  grid-template-columns: minmax(0,0.6fr) [Name] minmax(0,0.8fr) [Tot] minmax(0,0.8fr) [Base] minmax(0,0.8fr) [Ability] minmax(0,.8fr) [Misc] minmax(0,.8fr) 3fr;
+  grid-template-rows: 2.1em .5fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: ". . . . . . ." ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods";
+  grid-area: Saving-Throws;
+}
+
+#saving-throws > .totSaveScore, #saving-throws > .saveMod, #saving-throws > .saveBase, #saving-throws > .miscMod {
+  width: 90%;
+  height: 90%;
+}
+
+.save1st {grid-column-start: 1}
+.save2nd {grid-column-start: Name}
+.save3rd {grid-column-start: Tot}
+.save4th {grid-column-start: Base}
+.save5th {grid-column-start: Ability}
+.save6th {grid-column-start: Misc}
+
+#conditional-save-mods {
+  grid-area: Conditional-Mods;
+  margin-left:5px;
+}
+
+#conditional-save-mods > textarea {
+  height:99%;
+  box-sizing:border-box;
+  width:100%;
+}
+
+#special-abilities {
+  grid-area: Special-Abilities;
+  display: grid;
+  align-items: stretch;
+  grid-template-rows: 2em 1fr;
+}
+
+#special-abilities > .sectionHeader {
+  grid-row-start: 1;
+}
+
+#special-abilities > textarea { grid-row-start: 2}
+
+#abilities > .totSaveScore, #abilities > .saveMod, #abilities > .saveBase, #abilities > .tempSaveScore {
+	width: 100%;
+	height: 100%;
+}
+
+.ability1st {grid-column-start: 1}
+.ability2nd {grid-column-start: Ability-Name}
+.ability3rd {grid-column-start: Total-Score}
+.ability4th {grid-column-start: Mod}
+.ability5th {grid-column-start: Base-Score}
+.ability6th {grid-column-start: Temp-Mod}
+
+.skill {
+	grid-column-start:Name;
+}
+
+.skills > input {
+	grid-column-start:Value;
+}
+
+.sectionHeader {
+    grid-column-start: 1;
+    grid-column-end: -1;
+    background-color: black;
+    color: white;
+    height: fit-content;
+    font-size: 1.5em;
+    padding-bottom: 5px;
+    width:100%;
+}
+
+.top-box {
+    display: flex;
+    flex-direction: column;
+    padding:5px;
+}
+
+.top-box > :nth-child(2) {
+  flex-grow:1;
+}
+
+.side-box {
+    display: flex;
+    flex-direction: row;
+    padding:5px;
+    flex-wrap:wrap;;
+    max-height: 3em;
+}
+
+.side-box > :nth-child(1) {
+  flex-basis:50%;
+  max-height: 1.5em;
+}
+
+.side-box > :nth-child(2) {
+  flex-grow:1;
+  width:50%;
+  flex-basis:20%;
+  max-height: 1.5em;
+}
+
+.side-box > :nth-child(3) {
+  width: 100%;
+  font-size:.5em;
+}
+
+
+
