@@ -76,7 +76,7 @@ function css() {
             file._contents = Buffer.from(contents.replace(idRegex, converter), enc);
 
         }))
-        .pipe(gulp.dest('target/partials/'));
+        .pipe(gulp.dest('target/'));
 }
 
 css.description = "Compile SASS from src/ to target/partials/";

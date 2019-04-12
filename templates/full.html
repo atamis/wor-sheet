@@ -3,15 +3,12 @@
   <head>
     <meta charset="UTF-8">
     <title>WoR Sheet</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
   </head>
   <body>
     <div id="full-sheet"
     {% include "sheet.html.njk" %}
     </div>
-
-    <style>
-     {% include "style.css" %}
-    </style>
 
     <script type="text/worker">
      wor = {state: 'full'};
