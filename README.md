@@ -106,6 +106,11 @@ standalone CSS file. For example, `_partial.scss` can be imported with
 
 This is relative to the `src` directory. Also note the lack of extension.
 
+Note that Roll20 prepends `sheet-` all non-permited class names. Permitted class
+names start with `attr`, `roll`, or `repeating_`. To make Roll20-less
+development easier, `full.html` includes Javascript which makes the same changes
+to the sheet.
+
 
 ## Compilation Notes
 
