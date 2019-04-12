@@ -1,5 +1,7 @@
 const full = (typeof wor !== 'undefined' && wor.state == 'full');
 
+exports.full = full;
+
 const taglog = (...args) => (data) => {
     console.log.apply(null, args.concat([data]));
     return data;
