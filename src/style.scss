@@ -1,6 +1,6 @@
 @import 'partial';
 
-#container {
+.sheet-container {
   width: 50%;
   margin: 0 auto;
 }
@@ -16,7 +16,7 @@ div {
   max-height: 15px;
 }
 
-#full-sheet {
+.sheet-full-sheet {
 
 	// All grid layout thanks to https://grid.layoutit.com/ after I spent way too long trying to get it to work
 
@@ -30,85 +30,85 @@ div {
   min-height:1600px;
 }
 
-#full-sheet > div, #leftWrapper > div, #rightWrapper > div {
+.sheet-full-sheet > div, .sheet-leftWrapper > div, .sheet-rightWrapper > div {
 	border: 2px dashed black;
 	margin: 2px;
 	overflow: auto;
 }
 //
 
-#header-fields {
+.sheet-header-fields {
 	grid-area: Header;
 	display:flex;
 	flex-wrap:wrap;
 }
 
-#header-fields > label > input {
+.sheet-header-fields > label > input {
 	display:inline-block;
 	width: 100%;
 	position:relative;
 	top: -3em;
 }
 
-#header-fields > label {
+.sheet-header-fields > label {
 	display:inline-block;
 	padding-top:1.5em;
   margin-right:5px;
 }
 
-#header-fields > #charName, #header-fields > #classLevel {
+.sheet-header-fields > .charName, .sheet-header-fields > .sheet-classLevel {
   flex-basis:35%;
   flex-grow:1;
 }
 
-#header-fields > #race, #header-fields > #movement {
+.sheet-header-fields > .race, .sheet-header-fields > .sheet-movement {
   flex-basis:12%;
   flex-grow:1;
 }
 
-#header-fields > #age, #header-fields > #gender, #header-fields > #height, #header-fields > #weight, #header-fields > #eyes, #header-fields > #hair, #header-fields > #skin {
+.sheet-header-fields > .age, .sheet-header-fields > .gender, .sheet-header-fields > .height, .sheet-header-fields > .weight, .sheet-header-fields > .eyes, .sheet-header-fields > .hair, .sheet-header-fields > .sheet-skin {
   flex-basis: 13%;
   flex-grow:1;
 }
 
-#portrait {
+.sheet-portrait {
 	grid-area: Portrait;
 	padding-top:100%;
 }
 
-#abilities {
+.sheet-abilities{
   display: grid;
   grid-template-columns: minmax(0,0.6fr) [Ability-Name] minmax(0,0.8fr) [Total-Score] minmax(0,0.8fr) [Mod] minmax(0,0.8fr) [Base-Score] minmax(0,.8fr) [Temp-Mod] minmax(0,.8fr);
   grid-template-rows: minmax(0, .75fr) .5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-area: Abilities;
 }
 
-#skills {
+.sheet-skills {
   display: grid;
   grid-template-columns: minmax(0,0.5fr) [Name] minmax(0,1.5fr) [Value] minmax(0,1fr);
   grid-template-rows: 2.1em;
 	grid-area: Skills;
 }
 
-#skills > .sheet-skill {
+.sheet-skills > .sheet-skill {
   font-size: .8em;
   align-self: center;
 }
 
-#languages {
+.sheet-languages {
 	grid-area: Languages;
 	display: grid;
 	align-items: stretch;
 	grid-template-rows: 2em 1fr;
 }
 
-#languages > .sheet-sectionHeader {
+.sheet-languages > .sheet-sectionHeader {
 	grid-row-start: 1;
 }
 
-#languages > textarea {	grid-row-start: 2}
+.sheet-languages > textarea {	grid-row-start: 2}
 
-#hit-points {
+.sheet-hit-points {
   display: grid;
   grid-template-columns: minmax(0,0.6fr) minmax(0,0.6fr) minmax(0,1.1fr) minmax(0,1.7fr);
   grid-template-rows: 2.1em minmax(0,1fr) 0.6fr 1fr 1fr;
@@ -116,37 +116,37 @@ div {
   grid-area: Hit-Points;
 }
 
-#hit-points > .sheet-sectionHeader {
+.sheet-hit-points > .sheet-sectionHeader {
   grid-row-start: 1;
 }
 
-#totalhp {
+.sheet-totalhp {
   grid-area:HP;
 }
 
-#damage {
+.sheet-damage {
   grid-area:DMG;
 }
 
-#wounds-scars {
+.sheet-wounds-scars {
   grid-area: Wounds-Scars;
 }
 
-#bloodied-at {
+.sheet-bloodied-at {
   grid-area: Bloodied;
 }
 
-#wounded-at {
+.sheet-wounded-at {
   grid-area:Wounded;
 }
 
-#death-saves {
+.sheet-death-saves {
   grid-area: Death-Saves;
   display:grid;
   grid-template-rows:1fr 1fr;
 }
 
-#death-saves-label {
+.sheet-death-saves-label {
   grid-row-start:1;
   grid-row-end:3;
 }
@@ -161,68 +161,68 @@ div {
   grid-row-end:2;
 }
 
-#recovery-dice {
+.sheet-recovery-dice {
   grid-area: Recovery-Dice;
 }
 
-#recovery-dice-used {
+.sheet-recovery-dice-used {
   grid-area: RD-Used;
 }
 
-#conditions {
+.sheet-conditions {
 	grid-area: Conditions;
   display: grid;
   grid-template-columns: minmax(0,1fr) minmax(0,1fr);
   grid-auto-flow:column; 
 }
 
-#fatiguedConditionBox, #exhaustedConditionBox {
+.fatiguedConditionBox, .sheet-exhaustedConditionBox {
   grid-column-start:1;
   grid-column-end:2;
 }
 
-#bloodiedConditionBox, #woundedConditionBox, #encumbranceConditionBox {
+.bloodiedConditionBox, .woundedConditionBox, .sheet-encumbranceConditionBox {
   grid-column-start:2;
   grid-column-end:3;
 }
 
-#attacks {
+.sheet-attacks {
 	grid-area: Attacks;
   display:grid;
   grid-template-rows: 2.5em;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-#bcb {
+.bcb {
   grid-column-start:1;
   grid-column-end:2;
 }
 
-#grapple {
+.sheet-grapple {
   grid-column-start:2;
   grid-column-end:4;
   display:flex;
 }
 
-#grapple > label {
+.sheet-grapple > label {
   position: relative;
   top:1em;
   margin-right: 5px;
 }
 
-#melee-attack {
+.sheet-melee-attack {
   grid-column-start:1;
   grid-column-end:2;
 }
 
-#ranged-attack {
+.sheet-ranged-attack {
   grid-column-start:2;
   grid-column-end:3;
 }
 
 
 
-#unique-attacks {
+.sheet-unique-attacks {
   grid-column-start: 1;
   grid-column-end:4;
 }
@@ -244,7 +244,7 @@ div {
 .sheet-attack-box > :nth-child(6) {flex-basis:80%}
 
 
-#armor {
+.sheet-armor {
 	grid-area: Armor-Class;
   display:grid;
   grid-template-columns:1fr 2fr;
@@ -253,7 +253,7 @@ div {
   grid-row-gap:10px;
 }
 
-#total-armor {
+.sheet-total-armor {
   grid-column-start:1;
   grid-column-end:3;
 }
@@ -280,12 +280,12 @@ div {
   font-size:.8em;
 }
 
-#touch-AC, #off-guard-AC {
+.touch-AC, .sheet-off-guard-AC {
   grid-column-start:1;
   grid-column-end:2;
 }
 
-#special-defenses {
+.sheet-special-defenses {
     grid-row-end: span 2;
     padding:8px;
     align-self: stretch;
@@ -293,7 +293,7 @@ div {
     grid-row-start: 3;
 }
 
-#special-defenses > textarea {
+.sheet-special-defenses > textarea {
   width:100%;
   height:100%;
 }
@@ -345,20 +345,20 @@ div {
 .sheet-armor-box > :nth-child(7) {flex-basis:15%}
 .sheet-armor-box > :nth-child(8) {flex-basis:30%}
 
-#feats {
+.sheet-feats {
   grid-area: Feats;
   display: grid;
   align-items: stretch;
   grid-template-rows: 2em 1fr;
 }
 
-#feats > .sheet-sectionHeader {
+.sheet-feats > .sheet-sectionHeader {
   grid-row-start: 1;
 }
 
-#feats > textarea { grid-row-start: 2}
+.sheet-feats > textarea { grid-row-start: 2}
 
-#saving-throws {
+.sheet-saving-throws {
   display: grid;
   grid-template-columns: minmax(0,0.6fr) [Name] minmax(0,0.8fr) [Tot] minmax(0,0.8fr) [Base] minmax(0,0.8fr) [Ability] minmax(0,.8fr) [Misc] minmax(0,.8fr) 3fr;
   grid-template-rows: 2.1em .5fr 1fr 1fr 1fr 1fr 1fr;
@@ -366,7 +366,7 @@ div {
   grid-area: Saving-Throws;
 }
 
-#saving-throws > .sheet-totSaveScore, #saving-throws > .sheet-saveMod, #saving-throws > .sheet-saveBase, #saving-throws > .sheet-miscMod {
+.sheet-saving-throws > .sheet-totSaveScore, .sheet-saving-throws > .sheet-saveMod, .sheet-saving-throws > .sheet-saveBase, .sheet-saving-throws > .sheet-miscMod {
   width: 90%;
   height: 90%;
 }
@@ -378,31 +378,31 @@ div {
 .sheet-save5th {grid-column-start: Ability}
 .sheet-save6th {grid-column-start: Misc}
 
-#conditional-save-mods {
+.sheet-conditional-save-mods {
   grid-area: Conditional-Mods;
   margin-left:5px;
 }
 
-#conditional-save-mods > textarea {
+.sheet-conditional-save-mods > textarea {
   height:100%;
   box-sizing:border-box;
   width:100%;
 }
 
-#special-abilities {
+.sheet-special-abilities {
   grid-area: Special-Abilities;
   display: grid;
   align-items: stretch;
   grid-template-rows: 2em 1fr;
 }
 
-#special-abilities > .sheet-sectionHeader {
+.sheet-special-abilities > .sheet-sectionHeader {
   grid-row-start: 1;
 }
 
-#special-abilities > textarea { grid-row-start: 2}
+.sheet-special-abilities > textarea { grid-row-start: 2}
 
-#abilities > .sheet-totSaveScore, #abilities > .sheet-saveMod, #abilities > .sheet-saveBase, #abilities > .sheet-tempSaveScore {
+.sheet-abilities > .sheet-totSaveScore, .sheet-abilities > .sheet-saveMod, .sheet-abilities > .sheet-saveBase, .sheet-abilities > .sheet-tempSaveScore {
 	width: 100%;
 	height: 100%;
 }
