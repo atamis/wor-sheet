@@ -15,10 +15,10 @@
     </div>
 </div>
 
-<input class="totAbilityScore ability3rd" type="text" name="attr_totAbilityScore{{ name }}" value="10">
-<input class="abilityMod ability4th" type="text" name="attr_abilityMod{{ name }}" value="(@\{ {{ name }} \}-10)/2">
-<input class="abilityBase ability5th" type="text" name="attr_abilityBase{{ name }}">
-<input class="tempAbilityScore ability6th" type="text" name="attr_tempAbilityScore{{ name }}">    
+<input class="totAbilityScore ability3rd" type="number" name="attr_totAbilityScore{{ name }}" value="10">
+<input class="abilityMod ability4th" type="number" name="attr_abilityMod{{ name }}" value="(@\{ {{ name }} \}-10)/2" disabled="true">
+<input class="abilityBase ability5th" type="number" name="attr_abilityBase{{ name }}">
+<input class="tempAbilityScore ability6th" type="number" name="attr_tempAbilityScore{{ name }}">    
 {% endmacro %}
 
 {% macro saveTemplate(name) %}
@@ -29,10 +29,10 @@
     {{ name }}
 </div>
 
-<input class="totSaveScore save3rd" type="text" name="attr_totSaveScore{{ name }}" value="10">
-<input class="saveBase save4th" type="text" name="attr_saveBase{{ name }}">
-<input class="saveMod save5th" type="text" name="attr_saveMod{{ name }}" value="(@\{ {{ name }} \}-10)/2">
-<input class="miscMod save6th" type="text" name="attr_miscSaveMod{{ name }}">    
+<input class="totSaveScore save3rd" type="number" name="attr_totSaveScore{{ name }}" value="10">
+<input class="saveBase save4th" type="number" name="attr_saveBase{{ name }}">
+<input class="saveMod save5th" type="number" name="attr_saveMod{{ name }}" value="(@\{ {{ name }} \}-10)/2">
+<input class="miscMod save6th" type="number" name="attr_miscSaveMod{{ name }}">    
 {% endmacro %}
 
 
@@ -41,7 +41,7 @@
 
 <div id="full-sheet">
 	<div id="header-fields">
-		<label id="charName">Character Name<input type="text" name="attr_char_name" /></label>
+		<label id="charName">Character Name<input type="text" name="attr_character_name" /></label>
 		<label id="classLevel">Class and Level<input type="text" name="attr_class_lvl" /></label>
 		<label id="race">Race<input type="text" name="attr_race" /></label>
 		<label id="movement">Movement<input type="text" name="attr_movement" /></label>
@@ -133,7 +133,7 @@
 		<div class="skill">
 			{{skill}}
 		</div>
-		<input type="text" name="attr_skill_{{skill}}">
+		<input type="number" name="attr_skill_{{skill}}">
 		{% endfor %}
 	</div>
 
@@ -147,12 +147,12 @@
 
 		<div class="top-box" id="totalhp">
 			<label>Hit Points</label>
-			<input type="text" name="attr_totalHP"/>
+			<input type="number" name="attr_totalHP"/>
 		</div>
 
 		<div class="top-box" id="damage">
 			<label>Damage Taken</label>
-			<input type="text" name="attr_dmg"/>
+			<input type="number" name="attr_dmg"/>
 		</div>
 
 		<div class="top-box" id="wounds-scars">
@@ -162,13 +162,13 @@
 
 		<div class="side-box" id="bloodied-at">
 			<label>Bloodied at:</label>
-			<input type="text" name="attr_bloodied-val"/>
+			<input type="number" name="attr_bloodied-val"/>
 			<label>(-1 on attacks and checks)</label>
 		</div>
 
 		<div class="side-box" id="wounded-at">
 			<label>Wounded at:</label>
-			<input type="text" name="attr_wounded-val"/>
+			<input type="number" name="attr_wounded-val"/>
 			<label>(Further -1 on attacks and checks)</label>
 		</div>
 
@@ -187,12 +187,12 @@
 
 		<div class="side-box" id="recovery-dice">
 			<label>Recovery Dice:</label>
-			<input type="text" name="attr_recovery-dice"/>			
+			<input type="number" name="attr_recovery-dice"/>			
 		</div>
 
 		<div class="side-box" id="recovery-dice-used">
 			<label>Recovery Dice Used:</label>
-			<input type="text" name="attr_recovery-dice-used"/>		
+			<input type="number" name="attr_recovery-dice-used"/>		
 		</div>
 
 	</div>
@@ -201,42 +201,42 @@
 
 		<div class="sectionHeader">ARMOR CLASS</div>
 
-		<div id="total-armor">
-			<label>Total<input type="text" name="attr_totalAC" /></label>
+		<div id="total-armor" class="addition-wrapper">
+			<label>Total<input type="number" name="attr_totalAC" /></label>
 			<div class="plus-label"> = 10 + </div>
-			<label>Dex Mod<input type="text" name="attr_AC-Dex-Mod" /></label>
+			<label>Dex Mod<input type="number" name="attr_AC-Dex-Mod" /></label>
 			<div class="plus-label">+</div>
-			<label>Armor<input type="text" name="attr_AC-Armor" /></label>
+			<label>Armor<input type="number" name="attr_AC-Armor" /></label>
 			<div class="plus-label">+</div>
-			<label>Shield<input type="text" name="attr_AC-Shield" /></label>
+			<label>Shield<input type="number" name="attr_AC-Shield" /></label>
 			<div class="plus-label">+</div>
-			<label>Misc<input type="text" name="attr_AC-Misc" /></label>
+			<label>Misc<input type="number" name="attr_AC-Misc" /></label>
 			<div class="plus-label">+</div>
-			<label>Cover<input type="text" name="attr_AC-Cover" /></label>
+			<label>Cover<input type="number" name="attr_AC-Cover" /></label>
 			{# Maybe I need a better way of doing these plus-box-type-things #}
 		</div>
 
 		<div class="top-box" id="touch-AC">
 			<label>Touch AC</label>
-			<input type="text" name="attr_touch-AC"/>
 			<label>(No armor/shield bonus)</label>
+			<input type="number" name="attr_touch-AC"/>
 		</div>
 
 		<div class="top-box" id="off-guard-AC">
 			<label>Off-Guard AC</label>
-			<input type="text" name="attr_off-guard-AC"/>
 			<label>(No Dex bonus)</label>
+			<input type="number" name="attr_off-guard-AC"/>
 		</div>
 
 		<div id="special-defenses">
-			<textarea type="text" name="attr_special-defenses" placeholder="Special Defenses"></textarea>
+			<textarea type="number" name="attr_special-defenses" placeholder="Special Defenses"></textarea>
 		</div>
 
 		<div id="armor-box" class="armor-box topbar-table">
 			<label>Armor<input type="text" name="attr_armor" /></label>
-			<label>Check Pen.<input type="text" name="attr_armor-check-pen" /></label>
-			<label>AC Bonus<input type="text" name="attr_armor-AC-bonux" /></label>
-			<label>Max Dex<input type="text" name="attr_armor-max-dex" /></label>
+			<label>Check Pen.<input type="number" name="attr_armor-check-pen" /></label>
+			<label>AC Bonus<input type="number" name="attr_armor-AC-bonux" /></label>
+			<label>Max Dex<input type="number" name="attr_armor-max-dex" /></label>
 			<label>Spell Fail<input type="text" name="attr_spell-fail" /></label>
 			<label>Speed<input type="text" name="attr_armor-max-speed" /></label>
 			<label>Weight<input type="text" name="attr_armor-weight" /></label>
@@ -245,9 +245,9 @@
 
 		<div id="shield-box" class="armor-box topbar-table">
 			<label>Shield<input type="text" name="attr_shield" /></label>
-			<label>Check Pen.<input type="text" name="attr_shield-check-pen" /></label>
-			<label>AC Bonus<input type="text" name="attr_shield-AC-bonux" /></label>
-			<label>Max Dex<input type="text" name="attr_shield-max-dex" /></label>
+			<label>Check Pen.<input type="number" name="attr_shield-check-pen" /></label>
+			<label>AC Bonus<input type="number" name="attr_shield-AC-bonux" /></label>
+			<label>Max Dex<input type="number" name="attr_shield-max-dex" /></label>
 			<label>Spell Fail<input type="text" name="attr_spell-fail" /></label>
 			<label>Speed<input type="text" name="attr_shield-max-speed" /></label>
 			<label>Weight<input type="text" name="attr_shield-weight" /></label>
@@ -287,46 +287,60 @@
 
 	<div id="attacks">
 
-		<div class="sectionHeader"> ATTACKS </div></br>
+		<div class="sectionHeader"> ATTACKS </div>
 
-		<div id="attacks-header">
-			<div id="bcb" class="side-box">
-				BCB
-			</div>
+		<div id="bcb" class="side-box">
+			<label>BCB</label>
+			<input type="number" name="attr_bcb"/>
+			<label>(Base Combat Bonus)</label>
+		</div>
 
-			<div id="grapple">
-				<div class="side-box">
-				Grapple Modifier
-				</div>
+		<div id="grapple">
+			<label>Grapple</label>
 
-				= 
-
-				<div class="square-box">
-				</div>
-				+
-				<div class="square-box">
-				</div>
-				+
-				<div class="square-box">
-				</div>
-			</div>
-
-			<div class="side-box">
-				Melee Attack
-			</div>
-
-			<div class="side-box">
-				Ranged Attack
+			<div id="grapple-calc" class="addition-wrapper">
+				<label>Total<input type="number" name="attr_grapple-total" /></label>
+				<div class="plus-label">=</div>
+				<label>BCB<input type="number" name="attr_grapple-bcb" /></label>
+				<div class="plus-label">+</div>
+				<label>STR<input type="number" name="attr_str-bcb" /></label>
+				<div class="plus-label">+</div>
+				<label>Misc<input type="number" name="attr_misc-bcb" /></label>
+				{# Maybe I need a better way of doing these plus-box-type-things #}
 			</div>
 		</div>
 
-		{% for i in range(1,3) %}
-
-		<div id="attacks-{{i}}" class="attack-box topbar-table">
-			{# TODO #}
+		<div id="melee-attack">
+			<div class="side-box">
+				<label>Melee Atk</label>
+				<input type="number" name="attr_melee-atk"/>		
+			</div>
 		</div>
 
-		{% endfor %}
+		<div id="ranged-attack">
+			<div class="side-box">
+				<label>Ranged Atk</label>
+				<input type="number" name="attr_ranged-atk"/>		
+			</div>
+		</div>
+
+		<div id="initiative">
+			<div class="side-box">
+				<label>Initiative</label>
+				<input type="number" name="attr_wounded-val"/>				
+			</div>
+		</div>
+
+		<div id="unique-attacks">
+			<div id="atack-box-1" class="attack-box topbar-table">
+				<label>Attack<input type="text" name="attr_shield" /></label>
+				<label>Atk Bonus<input type="number" name="attr_shield-check-pen" /></label>
+				<label>Damage<input type="number" name="attr_shield-AC-bonux" /></label>
+				<label>Type<input type="number" name="attr_shield-max-dex" /></label>
+				<label>Range<input type="text" name="attr_spell-fail" /></label>
+				<label>Notes<input type="text" name="attr_shield-max-speed" /></label>
+			</div>
+		</div>
 	</div>
 
 	<div id="feats">

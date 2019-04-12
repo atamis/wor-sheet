@@ -26,8 +26,8 @@ div {
   grid-template-areas: "Header Header Header Portrait" "Abilities Skills Languages Portrait" "Abilities Skills Hit-Points Hit-Points" "Conditions Skills Hit-Points Hit-Points" "Conditions Skills Armor-Class Armor-Class" "Attacks Attacks Armor-Class Armor-Class" "Attacks Attacks Saving-Throws Saving-Throws" "Feats Feats Saving-Throws Saving-Throws" "Feats Feats Special-Abilities Special-Abilities";
   max-height:200vh;
   max-width:100vh;
-  min-width:920px;
-  min-height:1840px;
+  min-width:800px;
+  min-height:1600px;
 }
 
 #full-sheet > div, #leftWrapper > div, #rightWrapper > div {
@@ -40,7 +40,7 @@ div {
 #header-fields {
 	grid-area: Header;
 	display:flex;
-	flex-wrap:wrap
+	flex-wrap:wrap;
 }
 
 #header-fields > label > input {
@@ -189,7 +189,60 @@ div {
 
 #attacks {
 	grid-area: Attacks;
+  display:grid;
+  grid-template-rows: 2.5em;
+  grid-template-columns: 1fr 1fr 1fr;
 }
+
+#bcb {
+  grid-column-start:1;
+  grid-column-end:2;
+}
+
+#grapple {
+  grid-column-start:2;
+  grid-column-end:4;
+  display:flex;
+}
+
+#grapple > label {
+  position: relative;
+  top:1em;
+  margin-right: 5px;
+}
+
+#melee-attack {
+  grid-column-start:1;
+  grid-column-end:2;
+}
+
+#ranged-attack {
+  grid-column-start:2;
+  grid-column-end:3;
+}
+
+
+
+#unique-attacks {
+  grid-column-start: 1;
+  grid-column-end:4;
+}
+
+.attack-box > :nth-child(1) {
+  flex-basis:60%;
+  font-size:1em;
+  text-align: left;
+}
+
+.attack-box > :nth-child(1) > :first-child {
+  top:-.25em
+}
+
+.attack-box > :nth-child(2) {flex-basis:15%}
+.attack-box > :nth-child(3) {flex-basis:12%}
+.attack-box > :nth-child(4) {flex-basis:8%}
+.attack-box > :nth-child(5) {flex-basis:15%}
+.attack-box > :nth-child(6) {flex-basis:80%}
 
 
 #armor {
@@ -204,21 +257,24 @@ div {
 #total-armor {
   grid-column-start:1;
   grid-column-end:3;
+}
+
+.addition-wrapper {
   display:flex;
 }
 
-#total-armor > .plus-label {
+.addition-wrapper > .plus-label {
     flex-shrink: 0;
     padding-top: 1em;
 }
 
-#total-armor > label > input {
+.addition-wrapper > label > input {
   display:inline-block;
   width: 100%;
   position:relative;
 }
 
-#total-armor  > label {
+.addition-wrapper  > label {
   display:inline-block;
   padding-bottom:.5em;
   margin-right:5px;
@@ -243,31 +299,33 @@ div {
   height:100%;
 }
 
-.armor-box {
+.topbar-table {
   display:flex;
   flex-wrap: wrap;
   padding-bottom:.5em;
-  grid-column-start:1;
-  grid-column-end:3;
 }
 
-
-.armor-box > label > input {
+.topbar-table > label > input {
   display:inline-block;
   width: 100%;
   position:relative;
 }
 
-.armor-box > label {
+.topbar-table > label {
   display:inline-block;
   padding-bottom:.5em;
   margin-right:5px;
   font-size:.8em;
 }
 
-.armor-box > * {
+.topbar-table > * {
   flex-grow:1;
   text-align: center;
+}
+
+.armor-box {
+  grid-column-start:1;
+  grid-column-end:3;
 }
 
 .armor-box > :nth-child(1) {
@@ -354,6 +412,7 @@ div {
     height: fit-content;
     font-size: 1.5em;
     padding-bottom: 5px;
+    width:100%;
 }
 
 .top-box {
@@ -375,16 +434,19 @@ div {
 }
 
 .side-box > :nth-child(1) {
-  max-width:75%;
+  flex-basis:50%;
   max-height: 1.5em;
 }
 
 .side-box > :nth-child(2) {
   flex-grow:1;
-  width:10%;
+  width:50%;
+  flex-basis:20%;
   max-height: 1.5em;
 }
+
 .side-box > :nth-child(3) {
   width: 100%;
   font-size:.5em;
 }
+
