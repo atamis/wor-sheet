@@ -11,7 +11,7 @@ div {
 	display: block;
 }
 
-.rollbutton {
+.sheet-rollbutton {
   max-width: 15px;
   max-height: 15px;
 }
@@ -90,7 +90,7 @@ div {
 	grid-area: Skills;
 }
 
-#skills > .skill {
+#skills > .sheet-skill {
   font-size: .8em;
   align-self: center;
 }
@@ -102,7 +102,7 @@ div {
 	grid-template-rows: 2em 1fr;
 }
 
-#languages > .sectionHeader {
+#languages > .sheet-sectionHeader {
 	grid-row-start: 1;
 }
 
@@ -116,7 +116,7 @@ div {
   grid-area: Hit-Points;
 }
 
-#hit-points > .sectionHeader {
+#hit-points > .sheet-sectionHeader {
   grid-row-start: 1;
 }
 
@@ -151,12 +151,12 @@ div {
   grid-row-end:3;
 }
 
-.ds-fails {
+.sheet-ds-fails {
   grid-row-start:1;
   grid-row-end:1;
 }
 
-.ds-passes {
+.sheet-ds-passes {
   grid-row-start:2;
   grid-row-end:2;
 }
@@ -227,21 +227,21 @@ div {
   grid-column-end:4;
 }
 
-.attack-box > :nth-child(1) {
+.sheet-attack-box > :nth-child(1) {
   flex-basis:60%;
   font-size:1em;
   text-align: left;
 }
 
-.attack-box > :nth-child(1) > :first-child {
+.sheet-attack-box > :nth-child(1) > :first-child {
   top:-.25em
 }
 
-.attack-box > :nth-child(2) {flex-basis:15%}
-.attack-box > :nth-child(3) {flex-basis:12%}
-.attack-box > :nth-child(4) {flex-basis:8%}
-.attack-box > :nth-child(5) {flex-basis:15%}
-.attack-box > :nth-child(6) {flex-basis:80%}
+.sheet-attack-box > :nth-child(2) {flex-basis:15%}
+.sheet-attack-box > :nth-child(3) {flex-basis:12%}
+.sheet-attack-box > :nth-child(4) {flex-basis:8%}
+.sheet-attack-box > :nth-child(5) {flex-basis:15%}
+.sheet-attack-box > :nth-child(6) {flex-basis:80%}
 
 
 #armor {
@@ -258,22 +258,22 @@ div {
   grid-column-end:3;
 }
 
-.addition-wrapper {
+.sheet-addition-wrapper {
   display:flex;
 }
 
-.addition-wrapper > .plus-label {
+.sheet-addition-wrapper > .sheet-plus-label {
     flex-shrink: 0;
     padding-top: 1em;
 }
 
-.addition-wrapper > label > input {
+.sheet-addition-wrapper > label > input {
   display:inline-block;
   width: 100%;
   position:relative;
 }
 
-.addition-wrapper  > label {
+.sheet-addition-wrapper  > label {
   display:inline-block;
   padding-bottom:.5em;
   margin-right:5px;
@@ -298,52 +298,52 @@ div {
   height:100%;
 }
 
-.topbar-table {
+.sheet-topbar-table {
   display:flex;
   flex-wrap: wrap;
   padding-bottom:.5em;
 }
 
-.topbar-table > label > input {
+.sheet-topbar-table > label > input {
   display:inline-block;
   width: 100%;
   position:relative;
 }
 
-.topbar-table > label {
+.sheet-topbar-table > label {
   display:inline-block;
   padding-bottom:.5em;
   margin-right:5px;
   font-size:.8em;
 }
 
-.topbar-table > * {
+.sheet-topbar-table > * {
   flex-grow:1;
   text-align: center;
 }
 
-.armor-box {
+.sheet-armor-box {
   grid-column-start:1;
   grid-column-end:3;
 }
 
-.armor-box > :nth-child(1) {
+.sheet-armor-box > :nth-child(1) {
   flex-basis:45%;
   font-size:1em;
   text-align: left;
 }
 
-.armor-box > :nth-child(1) > :first-child {
+.sheet-armor-box > :nth-child(1) > :first-child {
   top:-.25em
 }
 
-.armor-box > :nth-child(2) {flex-basis:15%}
-.armor-box > :nth-child(3) {flex-basis:15%}
-.armor-box > :nth-child(4) {flex-basis:15%}
-.armor-box > :nth-child(5) {flex-basis:12%}
-.armor-box > :nth-child(6) {flex-basis:22%}
-.armor-box > :nth-child(7) {flex-basis:15%}
-.armor-box > :nth-child(8) {flex-basis:30%}
+.sheet-armor-box > :nth-child(2) {flex-basis:15%}
+.sheet-armor-box > :nth-child(3) {flex-basis:15%}
+.sheet-armor-box > :nth-child(4) {flex-basis:15%}
+.sheet-armor-box > :nth-child(5) {flex-basis:12%}
+.sheet-armor-box > :nth-child(6) {flex-basis:22%}
+.sheet-armor-box > :nth-child(7) {flex-basis:15%}
+.sheet-armor-box > :nth-child(8) {flex-basis:30%}
 
 #feats {
   grid-area: Feats;
@@ -352,7 +352,7 @@ div {
   grid-template-rows: 2em 1fr;
 }
 
-#feats > .sectionHeader {
+#feats > .sheet-sectionHeader {
   grid-row-start: 1;
 }
 
@@ -366,17 +366,17 @@ div {
   grid-area: Saving-Throws;
 }
 
-#saving-throws > .totSaveScore, #saving-throws > .saveMod, #saving-throws > .saveBase, #saving-throws > .miscMod {
+#saving-throws > .sheet-totSaveScore, #saving-throws > .sheet-saveMod, #saving-throws > .sheet-saveBase, #saving-throws > .sheet-miscMod {
   width: 90%;
   height: 90%;
 }
 
-.save1st {grid-column-start: 1}
-.save2nd {grid-column-start: Name}
-.save3rd {grid-column-start: Tot}
-.save4th {grid-column-start: Base}
-.save5th {grid-column-start: Ability}
-.save6th {grid-column-start: Misc}
+.sheet-save1st {grid-column-start: 1}
+.sheet-save2nd {grid-column-start: Name}
+.sheet-save3rd {grid-column-start: Tot}
+.sheet-save4th {grid-column-start: Base}
+.sheet-save5th {grid-column-start: Ability}
+.sheet-save6th {grid-column-start: Misc}
 
 #conditional-save-mods {
   grid-area: Conditional-Mods;
@@ -384,7 +384,7 @@ div {
 }
 
 #conditional-save-mods > textarea {
-  height:99%;
+  height:100%;
   box-sizing:border-box;
   width:100%;
 }
@@ -396,33 +396,33 @@ div {
   grid-template-rows: 2em 1fr;
 }
 
-#special-abilities > .sectionHeader {
+#special-abilities > .sheet-sectionHeader {
   grid-row-start: 1;
 }
 
 #special-abilities > textarea { grid-row-start: 2}
 
-#abilities > .totSaveScore, #abilities > .saveMod, #abilities > .saveBase, #abilities > .tempSaveScore {
+#abilities > .sheet-totSaveScore, #abilities > .sheet-saveMod, #abilities > .sheet-saveBase, #abilities > .sheet-tempSaveScore {
 	width: 100%;
 	height: 100%;
 }
 
-.ability1st {grid-column-start: 1}
-.ability2nd {grid-column-start: Ability-Name}
-.ability3rd {grid-column-start: Total-Score}
-.ability4th {grid-column-start: Mod}
-.ability5th {grid-column-start: Base-Score}
-.ability6th {grid-column-start: Temp-Mod}
+.sheet-ability1st {grid-column-start: 1}
+.sheet-ability2nd {grid-column-start: Ability-Name}
+.sheet-ability3rd {grid-column-start: Total-Score}
+.sheet-ability4th {grid-column-start: Mod}
+.sheet-ability5th {grid-column-start: Base-Score}
+.sheet-ability6th {grid-column-start: Temp-Mod}
 
-.skill {
+.sheet-skill {
 	grid-column-start:Name;
 }
 
-.skills > input {
+.sheet-skills > input {
 	grid-column-start:Value;
 }
 
-.sectionHeader {
+.sheet-sectionHeader {
     grid-column-start: 1;
     grid-column-end: -1;
     background-color: black;
@@ -433,17 +433,17 @@ div {
     width:100%;
 }
 
-.top-box {
+.sheet-top-box {
     display: flex;
     flex-direction: column;
     padding:5px;
 }
 
-.top-box > :nth-child(2) {
+.sheet-top-box > :nth-child(2) {
   flex-grow:1;
 }
 
-.side-box {
+.sheet-side-box {
     display: flex;
     flex-direction: row;
     padding:5px;
@@ -451,19 +451,19 @@ div {
     max-height: 3em;
 }
 
-.side-box > :nth-child(1) {
+.sheet-side-box > :nth-child(1) {
   flex-basis:50%;
   max-height: 1.5em;
 }
 
-.side-box > :nth-child(2) {
+.sheet-side-box > :nth-child(2) {
   flex-grow:1;
   width:50%;
   flex-basis:20%;
   max-height: 1.5em;
 }
 
-.side-box > :nth-child(3) {
+.sheet-side-box > :nth-child(3) {
   width: 100%;
   font-size:.5em;
 }
