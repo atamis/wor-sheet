@@ -106,13 +106,8 @@ standalone CSS file. For example, `_partial.scss` can be imported with
 
 This is relative to the `src` directory. Also note the lack of extension.
 
-Note that Roll20 prepends `sheet-` all non-permited class names. Permitted class
-names start with `attr`, `roll`, or `repeating_`. To make Roll20-less
-development easier, `full.html` includes Javascript which makes the same changes
-to the sheet.
 
-
-## Compilation Notes
+## Compatability Notes
 
 Roll20 requires sheets be exactly 1 HTML file and nothing else, so this project
 compiles all HTML, CSS, and Javascript to a single HTML file, so this
@@ -120,6 +115,13 @@ compilation process inlines all CSS and Javascript This is achieved by compiling
 the CSS and Javascript first, then using `nunjucks` to import
 `target/partials/app.js` and `target/partials/style.css` directly into the
 resulting file directly.
+
+Note that Roll20 prepends `sheet-` all non-permited class names. Permitted class
+names start with `attr`, `roll`, or `repeating_`. To make Roll20-less
+development easier, `full.html` includes Javascript which makes the same changes
+to the sheet. Additionally note that Roll20 converts all `id` selectors found in
+your stylesheets to class selectors, so this project is configured to do the
+same, although somewhat crudely.
 
 # Authors
 

@@ -11,8 +11,8 @@ const nunjucksRender = require('gulp-nunjucks-render');
 const log = require('gulplog');
 const es = require('event-stream');
 const rename = require('gulp-rename');
-
-var sass = require('gulp-sass');
+const gulpFn  = require('gulp-fn');
+const sass = require('gulp-sass');
 
 sass.compiler = require('node-sass');
 
@@ -62,8 +62,20 @@ function js(done) {
 js.description = "Browserify, transpile, and minify JS from ./src/entry.js to target/partials/app.js";
 
 function css() {
+    const idRegex = /(#-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/gi;
+    const converter = (match) => {
+        const cls = match.replace("#", ".");
+        return cls;
+    };
+
     return gulp.src('src/**/*.scss')
         .pipe(sass().on('error', sass.logError))
+        .pipe(gulpFn(function(file, enc) {
+            const contents = file._contents.toString(enc);
+            // Note: very slow.
+            file._contents = Buffer.from(contents.replace(idRegex, converter), enc);
+
+        }))
         .pipe(gulp.dest('target/partials/'));
 }
 
@@ -92,6 +104,7 @@ watch.description = "Watch src and templates and recompile with the default task
 
 exports.html = html;
 exports.clean = clean;
+exports.css = css;
 exports.js = js;
 exports.watch = watch;
 exports.default = def;
