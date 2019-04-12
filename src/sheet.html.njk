@@ -16,7 +16,7 @@
 </div>
 
 <input class="totAbilityScore ability3rd" type="number" name="attr_totAbilityScore{{ name }}" value="10">
-<input class="abilityMod ability4th" type="number" name="attr_abilityMod{{ name }}" value="(@\{ {{ name }} \}-10)/2" disabled="true">
+<input class="abilityMod ability4th" type="number" name="attr_abilityMod{{ name }}" value="(@\{ {{ name }} \}-10)/2">
 <input class="abilityBase ability5th" type="number" name="attr_abilityBase{{ name }}">
 <input class="tempAbilityScore ability6th" type="number" name="attr_tempAbilityScore{{ name }}">    
 {% endmacro %}
@@ -261,9 +261,11 @@
 
 		<div class="sectionHeader">SAVING THROWS</div></br>
 
-		<div id="saves-header">
-
-		</div>
+		<label class="save2nd">Save Name</label>
+		<label class="save3rd">Total</label>
+		<label class="save4th">Base Save</label>
+		<label class="save5th">Ability Mod</label>
+		<label class="save6th">Misc Mod</label>
 
 		{% set saves = ["Charm","Reflex","Death","Fear","Spell"] %}
 
@@ -272,14 +274,16 @@
 		{% endfor %}
 
 		<div id="conditional-save-mods">
-			<input type="text" name="attr_conditionalSaveMods"/>
+			<textarea type="text" name="attr_conditionalSaveMods" placeholder="Conditional Save Mods"></textarea>
 		</div>
 
 	</div>
 
 	<div id="special-abilities">
 
-		<div class="sectionHeader">SPECIAL ABILITIES</div></br>
+		<div class="sectionHeader">SPECIAL ABILITIES</div>
+
+		<textarea name="attr_special-abilities"></textarea>
 
 		{# Do something cool here. Like feats. But what? #}
 
@@ -344,8 +348,9 @@
 	</div>
 
 	<div id="feats">
-		<div class="sectionHeader">FEATS</div></br>
-		{# Do something nice here. But may have to be just a js thing? #}
+		<div class="sectionHeader">FEATS</div>
+		<textarea name="attr_feats"></textarea>
+		{# Do something nice here. But may have to be just a js thing? Or whatever the click-button-to-extend thing is #}
 	</div>
 
 

@@ -78,7 +78,7 @@ div {
 
 #abilities {
   display: grid;
-  grid-template-columns: minmax(0,0.6fr) [Ability-Name] minmax(0,0.8fr) [Total-Score] minmax(0,0.8fr) [Mod] minmax(0,1.8fr) [Base-Score] minmax(0,1fr) [Temp-Mod] minmax(0,1fr);
+  grid-template-columns: minmax(0,0.6fr) [Ability-Name] minmax(0,0.8fr) [Total-Score] minmax(0,0.8fr) [Mod] minmax(0,0.8fr) [Base-Score] minmax(0,.8fr) [Temp-Mod] minmax(0,.8fr);
   grid-template-rows: minmax(0, .75fr) .5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-area: Abilities;
 }
@@ -99,7 +99,6 @@ div {
 	grid-area: Languages;
 	display: grid;
 	align-items: stretch;
-	grid-template-columns: minmax(0,1fr);
 	grid-template-rows: 2em 1fr;
 }
 
@@ -347,20 +346,29 @@ div {
 .armor-box > :nth-child(8) {flex-basis:30%}
 
 #feats {
-	grid-area: Feats;
+  grid-area: Feats;
+  display: grid;
+  align-items: stretch;
+  grid-template-rows: 2em 1fr;
 }
+
+#feats > .sectionHeader {
+  grid-row-start: 1;
+}
+
+#feats > textarea { grid-row-start: 2}
 
 #saving-throws {
   display: grid;
-  grid-template-columns: minmax(0,0.4fr) [Name] minmax(0,0.4fr) [Tot] minmax(0,0.7fr) [Base] minmax(0,1.1fr) [Ability] minmax(0,2.4fr) [Misc] minmax(0,1fr) 2fr;
+  grid-template-columns: minmax(0,0.6fr) [Name] minmax(0,0.8fr) [Tot] minmax(0,0.8fr) [Base] minmax(0,0.8fr) [Ability] minmax(0,.8fr) [Misc] minmax(0,.8fr) 3fr;
   grid-template-rows: 2.1em .5fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-areas: ". . . . . . ." ". . . . . . ." ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods";
+  grid-template-areas: ". . . . . . ." ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods";
   grid-area: Saving-Throws;
 }
 
 #saving-throws > .totSaveScore, #saving-throws > .saveMod, #saving-throws > .saveBase, #saving-throws > .miscMod {
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
 }
 
 .save1st {grid-column-start: 1}
@@ -372,17 +380,27 @@ div {
 
 #conditional-save-mods {
   grid-area: Conditional-Mods;
-  max-height: 100%;
   margin-left:5px;
 }
 
-#conditional-save-mods > input {
-  height:100%;
+#conditional-save-mods > textarea {
+  height:99%;
+  box-sizing:border-box;
+  width:100%;
 }
 
 #special-abilities {
-	grid-area: Special-Abilities;
+  grid-area: Special-Abilities;
+  display: grid;
+  align-items: stretch;
+  grid-template-rows: 2em 1fr;
 }
+
+#special-abilities > .sectionHeader {
+  grid-row-start: 1;
+}
+
+#special-abilities > textarea { grid-row-start: 2}
 
 #abilities > .totSaveScore, #abilities > .saveMod, #abilities > .saveBase, #abilities > .tempSaveScore {
 	width: 100%;
@@ -449,4 +467,6 @@ div {
   width: 100%;
   font-size:.5em;
 }
+
+
 
