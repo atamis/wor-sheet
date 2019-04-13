@@ -5,6 +5,13 @@
   margin: 0 auto;
 }
 
+input, textarea {
+  width:initial;
+  padding:0px;
+  height:auto;
+  margin-bottom:0px;
+}
+
 textarea {resize:none}
 
 div {
@@ -22,7 +29,7 @@ div {
 
   display: grid;
   grid-template-columns: 1.35fr 0.83fr 0.7fr 1.2fr;
-  grid-template-rows: 0.7fr 0.8fr 1fr 0.6fr 0.6fr 2.4fr 1.2fr 0.4fr 1.4fr;
+  // grid-template-rows: 0.7fr 0.8fr 1fr 0.6fr 0.6fr 2.4fr 1.2fr 0.4fr 1.4fr;
   grid-template-areas: "Header Header Header Portrait" "Abilities Skills Languages Portrait" "Abilities Skills Hit-Points Hit-Points" "Conditions Skills Hit-Points Hit-Points" "Conditions Skills Armor-Class Armor-Class" "Attacks Attacks Armor-Class Armor-Class" "Attacks Attacks Saving-Throws Saving-Throws" "Feats Feats Saving-Throws Saving-Throws" "Feats Feats Special-Abilities Special-Abilities";
   max-height:200vh;
   max-width:100vh;
@@ -31,9 +38,8 @@ div {
 }
 
 .sheet-full-sheet > div, .sheet-leftWrapper > div, .sheet-rightWrapper > div {
-	border: 2px dashed black;
+	//border: 2px dashed black;
 	margin: 2px;
-	overflow: auto;
 }
 //
 
@@ -56,18 +62,18 @@ div {
   margin-right:5px;
 }
 
-.sheet-header-fields > .charName, .sheet-header-fields > .sheet-classLevel {
-  flex-basis:35%;
+.sheet-header-fields > .sheet-charName, .sheet-header-fields > .sheet-classLevel {
+  flex-basis:32%;
   flex-grow:1;
 }
 
-.sheet-header-fields > .race, .sheet-header-fields > .sheet-movement {
-  flex-basis:12%;
+.sheet-header-fields > .sheet-race, .sheet-header-fields > .sheet-movement {
+  flex-basis:11%;
   flex-grow:1;
 }
 
-.sheet-header-fields > .age, .sheet-header-fields > .gender, .sheet-header-fields > .height, .sheet-header-fields > .weight, .sheet-header-fields > .eyes, .sheet-header-fields > .hair, .sheet-header-fields > .sheet-skin {
-  flex-basis: 13%;
+.sheet-header-fields > .sheet-age, .sheet-header-fields > .sheet-gender, .sheet-header-fields > .sheet-height, .sheet-header-fields > .sheet-weight, .sheet-header-fields > .sheet-eyes, .sheet-header-fields > .sheet-hair, .sheet-header-fields > .sheet-skin {
+  flex-basis: 10%;
   flex-grow:1;
 }
 
@@ -79,14 +85,14 @@ div {
 .sheet-abilities{
   display: grid;
   grid-template-columns: minmax(0,0.6fr) [Ability-Name] minmax(0,0.8fr) [Total-Score] minmax(0,0.8fr) [Mod] minmax(0,0.8fr) [Base-Score] minmax(0,.8fr) [Temp-Mod] minmax(0,.8fr);
-  grid-template-rows: minmax(0, .75fr) .5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: minmax(0,2.1em) .5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-area: Abilities;
 }
 
 .sheet-skills {
   display: grid;
   grid-template-columns: minmax(0,0.5fr) [Name] minmax(0,1.5fr) [Value] minmax(0,1fr);
-  grid-template-rows: 2.1em;
+  grid-template-rows: minmax(0,2.1em);
 	grid-area: Skills;
 }
 
@@ -97,9 +103,10 @@ div {
 
 .sheet-languages {
 	grid-area: Languages;
+  min-height: 3em;
 	display: grid;
 	align-items: stretch;
-	grid-template-rows: 2em 1fr;
+	grid-template-rows: minmax(0,2.1em) 1fr;
 }
 
 .sheet-languages > .sheet-sectionHeader {
@@ -174,14 +181,16 @@ div {
   display: grid;
   grid-template-columns: minmax(0,1fr) minmax(0,1fr);
   grid-auto-flow:column; 
+  align-self: start;
+  min-height: 50%;
 }
 
-.fatiguedConditionBox, .sheet-exhaustedConditionBox {
+.sheet-fatiguedConditionBox, .sheet-exhaustedConditionBox {
   grid-column-start:1;
   grid-column-end:2;
 }
 
-.bloodiedConditionBox, .woundedConditionBox, .sheet-encumbranceConditionBox {
+.sheet-bloodiedConditionBox, .sheet-woundedConditionBox, .sheet-encumbranceConditionBox {
   grid-column-start:2;
   grid-column-end:3;
 }
@@ -189,11 +198,11 @@ div {
 .sheet-attacks {
 	grid-area: Attacks;
   display:grid;
-  grid-template-rows: 2.5em;
+  grid-template-rows: 2.1em;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.bcb {
+.sheet-bcb {
   grid-column-start:1;
   grid-column-end:2;
 }
@@ -248,7 +257,7 @@ div {
 	grid-area: Armor-Class;
   display:grid;
   grid-template-columns:1fr 2fr;
-  grid-template-rows:2.5em;
+  grid-template-rows:2.1em;
   align-items:start;
   grid-row-gap:10px;
 }
@@ -280,7 +289,7 @@ div {
   font-size:.8em;
 }
 
-.touch-AC, .sheet-off-guard-AC {
+.sheet-touch-AC, .sheet-off-guard-AC {
   grid-column-start:1;
   grid-column-end:2;
 }
@@ -361,7 +370,7 @@ div {
 .sheet-saving-throws {
   display: grid;
   grid-template-columns: minmax(0,0.6fr) [Name] minmax(0,0.8fr) [Tot] minmax(0,0.8fr) [Base] minmax(0,0.8fr) [Ability] minmax(0,.8fr) [Misc] minmax(0,.8fr) 3fr;
-  grid-template-rows: 2.1em .5fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: minmax(0,2.5em) .5fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas: ". . . . . . ." ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods";
   grid-area: Saving-Throws;
 }
@@ -394,6 +403,7 @@ div {
   display: grid;
   align-items: stretch;
   grid-template-rows: 2em 1fr;
+  min-height: 150px;
 }
 
 .sheet-special-abilities > .sheet-sectionHeader {
@@ -470,3 +480,8 @@ div {
 
 
 
+// Only to be used for override of roll20 things 
+
+body {
+  overflow:initial;
+}
