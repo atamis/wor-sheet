@@ -1,52 +1,52 @@
-{# Maybe port these out at some point? #}
+<# Maybe port these out at some point? #>
 
-{% macro abilityTemplate(abbreviation, name) %}
+<% macro abilityTemplate(abbreviation, name) %>
     
 
-<button type='roll' value='/roll 1d20 + @{{'{'}}{{ abbreviation }}Mod{{'}'}}' name='roll_{{name}}' class='ability1st rollButton'></button>
+<button type='roll' value='/roll 1d20 + @<$'{'$><$ abbreviation $>Mod<$'}'$>' name='roll_<$name$>' class='ability1st rollButton'></button>
 
 <div class="abilityTitlecard ability2nd">
     <div class="abilityName">
-      {{ name }}
+      <$ name $>
     </div>
     
     <div class="abilityAbbrev">
-      {{ abbreviation }}
+      <$ abbreviation $>
     </div>
 </div>
 
-<input class="totAbilityScore ability3rd" type="number" name="attr_{{ name }}" value="10">
-<input class="abilityMod ability4th" type="number" name="attr_{{ abbreviation }}Mod" value="floor((@{{ '{' }}{{ name }}{{ '}' }}-10)/2)" disabled="true">
-<input class="abilityBase ability5th" type="number" name="attr_Base{{ name }}">
-<input class="tempAbilityScore ability6th" type="number" name="attr_temp{{ name }}">    
-{% endmacro %}
+<input class="totAbilityScore ability3rd" type="number" name="attr_<$ name $>" value="10">
+<input class="abilityMod ability4th" type="number" name="attr_<$ abbreviation $>Mod" value="floor((@<$ '{' $><$ name $><$ '}' $>-10)/2)" disabled="true">
+<input class="abilityBase ability5th" type="number" name="attr_Base<$ name $>">
+<input class="tempAbilityScore ability6th" type="number" name="attr_temp<$ name $>">    
+<% endmacro %>
 
-{% macro saveTemplate(name) %}
+<% macro saveTemplate(name) %>
     
-<button type='roll' value='/roll 1d20 + @{{'{'}}Save{{ name }}{{'}'}}' name='roll_save{{name}}' class='save1st rollButton'></button>
+<button type='roll' value='/roll 1d20 + @<$'{'$>Save<$ name $><$'}'$>' name='roll_save<$name$>' class='save1st rollButton'></button>
 
 <div class="saveTitlecard save2nd">
-    {{ name }}
+    <$ name $>
 </div>
 
-{# Listen, I didn't ask for your opinion. It's 4 AM and there's no good way to do this #}
-{% if name=="Charm" %}
-{% set value = "(((@{ChaMod} + @{WisMod}) + abs(@{ChaMod} - @{WisMod})) / 2)" %}
-{% elif name=="Reflex" %}
-{% set value = "@{DexMod}" %}
-{% else %}
-{% set value = 0 %}
-{% endif %}
+<# Listen, I didn't ask for your opinion. It's 4 AM and there's no good way to do this #>
+<% if name=="Charm" %>
+<% set value = "(((@{ChaMod} + @{WisMod}) + abs(@{ChaMod} - @{WisMod})) / 2)" %>
+<% elif name=="Reflex" %>
+<% set value = "@{DexMod}" %>
+<% else %>
+<% set value = 0 %>
+<% endif %>
 
-<input class="totSaveScore save3rd" type="number" name="attr_Save{{ name }}" value="10">
-<input class="saveBase save4th" type="number" name="attr_save{{ name }}Base">
-<input class="saveMod save5th" type="number" name="attr_save{{ name }}Mod" value="{{ value }}" disabled="true">
-<input class="miscMod save6th" type="number" name="attr_miscSaveMod{{ name }}">    
-{% endmacro %}
+<input class="totSaveScore save3rd" type="number" name="attr_Save<$ name $>" value="10">
+<input class="saveBase save4th" type="number" name="attr_save<$ name $>Base">
+<input class="saveMod save5th" type="number" name="attr_save<$ name $>Mod" value="<$ value $>" disabled="true">
+<input class="miscMod save6th" type="number" name="attr_miscSaveMod<$ name $>">    
+<% endmacro %>
 
 
 
-{# End macro section #}
+<# End macro section #>
 
 <div class="full-sheet">
 	<div class="header-fields">
@@ -87,11 +87,11 @@
 			Temp Mod.
 		</div>
 
-		{% set abilities = [["STR","Strength"],["DEX","Dexterity"],["CON","Constitution"],["INT","Intelligence"],["WIS","Wisdom"],["CHA","Charisma"]] %}
+		<% set abilities = [["STR","Strength"],["DEX","Dexterity"],["CON","Constitution"],["INT","Intelligence"],["WIS","Wisdom"],["CHA","Charisma"]] %>
 
-		{% for ability in abilities %}
-		{{ abilityTemplate(ability[0], ability[1])}}
-		{% endfor %}
+		<% for ability in abilities %>
+		<$ abilityTemplate(ability[0], ability[1])$>
+		<% endfor %>
 	</div>
 
 	<div class="conditions">
@@ -103,7 +103,7 @@
 			<input type="checkbox" name="attr_fatiguedCondition" value='0'>
 				Fatigued
 		</div>
-				{# Again, some way of adding description/header. Or just a <div class="sectionHeader"> etc tag? #}
+				<# Again, some way of adding description/header. Or just a <div class="sectionHeader"> etc tag? #>
 
 		<div class="exhaustedConditionBox">
 			<input type="checkbox" name="attr_exhaustedCondition" value='0'>
@@ -135,15 +135,15 @@
 
 		<div class="sectionHeader">SKILLS</div>
 
-		{% set skills = ["Acrobatics","Appraise","Bluff","Climb","Concentration","Decipher Script","Diplomacy","Disguise","Escape Artist","Fly","Forgery","Gather Information","Handle Animal","Heal","Intimidate","Perception","Ride","Search","Sense Motive","Sleight of Hand","Spellcraft","Stealth","Survival","Swim","Tamper"] %}
+		<% set skills = ["Acrobatics","Appraise","Bluff","Climb","Concentration","Decipher Script","Diplomacy","Disguise","Escape Artist","Fly","Forgery","Gather Information","Handle Animal","Heal","Intimidate","Perception","Ride","Search","Sense Motive","Sleight of Hand","Spellcraft","Stealth","Survival","Swim","Tamper"] %>
 
-		{% for skill in skills %}
-		<button type='roll' value='/roll 1d20 + @{{'{'}}skill_{{skill}}{{'}'}}' name='roll_skill{{skill}}' class='rollButton'></button>
+		<% for skill in skills %>
+		<button type='roll' value='/roll 1d20 + @<$'{'$>skill_<$skill$><$'}'$>' name='roll_skill<$skill$>' class='rollButton'></button>
 		<div class="skill">
-			{{skill}}
+			<$skill$>
 		</div>
-		<input type="number" name="attr_skill_{{skill}}">
-		{% endfor %}
+		<input type="number" name="attr_skill_<$skill$>">
+		<% endfor %>
 	</div>
 
 	<div class="languages header-table">
@@ -222,7 +222,7 @@
 			<label>Misc<input type="number" name="attr_AC-Misc" /></label>
 			<div class="plus-label">+</div>
 			<label>Cover<input type="number" name="attr_AC-Cover" /></label>
-			{# Maybe I need a better way of doing these plus-box-type-things #}
+			<# Maybe I need a better way of doing these plus-box-type-things #>
 		</div>
 
 		<div class="top-box touch-AC">
@@ -276,11 +276,11 @@
 		<label class="save5th">Ability Mod</label>
 		<label class="save6th">Misc Mod</label>
 
-		{% set saves = ["Charm","Reflex","Death","Fear","Spell"] %}
+		<% set saves = ["Charm","Reflex","Death","Fear","Spell"] %>
 
-		{% for save in saves %}
-		{{ saveTemplate(save) }}
-		{% endfor %}
+		<% for save in saves %>
+		<$ saveTemplate(save) $>
+		<% endfor %>
 
 		<div class="conditional-save-mods">
 			<textarea type="text" name="attr_conditionalSaveMods" placeholder="Conditional Save Mods"></textarea>
@@ -294,7 +294,7 @@
 
 		<textarea name="attr_special-abilities"></textarea>
 
-		{# Do something cool here. Like feats. But what? #}
+		<# Do something cool here. Like feats. But what? #>
 
 	</div>
 
@@ -319,7 +319,7 @@
 				<label>STR<input type="number" name="attr_str-bcb" /></label>
 				<div class="plus-label">+</div>
 				<label>Misc<input type="number" name="attr_misc-bcb" /></label>
-				{# Maybe I need a better way of doing these plus-box-type-things #}
+				<# Maybe I need a better way of doing these plus-box-type-things #>
 			</div>
 		</div>
 
@@ -359,7 +359,7 @@
 	<div class="feats">
 		<div class="sectionHeader">FEATS</div>
 		<textarea name="attr_feats"></textarea>
-		{# Do something nice here. But may have to be just a js thing? Or whatever the click-button-to-extend thing is #}
+		<# Do something nice here. But may have to be just a js thing? Or whatever the click-button-to-extend thing is #>
 	</div>
 
 

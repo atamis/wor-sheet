@@ -19,7 +19,18 @@ sass.compiler = require('node-sass');
 function html() {
     return gulp.src('templates/**/*.+(html|nunjucks|njk)')
         .pipe(nunjucksRender({
-            path: ['src', 'target/partials']
+            path: ['src', 'target/partials'],
+            // Changes nunjucks syntax because it overlaps with roll20 syntax
+            envOptions: {
+                tags: {
+                    blockStart: '<%',
+                    blockEnd: '%>',
+                    variableStart: '<$',
+                    variableEnd: '$>',
+                    commentStart: '<#',
+                    commentEnd: '#>'
+                }
+            }
         })).pipe(gulp.dest('target'));
 }
 
@@ -27,6 +38,8 @@ html.description = "Compile pages from templates and partials from src to target
 
 var maps = true;
 var minify = true;
+
+
 
 function js(done) {
     var entries = ['app.js', 'worker.js'];
