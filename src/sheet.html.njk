@@ -3,7 +3,7 @@
 <% macro abilityTemplate(abbreviation, name) %>
     
 
-<button type='roll' value='/roll 1d20 + @<$'{'$><$ abbreviation $>Mod<$'}'$>' name='roll_<$name$>' class='ability1st rollButton'></button>
+<button type='roll' value='\&{template:default} {{name=Roll <$ abbreviation $> Check}} {{<$ abbreviation $>=[[1d20 + [[@{<$ abbreviation $>Mod}]]]]}}' name='roll_<$ name $>' class='ability1st rollButton'></button>
 
 <div class="abilityTitlecard ability2nd">
     <div class="abilityName">
@@ -23,7 +23,7 @@
 
 <% macro saveTemplate(name) %>
     
-<button type='roll' value='/roll 1d20 + @<$'{'$>Save<$ name $><$'}'$>' name='roll_save<$name$>' class='save1st rollButton'></button>
+<button type='roll' value='/roll 1d20 + @{Save<$ name $>}' name='roll_save<$ name $>' class='save1st rollButton'></button>
 
 <div class="saveTitlecard save2nd">
     <$ name $>
@@ -138,11 +138,11 @@
 		<% set skills = ["Acrobatics","Appraise","Bluff","Climb","Concentration","Decipher Script","Diplomacy","Disguise","Escape Artist","Fly","Forgery","Gather Information","Handle Animal","Heal","Intimidate","Perception","Ride","Search","Sense Motive","Sleight of Hand","Spellcraft","Stealth","Survival","Swim","Tamper"] %>
 
 		<% for skill in skills %>
-		<button type='roll' value='/roll 1d20 + @<$'{'$>skill_<$skill$><$'}'$>' name='roll_skill<$skill$>' class='rollButton'></button>
+		<button type='roll' value='/roll 1d20 + @{skill_<$ skill $>}' name='roll_skill<$ skill $>' class='rollButton'></button>
 		<div class="skill">
-			<$skill$>
+			<$ skill $>
 		</div>
-		<input type="number" name="attr_skill_<$skill$>">
+		<input type="number" name="attr_skill_<$ skill $>">
 		<% endfor %>
 	</div>
 

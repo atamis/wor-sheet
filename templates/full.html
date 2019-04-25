@@ -9,12 +9,12 @@
   </head>
   <body>
     <div id="full-sheet"
-    {% include "sheet.html.njk" %}
+    <% include "sheet.html.njk" %>
     </div>
 
     <script type="text/worker">
      wor = {state: 'full'};
-     {% include "worker.bundle.js" %}
+     <% include "worker.bundle.js" %>
     </script>
 
     <script>
@@ -31,7 +31,7 @@
     </script>
 
     <script>
-     {% include "app.bundle.js" %}
+     <% include "app.bundle.js" %>
     </script>
 
   </body>

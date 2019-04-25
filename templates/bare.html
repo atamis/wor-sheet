@@ -1,12 +1,16 @@
-{% include "sheet.html.njk" %}
+<% include "sheet.html.njk" %>
 
 <script type="text/worker">
  wor = {state: 'sheet'}
-  {% include "worker.bundle.js" %}
+
+<% include "worker.bundle.js" %>
+
 </script>
 
 <script>
  wor = {state: 'sheet'}
- {% include "app.bundle.js" %}
+
+ <% include "app.bundle.js" %>
+ 
 </script>
 
