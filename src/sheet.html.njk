@@ -3,7 +3,7 @@
 {% macro abilityTemplate(abbreviation, name) %}
     
 
-<button type='roll' value='/roll 1d20' name='roll_ability{{name}}' class='ability1st rollButton'></button>
+<button type='roll' value='/roll 1d20 + @{{'{'}}{{ abbreviation }}Mod{{'}'}}' name='roll_{{name}}' class='ability1st rollButton'></button>
 
 <div class="abilityTitlecard ability2nd">
     <div class="abilityName">
@@ -15,23 +15,32 @@
     </div>
 </div>
 
-<input class="totAbilityScore ability3rd" type="number" name="attr_totAbilityScore{{ name }}" value="10">
-<input class="abilityMod ability4th" type="number" name="attr_abilityMod{{ name }}" value="(@\{ {{ name }} \}-10)/2">
-<input class="abilityBase ability5th" type="number" name="attr_abilityBase{{ name }}">
-<input class="tempAbilityScore ability6th" type="number" name="attr_tempAbilityScore{{ name }}">    
+<input class="totAbilityScore ability3rd" type="number" name="attr_{{ name }}" value="10">
+<input class="abilityMod ability4th" type="number" name="attr_{{ abbreviation }}Mod" value="floor((@{{ '{' }}{{ name }}{{ '}' }}-10)/2)" disabled="true">
+<input class="abilityBase ability5th" type="number" name="attr_Base{{ name }}">
+<input class="tempAbilityScore ability6th" type="number" name="attr_temp{{ name }}">    
 {% endmacro %}
 
 {% macro saveTemplate(name) %}
     
-<button type='roll' value='/roll 1d20' name='roll_save{{name}}' class='save1st rollButton'></button>
+<button type='roll' value='/roll 1d20 + @{{'{'}}Save{{ name }}{{'}'}}' name='roll_save{{name}}' class='save1st rollButton'></button>
 
 <div class="saveTitlecard save2nd">
     {{ name }}
 </div>
 
-<input class="totSaveScore save3rd" type="number" name="attr_totSaveScore{{ name }}" value="10">
-<input class="saveBase save4th" type="number" name="attr_saveBase{{ name }}">
-<input class="saveMod save5th" type="number" name="attr_saveMod{{ name }}" value="(@\{ {{ name }} \}-10)/2">
+{# Listen, I didn't ask for your opinion. It's 4 AM and there's no good way to do this #}
+{% if name=="Charm" %}
+{% set value = "(((@{ChaMod} + @{WisMod}) + abs(@{ChaMod} - @{WisMod})) / 2)" %}
+{% elif name=="Reflex" %}
+{% set value = "@{DexMod}" %}
+{% else %}
+{% set value = 0 %}
+{% endif %}
+
+<input class="totSaveScore save3rd" type="number" name="attr_Save{{ name }}" value="10">
+<input class="saveBase save4th" type="number" name="attr_save{{ name }}Base">
+<input class="saveMod save5th" type="number" name="attr_save{{ name }}Mod" value="{{ value }}" disabled="true">
 <input class="miscMod save6th" type="number" name="attr_miscSaveMod{{ name }}">    
 {% endmacro %}
 
@@ -55,7 +64,7 @@
 	</div>
 
 	<div class="portrait">
-		Portrait goes here
+		<input type="file" name="attr_portrait" accept="image/png image/jpg"/>
 	</div>
 
 	<div class="abilities header-table">
@@ -63,7 +72,7 @@
 		<div class="sectionHeader"> ABILITIES </div></br>
 
 		<div class="abilityTitleName ability2nd">
-			AbilityName
+			Ability Name
 		</div>
 		<div class="abilityTitleTotal ability3rd">
 			Total Score
@@ -129,7 +138,7 @@
 		{% set skills = ["Acrobatics","Appraise","Bluff","Climb","Concentration","Decipher Script","Diplomacy","Disguise","Escape Artist","Fly","Forgery","Gather Information","Handle Animal","Heal","Intimidate","Perception","Ride","Search","Sense Motive","Sleight of Hand","Spellcraft","Stealth","Survival","Swim","Tamper"] %}
 
 		{% for skill in skills %}
-		<button type='roll' value='/roll 1d20' name='roll_skill{{skill}}' class='rollButton'></button>
+		<button type='roll' value='/roll 1d20 + @{{'{'}}skill_{{skill}}{{'}'}}' name='roll_skill{{skill}}' class='rollButton'></button>
 		<div class="skill">
 			{{skill}}
 		</div>

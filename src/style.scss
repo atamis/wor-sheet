@@ -25,6 +25,8 @@ div {
 
 .sheet-full-sheet {
 
+  margin-top:25px;
+
 	// All grid layout thanks to https://grid.layoutit.com/ after I spent way too long trying to get it to work
 
   display: grid;
@@ -79,20 +81,19 @@ div {
 
 .sheet-portrait {
 	grid-area: Portrait;
-	padding-top:100%;
 }
 
 .sheet-abilities{
   display: grid;
   grid-template-columns: minmax(0,0.6fr) [Ability-Name] minmax(0,0.8fr) [Total-Score] minmax(0,0.8fr) [Mod] minmax(0,0.8fr) [Base-Score] minmax(0,.8fr) [Temp-Mod] minmax(0,.8fr);
-  grid-template-rows: minmax(0,2.1em) .5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: minmax(0,2.5em) .5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-area: Abilities;
 }
 
 .sheet-skills {
   display: grid;
   grid-template-columns: minmax(0,0.5fr) [Name] minmax(0,1.5fr) [Value] minmax(0,1fr);
-  grid-template-rows: minmax(0,2.1em);
+  grid-template-rows: minmax(0,2.5em);
 	grid-area: Skills;
 }
 
@@ -103,10 +104,10 @@ div {
 
 .sheet-languages {
 	grid-area: Languages;
-  min-height: 3em;
+  min-height: 5em;
 	display: grid;
 	align-items: stretch;
-	grid-template-rows: minmax(0,2.1em) 1fr;
+	grid-template-rows: minmax(0,2.3em) 1fr;
 }
 
 .sheet-languages > .sheet-sectionHeader {
@@ -198,7 +199,7 @@ div {
 .sheet-attacks {
 	grid-area: Attacks;
   display:grid;
-  grid-template-rows: 2.1em;
+  grid-template-rows: 2.5em;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
@@ -484,4 +485,8 @@ div {
 
 body {
   overflow:initial;
+}
+
+select {
+  width:initial;
 }
