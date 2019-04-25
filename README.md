@@ -42,8 +42,15 @@ how this sheet attempts to mirror Roll20's sheet environment.
 ### HTML
 
 HTML is compiled with
-[`nunjucks`](https://mozilla.github.io/nunjucks/getting-started.html). The main
-templates or "entrypoints" can be found in `templates/`, but you shouldn't need to edit the directly.
+[`nunjucks`](https://mozilla.github.io/nunjucks/getting-started.html). To allow for proper roll20 compatibility, the default syntax has been changed as follows:
+
+|  | Block Start | Block End | Variable Start | Variable End | Comment Start | Comment End |
+| --- | ----------- | --------- | -------------- | ------------ | ------------- | ----------- |
+| Old | {% | %} | {{ | }} | {# | #} |
+| New | <% | %> | <$ | $> | <# | #> |
+
+The main
+templates or "entrypoints" can be found in `templates/`, but you shouldn't need to edit these directly.
 Both templates import `src/sheet.html.njk`, which in turn can import other
 partials from the `src` directory, which is where you can put other
 partial templates. The `.njk` extension is suggested but not required.
