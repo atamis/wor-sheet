@@ -15,15 +15,15 @@
     </div>
 </div>
 
-<input class="totAbilityScore ability3rd" type="number" name="attr_<$ name $>" value="10">
-<input class="abilityMod ability4th" type="number" name="attr_<$ abbreviation $>Mod" value="floor((@<$ '{' $><$ name $><$ '}' $>-10)/2)" disabled="true">
-<input class="abilityBase ability5th" type="number" name="attr_Base<$ name $>">
-<input class="tempAbilityScore ability6th" type="number" name="attr_temp<$ name $>">    
+<input class="totAbilityScore ability3rd" type="number" name="attr_<$ name $>" value="@{Base<$ name $>} + @{temp<$ name $>}" disabled='true'/>
+<input class="abilityMod ability4th" type="number" name="attr_<$ abbreviation $>Mod" value="floor((@{<$ name $>}-10)/2)" disabled="true"/>
+<input class="abilityBase ability5th" type="number" name="attr_Base<$ name $>" value="10"/>
+<input class="tempAbilityScore ability6th" type="number" name="attr_temp<$ name $>" value='0'/>    
 <% endmacro %>
 
 <% macro saveTemplate(name) %>
     
-<button type='roll' value='/roll 1d20 + @{Save<$ name $>}' name='roll_save<$ name $>' class='save1st rollButton'></button>
+<button type='roll' value='\&{template:default} {{name=Roll <$ name $> Save}} {{<$ abbreviation $>=[[1d20 + [[@{save<$ name $>Mod}]]]]}}' name='roll_save<$ name $>' class='save1st rollButton'></button>
 
 <div class="saveTitlecard save2nd">
     <$ name $>
@@ -138,7 +138,7 @@
 		<% set skills = ["Acrobatics","Appraise","Bluff","Climb","Concentration","Decipher Script","Diplomacy","Disguise","Escape Artist","Fly","Forgery","Gather Information","Handle Animal","Heal","Intimidate","Perception","Ride","Search","Sense Motive","Sleight of Hand","Spellcraft","Stealth","Survival","Swim","Tamper"] %>
 
 		<% for skill in skills %>
-		<button type='roll' value='/roll 1d20 + @{skill_<$ skill $>}' name='roll_skill<$ skill $>' class='rollButton'></button>
+		<button type='roll' value='\&{template:default} {{name=<$ skill $> Check}} {{<$ skill $>=[[1d20 + [[@{skill_<$ skill $>}]]]]}}' name='roll_skill<$ skill $>' class='rollButton'></button>
 		<div class="skill">
 			<$ skill $>
 		</div>
@@ -171,13 +171,13 @@
 
 		<div class="side-box bloodied-at">
 			<label>Bloodied at:</label>
-			<input type="number" name="attr_bloodied-val"/>
+			<input type="number" name="attr_bloodied-val" value="ceil(@{totalHP}/2)" disabled="true" />
 			<label>(-1 on attacks and checks)</label>
 		</div>
 
 		<div class="side-box wounded-at">
 			<label>Wounded at:</label>
-			<input type="number" name="attr_wounded-val"/>
+			<input type="number" name="attr_wounded-val" value="ceil(3 * @{totalHP}/4)" disabled="true" />
 			<label>(Further -1 on attacks and checks)</label>
 		</div>
 
@@ -196,7 +196,7 @@
 
 		<div class="side-box recovery-dice">
 			<label>Recovery Dice:</label>
-			<input type="number" name="attr_recovery-dice"/>			
+			<input type="text" name="attr_recovery-dice"/>			
 		</div>
 
 		<div class="side-box recovery-dice-used">
@@ -246,7 +246,7 @@
 			<label>Check Pen.<input type="number" name="attr_armor-check-pen" /></label>
 			<label>AC Bonus<input type="number" name="attr_armor-AC-bonux" /></label>
 			<label>Max Dex<input type="number" name="attr_armor-max-dex" /></label>
-			<label>Spell Fail<input type="text" name="attr_spell-fail" /></label>
+			<label>Spell Fail<input type="text" name="attr_armor-spell-fail" /></label>
 			<label>Speed<input type="text" name="attr_armor-max-speed" /></label>
 			<label>Weight<input type="text" name="attr_armor-weight" /></label>
 			<label>Special<input type="text" name="attr_armor-special" /></label>
@@ -257,7 +257,7 @@
 			<label>Check Pen.<input type="number" name="attr_shield-check-pen" /></label>
 			<label>AC Bonus<input type="number" name="attr_shield-AC-bonux" /></label>
 			<label>Max Dex<input type="number" name="attr_shield-max-dex" /></label>
-			<label>Spell Fail<input type="text" name="attr_spell-fail" /></label>
+			<label>Spell Fail<input type="text" name="attr_shield-spell-fail" /></label>
 			<label>Speed<input type="text" name="attr_shield-max-speed" /></label>
 			<label>Weight<input type="text" name="attr_shield-weight" /></label>
 			<label>Special<input type="text" name="attr_shield-special" /></label>
@@ -323,6 +323,9 @@
 			</div>
 		</div>
 
+		<input type="hidden" name="attr_initiative" value="@{bcb} + @{DexMod}" disabled="true"/>
+
+
 		<div class="melee-attack">
 			<div class="side-box">
 				<label>Melee Atk</label>
@@ -344,15 +347,17 @@
 			</div>
 		</div>
 
-		<div class="unique-attacks">
-			<div class="atack-box-1 attack-box topbar-table">
-				<label>Attack<input type="text" name="attr_shield" /></label>
-				<label>Atk Bonus<input type="number" name="attr_shield-check-pen" /></label>
-				<label>Damage<input type="number" name="attr_shield-AC-bonux" /></label>
-				<label>Type<input type="number" name="attr_shield-max-dex" /></label>
-				<label>Range<input type="text" name="attr_spell-fail" /></label>
-				<label>Notes<input type="text" name="attr_shield-max-speed" /></label>
-			</div>
+		<div class="repeating-attacks">
+			<fieldset class="repeating_attacks">
+				<div class="attack-box topbar-table">
+					<label>Attack<input type="text" name="attr_attack-name" /></label>
+					<label>Atk Bonus<input type="number" name="attr_attack-bonus" /></label>
+					<label>Damage<input type="number" name="attr_attack-damage" /></label>
+					<label>Type<input type="text" name="attr_attack-type" /></label>
+					<label>Range<input type="text" name="attr_attack-range" /></label>
+					<label>Notes<input type="text" name="attr_attack-notes" /></label>
+				</div>
+			</fieldset>
 		</div>
 	</div>
 
@@ -364,3 +369,125 @@
 
 
 </div>
+
+
+<!-- ROLL TEMPLATES -->
+	<rolltemplate class="sheet-rolltemplate-atk">
+		<div class="container">
+			<div class="result">
+				{{#always}}
+				<div class="adv">
+					<span>{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
+				</div>
+				<div class="advspacer"></div>
+				<div class="adv">
+					<span>{{r2}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
+				</div>
+				{{/always}}
+				{{#normal}}
+				<div class="solo">
+					<span>{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
+				</div>
+				{{/normal}}
+				{{#advantage}}
+				{{#rollLess() r1 r2}}
+				<div class="adv">
+					<span class="grey">{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
+				</div>
+				<div class="advspacer"></div>
+				<div class="adv">
+					<span>{{r2}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
+				</div>
+				{{/rollLess() r1 r2}}
+				{{#rollTotal() r1 r2}}
+				<div class="adv">
+					<span>{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
+				</div>
+				<div class="advspacer"></div>
+				<div class="adv">
+					<span>{{r2}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
+				</div>
+				{{/rollTotal() r1 r2}}
+				{{#rollGreater() r1 r2}}
+				<div class="adv">
+					<span>{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
+				</div>
+				<div class="advspacer"></div>
+				<div class="adv">
+					<span class="grey">{{r2}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
+				</div>
+				{{/rollGreater() r1 r2}}
+				{{/advantage}}
+				{{#disadvantage}}
+				{{#rollLess() r1 r2}}
+				<div class="adv">
+					<span>{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
+				</div>
+				<div class="advspacer"></div>
+				<div class="adv">
+					<span class="grey">{{r2}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
+				</div>
+				{{/rollLess() r1 r2}}
+				{{#rollTotal() r1 r2}}
+				<div class="adv">
+					<span>{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
+				</div>
+				<div class="advspacer"></div>
+				<div class="adv">
+					<span>{{r2}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
+				</div>
+				{{/rollTotal() r1 r2}}
+				{{#rollGreater() r1 r2}}
+				<div class="adv">
+					<span class="grey">{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
+				</div>
+				<div class="advspacer"></div>
+				<div class="adv">
+					<span>{{r2}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
+				</div>
+				{{/rollGreater() r1 r2}}
+				{{/disadvantage}}
+			</div>
+			{{#range}}
+			<div class="sublabel">
+				<span>{{range}}</span>
+			</div>
+			{{/range}}
+			<div class="label">
+				{{#normal}}
+				{{#rollWasCrit() r1}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r1}}
+				{{#^rollWasCrit() r1}}<span>{{rname}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/^rollWasCrit() r1}}
+				{{/normal}}
+				{{#always}}
+				{{#rollLess() r1 r2}}{{#rollWasCrit() r2}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r2}}{{/rollLess() r1 r2}}
+				{{#rollTotal() r1 r2}}{{#rollWasCrit() r1}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r1}}{{/rollTotal() r1 r2}}
+				{{#rollGreater() r1 r2}}{{#rollWasCrit() r1}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r1}}{{/rollGreater() r1 r2}}
+				{{#^rollWasCrit() r1}}{{#^rollWasCrit() r2}}<span>{{rname}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/^rollWasCrit() r2}}{{/^rollWasCrit() r1}}
+				{{/always}}
+				{{#advantage}}
+				{{#rollLess() r1 r2}}{{#rollWasCrit() r2}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r2}}{{/rollLess() r1 r2}}
+				{{#rollTotal() r1 r2}}{{#rollWasCrit() r1}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r1}}{{/rollTotal() r1 r2}}
+				{{#rollGreater() r1 r2}}{{#rollWasCrit() r1}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r1}}{{/rollGreater() r1 r2}}
+				{{#^rollWasCrit() r1}}{{#^rollWasCrit() r2}}<span>{{rname}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/^rollWasCrit() r2}}{{/^rollWasCrit() r1}}
+				{{/advantage}}
+				{{#disadvantage}}
+				{{#rollTotal() r1 r2}}{{#rollWasCrit() r1}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r1}}{{/rollTotal() r1 r2}}
+				{{#rollTotal() r1 r2}}{{#^rollWasCrit() r1}}<span>{{rname}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/^rollWasCrit() r1}}{{/rollTotal() r1 r2}}
+				{{#rollLess() r1 r2}}<span>{{rname}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollLess() r1 r2}}
+				{{#rollGreater() r1 r2}}<span>{{rname}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollGreater() r1 r2}}
+				{{/disadvantage}}
+			</div>
+			{{#charname}}
+			<div class="charname">
+				<span>{{charname}}</span>
+			</div>
+			{{/charname}}
+		</div>
+		{{#desc}}
+		<div class="desc info">
+			<span>
+				<span class="top"></span><span class="middle">{{desc}}</span><span class="bottom"></span>
+			</span>
+		</div>
+		{{/desc}}
+	</rolltemplate>

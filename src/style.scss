@@ -65,17 +65,17 @@ div {
 }
 
 .sheet-header-fields > .sheet-charName, .sheet-header-fields > .sheet-classLevel {
-  flex-basis:32%;
+  flex-basis:25%;
   flex-grow:1;
 }
 
 .sheet-header-fields > .sheet-race, .sheet-header-fields > .sheet-movement {
-  flex-basis:11%;
+  flex-basis:10%;
   flex-grow:1;
 }
 
 .sheet-header-fields > .sheet-age, .sheet-header-fields > .sheet-gender, .sheet-header-fields > .sheet-height, .sheet-header-fields > .sheet-weight, .sheet-header-fields > .sheet-eyes, .sheet-header-fields > .sheet-hair, .sheet-header-fields > .sheet-skin {
-  flex-basis: 10%;
+  flex-basis: 8%;
   flex-grow:1;
 }
 
@@ -232,13 +232,13 @@ div {
 
 
 
-.sheet-unique-attacks {
+.sheet-repeating-attacks {
   grid-column-start: 1;
   grid-column-end:4;
 }
 
 .sheet-attack-box > :nth-child(1) {
-  flex-basis:60%;
+  flex-basis:50%;
   font-size:1em;
   text-align: left;
 }
@@ -251,7 +251,7 @@ div {
 .sheet-attack-box > :nth-child(3) {flex-basis:12%}
 .sheet-attack-box > :nth-child(4) {flex-basis:8%}
 .sheet-attack-box > :nth-child(5) {flex-basis:15%}
-.sheet-attack-box > :nth-child(6) {flex-basis:80%}
+.sheet-attack-box > :nth-child(6) {flex-basis:70%}
 
 
 .sheet-armor {
@@ -281,6 +281,7 @@ div {
   display:inline-block;
   width: 100%;
   position:relative;
+  margin-right:0px;
 }
 
 .sheet-addition-wrapper  > label {
@@ -350,10 +351,10 @@ div {
 .sheet-armor-box > :nth-child(2) {flex-basis:15%}
 .sheet-armor-box > :nth-child(3) {flex-basis:15%}
 .sheet-armor-box > :nth-child(4) {flex-basis:15%}
-.sheet-armor-box > :nth-child(5) {flex-basis:12%}
-.sheet-armor-box > :nth-child(6) {flex-basis:22%}
-.sheet-armor-box > :nth-child(7) {flex-basis:15%}
-.sheet-armor-box > :nth-child(8) {flex-basis:30%}
+.sheet-armor-box > :nth-child(5) {flex-basis:11%}
+.sheet-armor-box > :nth-child(6) {flex-basis:20%}
+.sheet-armor-box > :nth-child(7) {flex-basis:14%}
+.sheet-armor-box > :nth-child(8) {flex-basis:25%}
 
 .sheet-feats {
   grid-area: Feats;
@@ -479,6 +480,91 @@ div {
   font-size:.5em;
 }
 
+// Thanks to the roll20 official 5e character sheet, whose buttons I'm a huge fan of
+.repcontrol {
+    min-height: 27px;
+}
+
+.repcontrol .btn {
+    border: medium none;
+    color: white !important;
+    background: none;
+    box-shadow: none;
+}
+
+.repcontrol .btn:focus {
+    outline: 0;
+}
+.sheet-saving-throw-container .repcontrol .repcontrol_edit,
+.sheet-saving-throw-container .repcontrol .repcontrol_add {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.repcontrol .repcontrol_edit:after {
+    content: '(';
+    visibility: visible;
+    font-family: pictos;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 2px;
+    font-size: 12px;
+    height: 12px;
+    width: 12px;
+    padding: 2px 4px 2px 4px;
+    color: black;
+}
+
+.editmode ~ .repcontrol .repcontrol_edit:after {
+    content: ')';
+}
+
+.repcontrol .repcontrol_add:before {
+    content: '&';
+    visibility: visible;
+    font-family: pictos;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 2px;
+    font-size: 12px;
+    height: 12px;
+    width: 12px;
+    padding: 2px 4px 2px 4px;
+    color: black;
+}
+
+.repcontrol .repcontrol_edit:hover:after,
+.repcontrol .repcontrol_add:hover:before
+{
+    background-color: #EFEFEF;
+}
+
+.sheet-resources .repcontrol {
+    margin-top: -10px;
+}
+
+.itemcontrol {
+    z-index: 10;
+}
+
+.itemcontrol .repcontrol_del {
+    font-size: 10px;
+    margin-top: 3px;
+    padding: 0px;
+    height: 18px;
+    width: 18px;
+}
+
+.itemcontrol .repcontrol_move {
+    font-size: 10px;
+    margin-top: 3px;
+    padding: 0px;
+    height: 18px;
+    width: 18px;
+}
+
+
+
 
 
 // Only to be used for override of roll20 things 
@@ -490,3 +576,5 @@ body {
 select {
   width:initial;
 }
+
+
