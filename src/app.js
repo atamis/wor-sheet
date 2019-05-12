@@ -32,3 +32,12 @@ if (r20.full) {
 r20.on("change:strength", function() {
     console.log("Strength changed");
 });
+
+r20.on("sheet:opened", function() {
+    // Maybe update more than that? Idk
+    var default_attr = {};
+    var sheet_values = r20.getAttrs(["totalHP"], function(values) { 
+        default_attr["bar1_value"] = 0;
+        default_attr["bar1_max"] = values.totalHP;
+    })
+});

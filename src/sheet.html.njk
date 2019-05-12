@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<input class="totAbilityScore ability3rd" type="number" name="attr_<$ name $>" value="@{Base<$ name $>} + @{temp<$ name $>}" disabled='true'/>
+<input class="totAbilityScore ability3rd" type="number" name="attr_<$ name $>" value="@{Base<$ name $>} + @{temp<$ name $>} - 2 * @{fatiguedCondition} - 2 * @{exhaustedCondition}" disabled='true'/>
 <input class="abilityMod ability4th" type="number" name="attr_<$ abbreviation $>Mod" value="floor((@{<$ name $>}-10)/2)" disabled="true"/>
 <input class="abilityBase ability5th" type="number" name="attr_Base<$ name $>" value="10"/>
 <input class="tempAbilityScore ability6th" type="number" name="attr_temp<$ name $>" value='0'/>    
@@ -100,14 +100,19 @@
 
 
 		<div class="fatiguedConditionBox">
-			<input type="checkbox" name="attr_fatiguedCondition" value='0'>
+				<input type="checkbox" name="attr_fatiguedCondition" value='1'>
 				Fatigued
+			<label class="belowLabel">
+					-2 to all abilities, -5 to speed
+			</label>
 		</div>
-				<# Again, some way of adding description/header. Or just a <div class="sectionHeader"> etc tag? #>
 
 		<div class="exhaustedConditionBox">
-			<input type="checkbox" name="attr_exhaustedCondition" value='0'>
+			<input type="checkbox" name="attr_exhaustedCondition" value='1'>
 				Exhausted
+			<label class="belowLabel">
+					Additional -2 to all abilities, can't run or charge
+			</label>
 		</div>
 
 		<div class="encumbranceConditionBox">
@@ -120,13 +125,19 @@
 		</div>
 
 		<div class="bloodiedConditionBox">
-			<input type="checkbox" name="attr_bloodiedCondition" value='0'>
+			<input type="checkbox" name="attr_bloodiedCondition" value='1'>
 				Bloodied
+			<label class="belowLabel">
+					-1 on attacks and checks, including initiative
+			</label>
 		</div>
 
 		<div class="woundedConditionBox">
-			<input type="checkbox" name="attr_woundedCondition" value='0'>
+			<input type="checkbox" name="attr_woundedCondition" value='1'>
 				Wounded
+			<label class="belowLabel">
+					Further -1 on attacks and checks, including initiative
+			</label>
 		</div>
 
 	</div>
@@ -185,13 +196,13 @@
 			<label class="death-saves-label">Death saves</label>
 			<label class="ds-passes">Pass</label>
 			<label class="ds-fails">Fail</label>
-			<input type="checkbox" name="attr_ds-fail-1" class="ds-fails" value='0'>
-			<input type="checkbox" name="attr_ds-fail-2" class="ds-fails" value='0'>
-			<input type="checkbox" name="attr_ds-fail-3" class="ds-fails" value='0'>
-			<input type="checkbox" name="attr_ds-fail-4" class="ds-fails" value='0'>
-			<input type="checkbox" name="attr_ds-pass-1" class="ds-passes" value='0'>
-			<input type="checkbox" name="attr_ds-pass-2" class="ds-passes" value='0'>
-			<input type="checkbox" name="attr_ds-pass-3" class="ds-passes" value='0'>
+			<input type="checkbox" name="attr_ds-fail-1" class="ds-fails" value='1'>
+			<input type="checkbox" name="attr_ds-fail-2" class="ds-fails" value='1'>
+			<input type="checkbox" name="attr_ds-fail-3" class="ds-fails" value='1'>
+			<input type="checkbox" name="attr_ds-fail-4" class="ds-fails" value='1'>
+			<input type="checkbox" name="attr_ds-pass-1" class="ds-passes" value='1'>
+			<input type="checkbox" name="attr_ds-pass-2" class="ds-passes" value='1'>
+			<input type="checkbox" name="attr_ds-pass-3" class="ds-passes" value='1'>
 		</div>
 
 		<div class="side-box recovery-dice">
@@ -351,11 +362,20 @@
 			<fieldset class="repeating_attacks">
 				<div class="attack-box topbar-table">
 					<label>Attack<input type="text" name="attr_attack-name" /></label>
-					<label>Atk Bonus<input type="number" name="attr_attack-bonus" /></label>
-					<label>Damage<input type="number" name="attr_attack-damage" /></label>
+					<label>Atk Bonus<input type="number" value='0' name="attr_attack-bonus" /></label>
+					<label>Damage<input type="number"  value='0' name="attr_attack-damage" /></label>
+					<select name="attr_attack-damage-die">
+						<option value="d4"> D4 </option>
+						<option value="d6"> D6 </option>
+						<option value="d8"> D8 </option>
+						<option value="d10"> D10 </option>
+						<option value="d12"> D12 </option>
+					</select>
 					<label>Type<input type="text" name="attr_attack-type" /></label>
 					<label>Range<input type="text" name="attr_attack-range" /></label>
-					<label>Notes<input type="text" name="attr_attack-notes" /></label>
+					<label>Notes<textarea name="attr_attack-notes"></textarea></label>
+					<button type='roll' value='\&{template:attack} {{name=@{attack-name}}} {{type=@{attack-type}}} {{attack=[[1d20 + [[@{attack-bonus}]]]]}} {{damage=[[1@{attack-damage-die} + [[@{attack-damage}]]]]}}' name='roll_attack' class='rollButton'></button>
+
 				</div>
 			</fieldset>
 		</div>
@@ -372,122 +392,16 @@
 
 
 <!-- ROLL TEMPLATES -->
-	<rolltemplate class="sheet-rolltemplate-atk">
-		<div class="container">
-			<div class="result">
-				{{#always}}
-				<div class="adv">
-					<span>{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
-				</div>
-				<div class="advspacer"></div>
-				<div class="adv">
-					<span>{{r2}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
-				</div>
-				{{/always}}
-				{{#normal}}
-				<div class="solo">
-					<span>{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
-				</div>
-				{{/normal}}
-				{{#advantage}}
-				{{#rollLess() r1 r2}}
-				<div class="adv">
-					<span class="grey">{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
-				</div>
-				<div class="advspacer"></div>
-				<div class="adv">
-					<span>{{r2}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
-				</div>
-				{{/rollLess() r1 r2}}
-				{{#rollTotal() r1 r2}}
-				<div class="adv">
-					<span>{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
-				</div>
-				<div class="advspacer"></div>
-				<div class="adv">
-					<span>{{r2}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
-				</div>
-				{{/rollTotal() r1 r2}}
-				{{#rollGreater() r1 r2}}
-				<div class="adv">
-					<span>{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
-				</div>
-				<div class="advspacer"></div>
-				<div class="adv">
-					<span class="grey">{{r2}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
-				</div>
-				{{/rollGreater() r1 r2}}
-				{{/advantage}}
-				{{#disadvantage}}
-				{{#rollLess() r1 r2}}
-				<div class="adv">
-					<span>{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
-				</div>
-				<div class="advspacer"></div>
-				<div class="adv">
-					<span class="grey">{{r2}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
-				</div>
-				{{/rollLess() r1 r2}}
-				{{#rollTotal() r1 r2}}
-				<div class="adv">
-					<span>{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
-				</div>
-				<div class="advspacer"></div>
-				<div class="adv">
-					<span>{{r2}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
-				</div>
-				{{/rollTotal() r1 r2}}
-				{{#rollGreater() r1 r2}}
-				<div class="adv">
-					<span class="grey">{{r1}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
-				</div>
-				<div class="advspacer"></div>
-				<div class="adv">
-					<span>{{r2}}{{#globalattack}} + {{globalattack}}{{/globalattack}}</span>
-				</div>
-				{{/rollGreater() r1 r2}}
-				{{/disadvantage}}
-			</div>
-			{{#range}}
-			<div class="sublabel">
-				<span>{{range}}</span>
-			</div>
-			{{/range}}
-			<div class="label">
-				{{#normal}}
-				{{#rollWasCrit() r1}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r1}}
-				{{#^rollWasCrit() r1}}<span>{{rname}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/^rollWasCrit() r1}}
-				{{/normal}}
-				{{#always}}
-				{{#rollLess() r1 r2}}{{#rollWasCrit() r2}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r2}}{{/rollLess() r1 r2}}
-				{{#rollTotal() r1 r2}}{{#rollWasCrit() r1}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r1}}{{/rollTotal() r1 r2}}
-				{{#rollGreater() r1 r2}}{{#rollWasCrit() r1}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r1}}{{/rollGreater() r1 r2}}
-				{{#^rollWasCrit() r1}}{{#^rollWasCrit() r2}}<span>{{rname}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/^rollWasCrit() r2}}{{/^rollWasCrit() r1}}
-				{{/always}}
-				{{#advantage}}
-				{{#rollLess() r1 r2}}{{#rollWasCrit() r2}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r2}}{{/rollLess() r1 r2}}
-				{{#rollTotal() r1 r2}}{{#rollWasCrit() r1}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r1}}{{/rollTotal() r1 r2}}
-				{{#rollGreater() r1 r2}}{{#rollWasCrit() r1}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r1}}{{/rollGreater() r1 r2}}
-				{{#^rollWasCrit() r1}}{{#^rollWasCrit() r2}}<span>{{rname}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/^rollWasCrit() r2}}{{/^rollWasCrit() r1}}
-				{{/advantage}}
-				{{#disadvantage}}
-				{{#rollTotal() r1 r2}}{{#rollWasCrit() r1}}<span>{{rnamec}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollWasCrit() r1}}{{/rollTotal() r1 r2}}
-				{{#rollTotal() r1 r2}}{{#^rollWasCrit() r1}}<span>{{rname}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/^rollWasCrit() r1}}{{/rollTotal() r1 r2}}
-				{{#rollLess() r1 r2}}<span>{{rname}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollLess() r1 r2}}
-				{{#rollGreater() r1 r2}}<span>{{rname}}{{#innate}}<span class="grey">, {{innate}}</span>{{/innate}} <span>({{mod}})</span></span>{{/rollGreater() r1 r2}}
-				{{/disadvantage}}
-			</div>
-			{{#charname}}
-			<div class="charname">
-				<span>{{charname}}</span>
-			</div>
-			{{/charname}}
-		</div>
-		{{#desc}}
-		<div class="desc info">
-			<span>
-				<span class="top"></span><span class="middle">{{desc}}</span><span class="bottom"></span>
-			</span>
-		</div>
-		{{/desc}}
-	</rolltemplate>
+<rolltemplate class="sheet-rolltemplate-attack">
+    <div class="container">
+        <div><h1>{{name}}</h1></div>
+        <div><span class="subheader">{{type}}</span></div>
+        <div class="arrow-container"><div class="arrow-right"></div></div>
+        <div class="rowcolor"><span class="tcat">Attack: </span>{{attack}} vs AC</div>
+        {{#damage}}
+            <div>
+                 <span class="tcat">Damage: </span>{{damage}} 
+            </div>
+        {{/damage}}
+    </div>
+</rolltemplate>

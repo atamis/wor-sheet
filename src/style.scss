@@ -6,16 +6,25 @@
 }
 
 input, textarea {
-  width:initial;
   padding:0px;
-  height:auto;
   margin-bottom:0px;
 }
 
-textarea {resize:none}
-
 div {
 	display: block;
+}
+
+textarea {
+  min-height: 1em;
+  max-height: 25vh;
+  outline: none;
+  max-width: 100%;
+  resize: vertical;
+}
+
+button {
+  max-height: 30px;
+  max-width: 30px;
 }
 
 .sheet-rollbutton {
@@ -61,7 +70,6 @@ div {
 .sheet-header-fields > label {
 	display:inline-block;
 	padding-top:1.5em;
-  margin-right:5px;
 }
 
 .sheet-header-fields > .sheet-charName, .sheet-header-fields > .sheet-classLevel {
@@ -217,7 +225,6 @@ div {
 .sheet-grapple > label {
   position: relative;
   top:1em;
-  margin-right: 5px;
 }
 
 .sheet-melee-attack {
@@ -243,15 +250,18 @@ div {
   text-align: left;
 }
 
-.sheet-attack-box > :nth-child(1) > :first-child {
-  top:-.25em
-}
-
 .sheet-attack-box > :nth-child(2) {flex-basis:15%}
 .sheet-attack-box > :nth-child(3) {flex-basis:12%}
-.sheet-attack-box > :nth-child(4) {flex-basis:8%}
-.sheet-attack-box > :nth-child(5) {flex-basis:15%}
-.sheet-attack-box > :nth-child(6) {flex-basis:70%}
+
+.sheet-attack-box > :nth-child(4) {
+  flex-basis:8%;
+  position: relative;
+  top:10px;
+}
+.sheet-attack-box > :nth-child(5) {flex-basis:5%}
+.sheet-attack-box > :nth-child(6) {flex-basis:5%}
+.sheet-attack-box > :nth-child(7) {flex-basis:25%}
+.sheet-attack-box > :nth-child(8) {flex-basis:10%}
 
 
 .sheet-armor {
@@ -281,13 +291,10 @@ div {
   display:inline-block;
   width: 100%;
   position:relative;
-  margin-right:0px;
 }
 
 .sheet-addition-wrapper  > label {
   display:inline-block;
-  padding-bottom:.5em;
-  margin-right:5px;
   font-size:.8em;
 }
 
@@ -315,16 +322,15 @@ div {
   padding-bottom:.5em;
 }
 
-.sheet-topbar-table > label > input {
+.sheet-topbar-table > label > input, .sheet-topbar-table > label > textarea {
   display:inline-block;
-  width: 100%;
   position:relative;
+  height:1.35em;
+  width: 100% !important;
 }
 
 .sheet-topbar-table > label {
   display:inline-block;
-  padding-bottom:.5em;
-  margin-right:5px;
   font-size:.8em;
 }
 
@@ -354,7 +360,7 @@ div {
 .sheet-armor-box > :nth-child(5) {flex-basis:11%}
 .sheet-armor-box > :nth-child(6) {flex-basis:20%}
 .sheet-armor-box > :nth-child(7) {flex-basis:14%}
-.sheet-armor-box > :nth-child(8) {flex-basis:25%}
+.sheet-armor-box > :nth-child(8) {flex-basis:20%}
 
 .sheet-feats {
   grid-area: Feats;
@@ -480,6 +486,17 @@ div {
   font-size:.5em;
 }
 
+.sheet-belowLabel {
+  font-size: .5em;
+}
+
+
+
+
+
+
+
+
 // Thanks to the roll20 official 5e character sheet, whose buttons I'm a huge fan of
 .repcontrol {
     min-height: 27px;
@@ -512,7 +529,9 @@ div {
     height: 12px;
     width: 12px;
     padding: 2px 4px 2px 4px;
-    color: black;
+    color: black;    
+    position: relative;
+    left: -25px;
 }
 
 .editmode ~ .repcontrol .repcontrol_edit:after {
@@ -564,6 +583,71 @@ div {
 }
 
 
+
+// Roll templates
+.sheet-rolltemplate-attack .sheet-container {
+    background-color: #ffffff;
+    border: 1px solid;
+    padding: 2px;
+    width: 189px;
+}
+
+.sheet-rolltemplate-attack .sheet-container h1 {
+    color: rgb(126, 45, 64);
+    font-size: 1.2em;
+    font-variant: small-caps;
+    line-height: 20px;
+}
+
+.sheet-rolltemplate-attack div {
+    padding: 2px;
+};
+ 
+.sheet-rolltemplate-attack span {
+    color: rgb(126, 45, 64);
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.2em;
+    font-variant: small-caps;
+    line-height: 1.6em;
+    padding-left: 5px;
+    text-align: left;
+}
+ 
+.sheet-rolltemplate-attack .sheet-subheader {
+    color: #000;
+    font-size: 1em;
+    font-style: italic;
+}
+ 
+.sheet-rolltemplate-attack .sheet-arrow-right {
+    border-bottom: 2px solid transparent;
+    border-left: 180px solid rgb(126, 45, 64);
+    border-top: 2px solid transparent;
+}
+ 
+.sheet-rolltemplate-attack .sheet-tcat {
+    font-style: italic;
+}
+ 
+.sheet-rolltemplate-attack .inlinerollresult  {
+    background-color: #ffffff;
+    border: none;
+}
+ 
+.sheet-rolltemplate-attack .inlinerollresult.fullcrit {
+    color: #3FB315;
+    border: none;
+}
+ 
+.sheet-rolltemplate-attack .inlinerollresult.fullfail {
+    color: #B31515;
+    border: none;
+}
+ 
+.sheet-rolltemplate-attack .inlinerollresult.importandivoll {
+    color: #4A57ED;
+    border: none;
+}
 
 
 
