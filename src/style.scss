@@ -32,7 +32,7 @@ button {
   max-height: 15px;
 }
 
-.sheet-full-sheet {
+.sheet-page-main {
 
   margin-top:25px;
 
@@ -48,7 +48,7 @@ button {
   min-height:1600px;
 }
 
-.sheet-full-sheet > div, .sheet-leftWrapper > div, .sheet-rightWrapper > div {
+.sheet-full-sheet > * > div, .sheet-leftWrapper > div, .sheet-rightWrapper > div {
 	//border: 2px dashed black;
 	margin: 2px;
 }
@@ -258,7 +258,7 @@ button {
   position: relative;
   top:10px;
 }
-.sheet-attack-box > :nth-child(5) {flex-basis:5%}
+.sheet-attack-box > :nth-child(5) {flex-basis:10%}
 .sheet-attack-box > :nth-child(6) {flex-basis:5%}
 .sheet-attack-box > :nth-child(7) {flex-basis:25%}
 .sheet-attack-box > :nth-child(8) {flex-basis:10%}
@@ -477,7 +477,6 @@ button {
 .sheet-side-box > :nth-child(2) {
   flex-grow:1;
   width:50%;
-  flex-basis:20%;
   max-height: 1.5em;
 }
 
@@ -489,10 +488,6 @@ button {
 .sheet-belowLabel {
   font-size: .5em;
 }
-
-
-
-
 
 
 
