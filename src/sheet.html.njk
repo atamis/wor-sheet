@@ -38,10 +38,10 @@
 <% set value = 0 %>
 <% endif %>
 
-<input class="totSaveScore save3rd" type="number" name="attr_Save<$ name $>" value="0">
-<input class="saveBase save4th" type="number" name="attr_save<$ name $>Base">
+<input class="totSaveScore save3rd" type="number" name="attr_Save<$ name $>" value="@{save<$ name $>Base} + @{save<$ name $>Mod} + @{miscSaveMod<$ name $>}" disabled="true">
+<input class="saveBase save4th" type="number" name="attr_save<$ name $>Base" value="0">
 <input class="saveMod save5th" type="number" name="attr_save<$ name $>Mod" value="<$ value $>" disabled="true">
-<input class="miscMod save6th" type="number" name="attr_miscSaveMod<$ name $>">    
+<input class="miscMod save6th" type="number" name="attr_miscSaveMod<$ name $>" value="0">    
 <% endmacro %>
 
 
@@ -150,11 +150,12 @@
 			<% set skills = ["Acrobatics","Appraise","Bluff","Climb","Concentration","Decipher Script","Diplomacy","Disguise","Escape Artist","Fly","Forgery","Gather Information","Handle Animal","Heal","Intimidate","Perception","Ride","Search","Sense Motive","Sleight of Hand","Spellcraft","Stealth","Survival","Swim","Tamper"] %>
 
 			<% for skill in skills %>
-			<button type='roll' value='\&{template:default} {{name=<$ skill $> Check}} {{<$ skill $>=[[1d20 + [[@{skill_<$ skill $>}]]]]}}' name='roll_skill<$ skill $>' class='rollButton'></button>
+			<% set cleanSkill = skill.replace(" ","_") %>
+			<button type='roll' value='\&{template:default} {{name=<$ skill $> Check}} {{<$ skill $>=[[1d20 + [[@{skill_<$ cleanSkill $>}]]]]}}' name='roll_skill<$ cleanSkill $>' class='rollButton'></button>
 			<div class="skill">
 				<$ skill $>
 			</div>
-			<input type="number" value="0" name="attr_skill_<$ skill $>">
+			<input type="number" value="0" name="attr_skill_<$ cleanSkill $>">
 			<% endfor %>
 		</div>
 
@@ -200,10 +201,10 @@
 				<input type="checkbox" name="attr_ds-fail-1" class="ds-fails" value='1'>
 				<input type="checkbox" name="attr_ds-fail-2" class="ds-fails" value='1'>
 				<input type="checkbox" name="attr_ds-fail-3" class="ds-fails" value='1'>
-				<input type="checkbox" name="attr_ds-fail-4" class="ds-fails" value='1'>
 				<input type="checkbox" name="attr_ds-pass-1" class="ds-passes" value='1'>
 				<input type="checkbox" name="attr_ds-pass-2" class="ds-passes" value='1'>
 				<input type="checkbox" name="attr_ds-pass-3" class="ds-passes" value='1'>
+				<input type="checkbox" name="attr_ds-pass-4" class="ds-passes" value='1'>
 			</div>
 
 			<div class="side-box recovery-dice">
@@ -223,7 +224,7 @@
 			<div class="sectionHeader">ARMOR CLASS</div>
 
 			<div class="total-armor addition-wrapper">
-				<label>Total<input type="number" name="attr_totalAC" /></label>
+				<label>Total<input type="number" name="attr_totalAC" value="10 + @{AC-Dex-Mod} + @{AC-Armor} + @{AC-Shield} + @{AC-Misc} + @{AC-Cover}" disabled="true" /></label>
 				<div class="plus-label"> = 10 + </div>
 				<label>Dex Mod<input type="number" name="attr_AC-Dex-Mod" value="@{DexMod}" disabled="true" /></label>
 				<div class="plus-label">+</div>
@@ -324,13 +325,13 @@
 
 				<div class="grapple-calc addition-wrapper">
 					<label>Grapple</label>
-					<label>Total<input type="number" name="attr_grapple-total" /></label>
+					<label>Total<input type="number" name="attr_grapple-total" value="@{grapple-bcb} + @{grapple-str} + @{grapple-misc}" disabled="true" /></label>
 					<div class="plus-label">=</div>
 					<label>BCB<input type="number" name="attr_grapple-bcb" value="@{bcb}" disabled="true" /></label>
 					<div class="plus-label">+</div>
-					<label>STR<input type="number" name="attr_str-bcb" value="@{StrMod}" disabled="true" /></label>
+					<label>STR<input type="number" name="attr_grapple-str" value="@{StrMod}" disabled="true" /></label>
 					<div class="plus-label">+</div>
-					<label>Misc<input type="number" name="attr_misc-bcb" /></label>
+					<label>Misc<input type="number" name="attr_grapple-misc" value="0" /></label>
 					<# Maybe I need a better way of doing these plus-box-type-things #>
 				</div>
 			</div>
