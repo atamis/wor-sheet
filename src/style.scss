@@ -32,6 +32,60 @@ button {
   max-height: 15px;
 }
 
+// Tabbing
+input[type=radio].sheet-tab {
+    opacity: 0;
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    width: 18px;
+    height: 18px;
+    z-index: 2;
+}
+
+ input[type=radio].sheet-tab + span {
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    width: 17px;
+    height: 17px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #E8E8E8;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+}
+
+ .sheet-page {
+    display: none;
+}
+
+ input[type=radio].sheet-tab-main:checked ~ .sheet-tab-main,
+input[type=radio].sheet-tab-notes:checked ~ .sheet-tab-notes,
+{
+    display: block;
+}
+
+ input[type=radio].sheet-tab-main.sheet-tab,
+input[type=radio].sheet-tab-main.sheet-tab + span {
+    right: 136px;
+    width: 45px;
+}
+
+ input[type=radio].sheet-tab-notes.sheet-tab,
+input[type=radio].sheet-tab-notes.sheet-tab + span {
+    right: 83px;
+    width: 50px;
+}
+
+ input[type=radio].sheet-tab:checked + span {
+  background: rgba(0,0,0,.2);
+}
+
+ // End tabbing
+
+
 .sheet-page-main {
 
   margin-top:25px;

@@ -23,7 +23,7 @@
 <% endmacro %>
 
 <% macro saveTemplate(name) %>
-    
+
 <button type='roll' value='\&{template:default} {{name=Roll <$ name $> Save}} {{<$ abbreviation $>=[[1d20 + [[@{save<$ name $>}]]]]}}' name='roll_save<$ name $>' class='save1st rollButton'>
 </button>
 
@@ -52,100 +52,103 @@
 <# End macro section #>
 
 <div class="full-sheet">
-	<div class="page-main">
-		<div class="header-fields">
-			<label class="charName">Character Name
-				<input type="text" name="attr_character_name" />
-			</label>
-			<label class="classLevel">Class and Level
-				<input type="text" name="attr_class_lvl" />
-			</label>
-			<label class="race">Race
-				<input type="text" name="attr_race" />
-			</label>
-			<label class="movement">Movement
-				<input type="text" name="attr_movement" />
-			</label>
-			<label class="age">Age
-				<input type="text" name="attr_age">
-			</label>
-			<label class="gender">Gender
-				<input type="text" name="attr_gender" />
-			</label>
-			<label class="height">Height
-				<input type="text" name="attr_height" />
-			</label>
-			<label class="weight">Weight
-				<input type="text" name="attr_weight" />
-			</label>
-			<label class="eyes">Eyes
-				<input type="text" name="attr_eyes" />
-			</label>
-			<label class="hair">Hair
-				<input type="text" name="attr_hair" />
-			</label>
-			<label class="skin">Skin
-				<input type="text" name="attr_skin" />
-			</label>
-		</div>
-
-		<div class="portrait">
-			<input type="file" name="attr_portrait" accept="image/png image/jpg"/>
-		</div>
-
-		<div class="abilities header-table">
-
-			<div class="sectionHeader"> ABILITIES
-			</div>
-			<br />
-
-			<div class="abilityTitleName ability2nd">
-				Ability Name
-			</div>
-			<div class="abilityTitleTotal ability3rd">
-				Total Score
-			</div>
-			<div class="abilityTitleMod ability4th">
-				Mod.
-			</div>
-			<div class="abilityTitleBase ability5th">
-				Base Score
-			</div>
-			<div class="abilityTitleTemp ability6th">
-				Temp Mod.
+	<input type="radio" name="attr_page" class="sheet-tab tab-main" value="1" checked="checked"><span>MAIN</span>
+	<input type="radio" name="attr_page" class="sheet-tab tab-notes" value="2"><span>NOTES</span>
+	<div class="tab-main page">
+		<div class="page-main">
+			<div class="header-fields">
+				<label class="charName">Character Name
+					<input type="text" name="attr_character_name" />
+				</label>
+				<label class="classLevel">Class and Level
+					<input type="text" name="attr_class_lvl" />
+				</label>
+				<label class="race">Race
+					<input type="text" name="attr_race" />
+				</label>
+				<label class="movement">Movement
+					<input type="text" name="attr_movement" />
+				</label>
+				<label class="age">Age
+					<input type="text" name="attr_age">
+				</label>
+				<label class="gender">Gender
+					<input type="text" name="attr_gender" />
+				</label>
+				<label class="height">Height
+					<input type="text" name="attr_height" />
+				</label>
+				<label class="weight">Weight
+					<input type="text" name="attr_weight" />
+				</label>
+				<label class="eyes">Eyes
+					<input type="text" name="attr_eyes" />
+				</label>
+				<label class="hair">Hair
+					<input type="text" name="attr_hair" />
+				</label>
+				<label class="skin">Skin
+					<input type="text" name="attr_skin" />
+				</label>
 			</div>
 
-			<% set abilities = [["STR","Strength"],["DEX","Dexterity"],["CON","Constitution"],["INT","Intelligence"],["WIS","Wisdom"],["CHA","Charisma"]] %>
-
-			<% for ability in abilities %>
-			<$ abilityTemplate(ability[0], ability[1])$>
-			<% endfor %>
-		</div>
-
-		<div class="conditions">
-
-			<div class="sectionHeader">CONDITIONS
+			<div class="portrait">
+				<input type="file" name="attr_portrait" accept="image/png image/jpg"/>
 			</div>
 
+			<div class="abilities header-table">
 
-			<div class="fatiguedConditionBox">
+				<div class="sectionHeader"> ABILITIES
+				</div>
+				<br />
+
+				<div class="abilityTitleName ability2nd">
+					Ability Name
+				</div>
+				<div class="abilityTitleTotal ability3rd">
+					Total Score
+				</div>
+				<div class="abilityTitleMod ability4th">
+					Mod.
+				</div>
+				<div class="abilityTitleBase ability5th">
+					Base Score
+				</div>
+				<div class="abilityTitleTemp ability6th">
+					Temp Mod.
+				</div>
+
+				<% set abilities = [["STR","Strength"],["DEX","Dexterity"],["CON","Constitution"],["INT","Intelligence"],["WIS","Wisdom"],["CHA","Charisma"]] %>
+
+				<% for ability in abilities %>
+				<$ abilityTemplate(ability[0], ability[1])$>
+				<% endfor %>
+			</div>
+
+			<div class="conditions">
+
+				<div class="sectionHeader">CONDITIONS
+				</div>
+
+
+				<div class="fatiguedConditionBox">
 					<input type="checkbox" name="attr_fatiguedCondition" value='1'>
 					Fatigued
-				<label class="belowLabel">
+					<label class="belowLabel">
 						-2 to all abilities, -5 to speed
-				</label>
-			</div>
+					</label>
+				</div>
 
-			<div class="exhaustedConditionBox">
-				<input type="checkbox" name="attr_exhaustedCondition" value='1'>
+				<div class="exhaustedConditionBox">
+					<input type="checkbox" name="attr_exhaustedCondition" value='1'>
 					Exhausted
-				<label class="belowLabel">
+					<label class="belowLabel">
 						Additional -2 to all abilities, can't run or charge
-				</label>
-			</div>
+					</label>
+				</div>
 
-			<div class="encumbranceConditionBox">
-				Encumbrance:
+				<div class="encumbranceConditionBox">
+					Encumbrance:
 					<select name="attr_encumbranceCondition">
 						<option value="light"> Light
 						</option>
@@ -154,251 +157,248 @@
 						<option value="heavy"> Heavy
 						</option>
 					</select>
-			</div>
+				</div>
 
-			<div class="bloodiedConditionBox">
-				<input type="checkbox" name="attr_bloodiedCondition" value='1'>
+				<div class="bloodiedConditionBox">
+					<input type="checkbox" name="attr_bloodiedCondition" value='1'>
 					Bloodied
-				<label class="belowLabel">
+					<label class="belowLabel">
 						-1 on attacks and checks, including initiative
-				</label>
-			</div>
+					</label>
+				</div>
 
-			<div class="woundedConditionBox">
-				<input type="checkbox" name="attr_woundedCondition" value='1'>
+				<div class="woundedConditionBox">
+					<input type="checkbox" name="attr_woundedCondition" value='1'>
 					Wounded
-				<label class="belowLabel">
+					<label class="belowLabel">
 						Further -1 on attacks and checks, including initiative
-				</label>
+					</label>
+				</div>
+
 			</div>
 
-		</div>
+			<div class="skills header-table">
 
-		<div class="skills header-table">
+				<div class="sectionHeader">SKILLS
+				</div>
 
-			<div class="sectionHeader">SKILLS
+				<% set skills = ["Acrobatics","Appraise","Bluff","Climb","Concentration","Decipher Script","Diplomacy","Disguise","Escape Artist","Fly","Forgery","Gather Information","Handle Animal","Heal","Intimidate","Perception","Ride","Search","Sense Motive","Sleight of Hand","Spellcraft","Stealth","Survival","Swim","Tamper"] %>
+
+				<% for skill in skills %>
+				<% set cleanSkill = skill.replace(" ","_") %>
+				<button type='roll' value='\&{template:default} {{name=<$ skill $> Check}} {{<$ skill $>=[[1d20 + [[@{skill_<$ cleanSkill $>}]]]]}}' name='roll_skill<$ cleanSkill $>' class='rollButton'>
+				</button>
+				<div class="skill">
+					<$ skill $>
+				</div>
+				<input type="number" value="0" name="attr_skill_<$ cleanSkill $>">
+				<% endfor %>
 			</div>
 
-			<% set skills = ["Acrobatics","Appraise","Bluff","Climb","Concentration","Decipher Script","Diplomacy","Disguise","Escape Artist","Fly","Forgery","Gather Information","Handle Animal","Heal","Intimidate","Perception","Ride","Search","Sense Motive","Sleight of Hand","Spellcraft","Stealth","Survival","Swim","Tamper"] %>
-
-			<% for skill in skills %>
-			<% set cleanSkill = skill.replace(" ","_") %>
-			<button type='roll' value='\&{template:default} {{name=<$ skill $> Check}} {{<$ skill $>=[[1d20 + [[@{skill_<$ cleanSkill $>}]]]]}}' name='roll_skill<$ cleanSkill $>' class='rollButton'>
-			</button>
-			<div class="skill">
-				<$ skill $>
-			</div>
-			<input type="number" value="0" name="attr_skill_<$ cleanSkill $>">
-			<% endfor %>
-		</div>
-
-		<div class="languages header-table">
-			<div class="sectionHeader">LANGUAGES
-			</div>
-			<textarea name="attr_languages">
-			</textarea>
-		</div>
-
-		<div class="hit-points">
-			<div class="sectionHeader">HIT POINTS
-			</div>
-
-			<div class="top-box totalhp">
-				<label>Hit Points
-				</label>
-				<input type="number" name="attr_totalHP"/>
-			</div>
-
-			<div class="top-box damage">
-				<label>Damage Taken
-				</label>
-				<input type="number" name="attr_dmg"/>
-			</div>
-
-			<div class="top-box wounds-scars">
-				<label>Wounds & Scars
-				</label>
-				<textarea name="attr_wounds-scars">
+			<div class="languages header-table">
+				<div class="sectionHeader">LANGUAGES
+				</div>
+				<textarea name="attr_languages">
 				</textarea>
 			</div>
 
-			<div class="side-box bloodied-at">
-				<label>Bloodied at:
-				</label>
-				<input type="number" name="attr_bloodied-val" value="ceil(@{totalHP}/2)" disabled="true" />
-				<label>(-1 on attacks and checks)
-				</label>
-			</div>
-
-			<div class="side-box wounded-at">
-				<label>Wounded at:
-				</label>
-				<input type="number" name="attr_wounded-val" value="ceil(3 * @{totalHP}/4)" disabled="true" />
-				<label>(Further -1 on attacks and checks)
-				</label>
-			</div>
-
-			<div class="death-saves">
-				<label class="death-saves-label">Death saves
-				</label>
-				<label class="ds-passes">Pass
-				</label>
-				<label class="ds-fails">Fail
-				</label>
-				<input type="checkbox" name="attr_ds-fail-1" class="ds-fails" value='1'>
-				<input type="checkbox" name="attr_ds-fail-2" class="ds-fails" value='1'>
-				<input type="checkbox" name="attr_ds-fail-3" class="ds-fails" value='1'>
-				<input type="checkbox" name="attr_ds-pass-1" class="ds-passes" value='1'>
-				<input type="checkbox" name="attr_ds-pass-2" class="ds-passes" value='1'>
-				<input type="checkbox" name="attr_ds-pass-3" class="ds-passes" value='1'>
-				<input type="checkbox" name="attr_ds-pass-4" class="ds-passes" value='1'>
-			</div>
-
-			<div class="side-box recovery-dice">
-				<label>Recovery Dice:
-				</label>
-				<input type="text" name="attr_recovery-dice"/>			
-			</div>
-
-			<div class="side-box recovery-dice-used">
-				<label>Recovery Dice Used:
-				</label>
-				<input type="number" name="attr_recovery-dice-used"/>		
-			</div>
-
-		</div>
-
-		<div class="armor">
-
-			<div class="sectionHeader">ARMOR CLASS
-			</div>
-
-			<div class="total-armor addition-wrapper">
-				<label>Total
-					<input type="number" name="attr_totalAC" value="10 + @{AC-Dex-Mod} + @{AC-Armor} + @{AC-Shield} + @{AC-Misc} + @{AC-Cover}" disabled="true" />
-				</label>
-				<div class="plus-label"> = 10 +
+			<div class="hit-points">
+				<div class="sectionHeader">HIT POINTS
 				</div>
-				<label>Dex Mod
-					<input type="number" name="attr_AC-Dex-Mod" value="@{DexMod}" disabled="true" />
-				</label>
-				<div class="plus-label">+
+
+				<div class="top-box totalhp">
+					<label>Hit Points
+					</label>
+					<input type="number" name="attr_totalHP"/>
 				</div>
-				<label>Armor
-					<input type="number" name="attr_AC-Armor" />
-				</label>
-				<div class="plus-label">+
+
+				<div class="top-box damage">
+					<label>Damage Taken
+					</label>
+					<input type="number" name="attr_dmg"/>
 				</div>
-				<label>Shield
-					<input type="number" name="attr_AC-Shield" />
-				</label>
-				<div class="plus-label">+
+
+				<div class="top-box wounds-scars">
+					<label>Wounds & Scars
+					</label>
+					<textarea name="attr_wounds-scars">
+					</textarea>
 				</div>
-				<label>Misc
-					<input type="number" name="attr_AC-Misc" />
-				</label>
-				<div class="plus-label">+
+
+				<div class="side-box bloodied-at">
+					<label>Bloodied at:
+					</label>
+					<input type="number" name="attr_bloodied-val" value="ceil(@{totalHP}/2)" disabled="true" />
+					<label>(-1 on attacks and checks)
+					</label>
 				</div>
-				<label>Cover
-					<input type="number" name="attr_AC-Cover" />
-				</label>
-				<# Maybe I need a better way of doing these plus-box-type-things #>
+
+				<div class="side-box wounded-at">
+					<label>Wounded at:
+					</label>
+					<input type="number" name="attr_wounded-val" value="ceil(3 * @{totalHP}/4)" disabled="true" />
+					<label>(Further -1 on attacks and checks)
+					</label>
+				</div>
+
+				<div class="death-saves">
+					<label class="death-saves-label">Death saves
+					</label>
+					<label class="ds-passes">Pass
+					</label>
+					<label class="ds-fails">Fail
+					</label>
+					<input type="checkbox" name="attr_ds-fail-1" class="ds-fails" value='1'>
+					<input type="checkbox" name="attr_ds-fail-2" class="ds-fails" value='1'>
+					<input type="checkbox" name="attr_ds-fail-3" class="ds-fails" value='1'>
+					<input type="checkbox" name="attr_ds-pass-1" class="ds-passes" value='1'>
+					<input type="checkbox" name="attr_ds-pass-2" class="ds-passes" value='1'>
+					<input type="checkbox" name="attr_ds-pass-3" class="ds-passes" value='1'>
+					<input type="checkbox" name="attr_ds-pass-4" class="ds-passes" value='1'>
+				</div>
+
+				<div class="side-box recovery-dice">
+					<label>Recovery Dice:
+					</label>
+					<input type="text" name="attr_recovery-dice"/>			
+				</div>
+
+				<div class="side-box recovery-dice-used">
+					<label>Recovery Dice Used:
+					</label>
+					<input type="number" name="attr_recovery-dice-used"/>		
+				</div>
 			</div>
 
-			<div class="top-box touch-AC">
-				<label>Touch AC
-				</label>
-				<label>(No armor/shield bonus)
-				</label>
-				<input type="number" name="attr_touch-AC"/>
+			<div class="armor">
+
+				<div class="sectionHeader">ARMOR CLASS
+				</div>
+
+				<div class="total-armor addition-wrapper">
+					<label>Total
+						<input type="number" name="attr_totalAC" value="10 + @{AC-Dex-Mod} + @{AC-Armor} + @{AC-Shield} + @{AC-Misc} + @{AC-Cover}" disabled="true" />
+					</label>
+					<div class="plus-label"> = 10 +
+					</div>
+					<label>Dex Mod
+						<input type="number" name="attr_AC-Dex-Mod" value="@{DexMod}" disabled="true" />
+					</label>
+					<div class="plus-label">+
+					</div>
+					<label>Armor
+						<input type="number" name="attr_AC-Armor" />
+					</label>
+					<div class="plus-label">+
+					</div>
+					<label>Shield
+						<input type="number" name="attr_AC-Shield" />
+					</label>
+					<div class="plus-label">+
+					</div>
+					<label>Misc
+						<input type="number" name="attr_AC-Misc" />
+					</label>
+					<div class="plus-label">+
+					</div>
+					<label>Cover
+						<input type="number" name="attr_AC-Cover" />
+					</label>
+					<# Maybe I need a better way of doing these plus-box-type-things #>
+				</div>
+
+				<div class="top-box touch-AC">
+					<label>Touch AC
+					</label>
+					<label>(No armor/shield bonus)
+					</label>
+					<input type="number" name="attr_touch-AC"/>
+				</div>
+
+				<div class="top-box off-guard-AC">
+					<label>Off-Guard AC
+					</label>
+					<label>(No Dex bonus)
+					</label>
+					<input type="number" name="attr_off-guard-AC"/>
+				</div>
+
+				<div class="special-defenses">
+					<textarea type="number" name="attr_special-defenses" placeholder="Special Defenses">
+					</textarea>
+				</div>
+
+				<div class="armor-box topbar-table">
+					<label>Armor
+						<input type="text" name="attr_armor" />
+					</label>
+					<label>Check Pen.
+						<input type="number" name="attr_armor-check-pen" />
+					</label>
+					<label>AC Bonus
+						<input type="number" name="attr_armor-AC-bonux" />
+					</label>
+					<label>Max Dex
+						<input type="number" name="attr_armor-max-dex" />
+					</label>
+					<label>Spell Fail
+						<input type="text" name="attr_armor-spell-fail" />
+					</label>
+					<label>Speed
+						<input type="text" name="attr_armor-max-speed" />
+					</label>
+					<label>Weight
+						<input type="text" name="attr_armor-weight" />
+					</label>
+					<label>Special
+						<input type="text" name="attr_armor-special" />
+					</label>
+				</div>
+
+				<div class="armor-box topbar-table">
+					<label>Shield
+						<input type="text" name="attr_shield" />
+					</label>
+					<label>Check Pen.
+						<input type="number" name="attr_shield-check-pen" />
+					</label>
+					<label>AC Bonus
+						<input type="number" name="attr_shield-AC-bonux" />
+					</label>
+					<label>Max Dex
+						<input type="number" name="attr_shield-max-dex" />
+					</label>
+					<label>Spell Fail
+						<input type="text" name="attr_shield-spell-fail" />
+					</label>
+					<label>Speed
+						<input type="text" name="attr_shield-max-speed" />
+					</label>
+					<label>Weight
+						<input type="text" name="attr_shield-weight" />
+					</label>
+					<label>Special
+						<input type="text" name="attr_shield-special" />
+					</label>
+				</div>
 			</div>
 
-			<div class="top-box off-guard-AC">
-				<label>Off-Guard AC
-				</label>
-				<label>(No Dex bonus)
-				</label>
-				<input type="number" name="attr_off-guard-AC"/>
-			</div>
+			<div class="saving-throws">
 
-			<div class="special-defenses">
-				<textarea type="number" name="attr_special-defenses" placeholder="Special Defenses">
-				</textarea>
-			</div>
+				<div class="sectionHeader">SAVING THROWS
+				</div>
+			</br>
 
-			<div class="armor-box topbar-table">
-				<label>Armor
-					<input type="text" name="attr_armor" />
-				</label>
-				<label>Check Pen.
-					<input type="number" name="attr_armor-check-pen" />
-				</label>
-				<label>AC Bonus
-					<input type="number" name="attr_armor-AC-bonux" />
-				</label>
-				<label>Max Dex
-					<input type="number" name="attr_armor-max-dex" />
-				</label>
-				<label>Spell Fail
-					<input type="text" name="attr_armor-spell-fail" />
-				</label>
-				<label>Speed
-					<input type="text" name="attr_armor-max-speed" />
-				</label>
-				<label>Weight
-					<input type="text" name="attr_armor-weight" />
-				</label>
-				<label>Special
-					<input type="text" name="attr_armor-special" />
-				</label>
-			</div>
-
-			<div class="armor-box topbar-table">
-				<label>Shield
-					<input type="text" name="attr_shield" />
-				</label>
-				<label>Check Pen.
-					<input type="number" name="attr_shield-check-pen" />
-				</label>
-				<label>AC Bonus
-					<input type="number" name="attr_shield-AC-bonux" />
-				</label>
-				<label>Max Dex
-					<input type="number" name="attr_shield-max-dex" />
-				</label>
-				<label>Spell Fail
-					<input type="text" name="attr_shield-spell-fail" />
-				</label>
-				<label>Speed
-					<input type="text" name="attr_shield-max-speed" />
-				</label>
-				<label>Weight
-					<input type="text" name="attr_shield-weight" />
-				</label>
-				<label>Special
-					<input type="text" name="attr_shield-special" />
-				</label>
-			</div>
-
-
-		</div>
-
-		<div class="saving-throws">
-
-			<div class="sectionHeader">SAVING THROWS
-			</div>
-</br>
-
-<label class="save2nd">Save Name
-</label>
-<label class="save3rd">Total
-</label>
-<label class="save4th">Base Save
-</label>
-<label class="save5th">Ability Mod
-</label>
-<label class="save6th">Misc Mod
-</label>
+			<label class="save2nd">Save Name
+			</label>
+			<label class="save3rd">Total
+			</label>
+			<label class="save4th">Base Save
+			</label>
+			<label class="save5th">Ability Mod
+			</label>
+			<label class="save6th">Misc Mod
+			</label>
 
 			<% set saves = ["Charm","Reflex","Death","Fear","Spell"] %>
 
@@ -544,7 +544,9 @@
 			<# Do something nice here. But may have to be just a js thing? Or whatever the click-button-to-extend thing is #>
 		</div>
 	</div>
+</div>
 
+<div class="tab-notes page">
 	<div class="page-notes">
 		<div class="header-table">
 			<div class="sectionHeader">NOTES
@@ -553,6 +555,7 @@
 			</textarea>
 		</div>
 	</div>
+</div>
 
 </div>
 
