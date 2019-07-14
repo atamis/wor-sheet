@@ -61,16 +61,23 @@ input[type=radio].sheet-tab {
     display: none;
 }
 
- input[type=radio].sheet-tab-main:checked ~ .sheet-tab-main,
+input[type=radio].sheet-tab-main:checked ~ .sheet-tab-main,
 input[type=radio].sheet-tab-notes:checked ~ .sheet-tab-notes,
+input[type=radio].sheet-tab-skills:checked ~ .sheet-tab-skills
 {
     display: block;
 }
 
  input[type=radio].sheet-tab-main.sheet-tab,
 input[type=radio].sheet-tab-main.sheet-tab + span {
-    right: 136px;
+    right: 186px;
     width: 45px;
+}
+
+ input[type=radio].sheet-tab-skills.sheet-tab,
+input[type=radio].sheet-tab-skills.sheet-tab + span {
+    right: 136px;
+    width: 50px;
 }
 
  input[type=radio].sheet-tab-notes.sheet-tab,

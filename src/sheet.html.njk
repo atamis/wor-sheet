@@ -53,7 +53,9 @@
 
 <div class="full-sheet">
 	<input type="radio" name="attr_page" class="sheet-tab tab-main" value="1" checked="checked"><span>MAIN</span>
-	<input type="radio" name="attr_page" class="sheet-tab tab-notes" value="2"><span>NOTES</span>
+	<input type="radio" name="attr_page" class="sheet-tab tab-skills" value="2"><span>SKILLS</span>
+	<input type="radio" name="attr_page" class="sheet-tab tab-notes" value="3"><span>NOTES</span>
+
 	<div class="tab-main page">
 		<div class="page-main">
 			<div class="header-fields">
@@ -387,175 +389,186 @@
 
 				<div class="sectionHeader">SAVING THROWS
 				</div>
-			</br>
+				<br />
 
-			<label class="save2nd">Save Name
-			</label>
-			<label class="save3rd">Total
-			</label>
-			<label class="save4th">Base Save
-			</label>
-			<label class="save5th">Ability Mod
-			</label>
-			<label class="save6th">Misc Mod
-			</label>
+				<label class="save2nd">Save Name
+				</label>
+				<label class="save3rd">Total
+				</label>
+				<label class="save4th">Base Save
+				</label>
+				<label class="save5th">Ability Mod
+				</label>
+				<label class="save6th">Misc Mod
+				</label>
 
-			<% set saves = ["Charm","Reflex","Death","Fear","Spell"] %>
+				<% set saves = ["Charm","Reflex","Death","Fear","Spell"] %>
 
-			<% for save in saves %>
-			<$ saveTemplate(save) $>
-			<% endfor %>
+				<% for save in saves %>
+				<$ saveTemplate(save) $>
+				<% endfor %>
 
-			<div class="conditional-save-mods">
-				<textarea type="text" name="attr_conditionalSaveMods" placeholder="Conditional Save Mods">
+				<div class="conditional-save-mods">
+					<textarea type="text" name="attr_conditionalSaveMods" placeholder="Conditional Save Mods">
+					</textarea>
+				</div>
+
+			</div>
+
+			<div class="special-abilities">
+
+				<div class="sectionHeader">SPECIAL ABILITIES
+				</div>
+
+				<textarea name="attr_special-abilities">
+				</textarea>
+
+				<# Do something cool here. Like feats. But what? #>
+
+			</div>
+
+			<div class="attacks">
+
+				<div class="sectionHeader"> ATTACKS
+				</div>
+
+				<div class="bcb side-box">
+					<label>BCB
+					</label>
+					<input type="number" name="attr_bcb"/>
+					<label>(Base Combat Bonus)
+					</label>
+				</div>
+
+				<div class="grapple">
+
+					<div class="grapple-calc addition-wrapper">
+						<label>Grapple
+						</label>
+						<label>Total
+							<input type="number" name="attr_grapple-total" value="@{grapple-bcb} + @{grapple-str} + @{grapple-misc}" disabled="true" />
+						</label>
+						<div class="plus-label">=
+						</div>
+						<label>BCB
+							<input type="number" name="attr_grapple-bcb" value="@{bcb}" disabled="true" />
+						</label>
+						<div class="plus-label">+
+						</div>
+						<label>STR
+							<input type="number" name="attr_grapple-str" value="@{StrMod}" disabled="true" />
+						</label>
+						<div class="plus-label">+
+						</div>
+						<label>Misc
+							<input type="number" name="attr_grapple-misc" value="0" />
+						</label>
+						<# Maybe I need a better way of doing these plus-box-type-things #>
+					</div>
+				</div>
+
+				<input type="hidden" name="attr_initiative" value="@{bcb} + @{DexMod}" disabled="true"/>
+
+
+				<div class="melee-attack">
+					<div class="side-box">
+						<label>Melee Atk
+						</label>
+						<input type="number" name="attr_melee-atk"/>		
+					</div>
+				</div>
+
+				<div class="ranged-attack">
+					<div class="side-box">
+						<label>Ranged Atk
+						</label>
+						<input type="number" name="attr_ranged-atk"/>		
+					</div>
+				</div>
+
+				<div class="initiative">
+					<div class="side-box">
+						<label>Initiative
+						</label>
+						<input type="number" name="attr_wounded-val"/>				
+					</div>
+				</div>
+
+				<div class="repeating-attacks">
+					<fieldset class="repeating_attacks">
+						<div class="attack-box topbar-table">
+							<label>Attack
+								<input type="text" name="attr_attack-name" />
+							</label>
+							<label>Atk Bonus
+								<input type="number" value='0' name="attr_attack-bonus" />
+							</label>
+							<label>Damage
+								<input type="number"  value='0' name="attr_attack-damage" />
+							</label>
+							<select name="attr_attack-damage-die">
+								<option value="d4"> D4
+								</option>
+								<option value="d6"> D6
+								</option>
+								<option value="d8"> D8
+								</option>
+								<option value="d10"> D10
+								</option>
+								<option value="d12"> D12
+								</option>
+								<option value="d0"> None
+								</option>
+							</select>
+							<label>Type
+								<input type="text" name="attr_attack-type" />
+							</label>
+							<label>Range
+								<input type="text" name="attr_attack-range" />
+							</label>
+							<label>Notes
+								<textarea name="attr_attack-notes">
+								</textarea>
+							</label>
+							<button type='roll' value='\&{template:attack} {{name=@{attack-name}}} {{type=@{attack-type}}} {{attack=[[1d20 + [[@{attack-bonus}]]]]}} {{damage=[[1@{attack-damage-die} + [[@{attack-damage}]]]]}}' name='roll_attack' class='rollButton'>
+							</button>
+
+						</div>
+					</fieldset>
+				</div>
+			</div>
+
+			<div class="feats">
+				<div class="sectionHeader">FEATS
+				</div>
+				<textarea name="attr_feats">
+				</textarea>
+				<# Do something nice here. But may have to be just a js thing? Or whatever the click-button-to-extend thing is #>
+			</div>
+		</div>
+	</div>
+
+	<div class="tab-notes page">
+		<div class="page-notes">
+			<div class="header-table">
+				<div class="sectionHeader">NOTES
+				</div>
+				<textarea name="attr_notes">
 				</textarea>
 			</div>
-
-		</div>
-
-		<div class="special-abilities">
-
-			<div class="sectionHeader">SPECIAL ABILITIES
-			</div>
-
-			<textarea name="attr_special-abilities">
-			</textarea>
-
-			<# Do something cool here. Like feats. But what? #>
-
-		</div>
-
-		<div class="attacks">
-
-			<div class="sectionHeader"> ATTACKS
-			</div>
-
-			<div class="bcb side-box">
-				<label>BCB
-				</label>
-				<input type="number" name="attr_bcb"/>
-				<label>(Base Combat Bonus)
-				</label>
-			</div>
-
-			<div class="grapple">
-
-				<div class="grapple-calc addition-wrapper">
-					<label>Grapple
-					</label>
-					<label>Total
-						<input type="number" name="attr_grapple-total" value="@{grapple-bcb} + @{grapple-str} + @{grapple-misc}" disabled="true" />
-					</label>
-					<div class="plus-label">=
-					</div>
-					<label>BCB
-						<input type="number" name="attr_grapple-bcb" value="@{bcb}" disabled="true" />
-					</label>
-					<div class="plus-label">+
-					</div>
-					<label>STR
-						<input type="number" name="attr_grapple-str" value="@{StrMod}" disabled="true" />
-					</label>
-					<div class="plus-label">+
-					</div>
-					<label>Misc
-						<input type="number" name="attr_grapple-misc" value="0" />
-					</label>
-					<# Maybe I need a better way of doing these plus-box-type-things #>
-				</div>
-			</div>
-
-			<input type="hidden" name="attr_initiative" value="@{bcb} + @{DexMod}" disabled="true"/>
-
-
-			<div class="melee-attack">
-				<div class="side-box">
-					<label>Melee Atk
-					</label>
-					<input type="number" name="attr_melee-atk"/>		
-				</div>
-			</div>
-
-			<div class="ranged-attack">
-				<div class="side-box">
-					<label>Ranged Atk
-					</label>
-					<input type="number" name="attr_ranged-atk"/>		
-				</div>
-			</div>
-
-			<div class="initiative">
-				<div class="side-box">
-					<label>Initiative
-					</label>
-					<input type="number" name="attr_wounded-val"/>				
-				</div>
-			</div>
-
-			<div class="repeating-attacks">
-				<fieldset class="repeating_attacks">
-					<div class="attack-box topbar-table">
-						<label>Attack
-							<input type="text" name="attr_attack-name" />
-						</label>
-						<label>Atk Bonus
-							<input type="number" value='0' name="attr_attack-bonus" />
-						</label>
-						<label>Damage
-							<input type="number"  value='0' name="attr_attack-damage" />
-						</label>
-						<select name="attr_attack-damage-die">
-							<option value="d4"> D4
-							</option>
-							<option value="d6"> D6
-							</option>
-							<option value="d8"> D8
-							</option>
-							<option value="d10"> D10
-							</option>
-							<option value="d12"> D12
-							</option>
-							<option value="d0"> None
-							</option>
-						</select>
-						<label>Type
-							<input type="text" name="attr_attack-type" />
-						</label>
-						<label>Range
-							<input type="text" name="attr_attack-range" />
-						</label>
-						<label>Notes
-							<textarea name="attr_attack-notes">
-							</textarea>
-						</label>
-						<button type='roll' value='\&{template:attack} {{name=@{attack-name}}} {{type=@{attack-type}}} {{attack=[[1d20 + [[@{attack-bonus}]]]]}} {{damage=[[1@{attack-damage-die} + [[@{attack-damage}]]]]}}' name='roll_attack' class='rollButton'>
-						</button>
-
-					</div>
-				</fieldset>
-			</div>
-		</div>
-
-		<div class="feats">
-			<div class="sectionHeader">FEATS
-			</div>
-			<textarea name="attr_feats">
-			</textarea>
-			<# Do something nice here. But may have to be just a js thing? Or whatever the click-button-to-extend thing is #>
 		</div>
 	</div>
-</div>
 
-<div class="tab-notes page">
-	<div class="page-notes">
-		<div class="header-table">
-			<div class="sectionHeader">NOTES
+	<div class="tab-skills page">
+		<div class="page-skills">
+			<div class="header-table">
+				<div class="sectionHeader">SKILLS
+				</div>
+				<textarea name="attr_notes">
+				</textarea>
 			</div>
-			<textarea name="attr_notes">
-			</textarea>
 		</div>
 	</div>
-</div>
 
 </div>
 
