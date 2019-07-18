@@ -3,7 +3,7 @@
 <% macro abilityTemplate(abbreviation, name) %>
 
 
-<button type='roll' value='\&{template:default} {{name=Roll <$ abbreviation $> Check}} {{<$ abbreviation $>=[[1d20 + [[@{<$ abbreviation $>Mod}]]]]}}' name='roll_<$ name $>' class='ability1st rollButton'>
+<button type='roll' value='\&{template:default} {{name=Roll <$ abbreviation $> Check}} {{<$ abbreviation $>=[[1d20 + [[@{<$ abbreviation $>Mod}]] - [[@{bloodiedCondition} + @{woundedCondition}]]]]}}' name='roll_<$ name $>' class='ability1st rollButton'>
 </button>
 
 <div class="abilityTitlecard ability2nd">
@@ -52,6 +52,9 @@
 <# End macro section #>
 
 <div class="full-sheet">
+
+	<input type="hidden" name="attr_initiative" value="@{bcb} + @{DexMod}" disabled="true"/>
+	<input type="hidden" name="attr_zero_val" value="0" disabled="true"/>
 	<input type="radio" name="attr_page" class="sheet-tab tab-main" value="1" checked="checked"><span>MAIN</span>
 	<input type="radio" name="attr_page" class="sheet-tab tab-skills" value="2"><span>SKILLS</span>
 	<input type="radio" name="attr_page" class="sheet-tab tab-notes" value="3"><span>NOTES</span>
@@ -179,7 +182,7 @@
 
 			</div>
 
-			<div class="skills header-table">
+			<div class="skills-disp header-table">
 
 				<div class="sectionHeader">SKILLS
 				</div>
@@ -193,7 +196,7 @@
 				<div class="skill">
 					<$ skill $>
 				</div>
-				<input type="number" value="0" name="attr_skill_<$ cleanSkill $>">
+				<input type="number" disabled="true" name="attr_skill_<$ cleanSkill $>_disp" value="@{skill_<$ cleanSkill $>}">
 				<% endfor %>
 			</div>
 
@@ -467,8 +470,6 @@
 					</div>
 				</div>
 
-				<input type="hidden" name="attr_initiative" value="@{bcb} + @{DexMod}" disabled="true"/>
-
 
 				<div class="melee-attack">
 					<div class="side-box">
@@ -517,6 +518,8 @@
 								</option>
 								<option value="d12"> D12
 								</option>
+								<option value="d20"> D20
+								</option>
 								<option value="d0"> None
 								</option>
 							</select>
@@ -530,7 +533,7 @@
 								<textarea name="attr_attack-notes">
 								</textarea>
 							</label>
-							<button type='roll' value='\&{template:attack} {{name=@{attack-name}}} {{type=@{attack-type}}} {{attack=[[1d20 + [[@{attack-bonus}]]]]}} {{damage=[[1@{attack-damage-die} + [[@{attack-damage}]]]]}}' name='roll_attack' class='rollButton'>
+							<button type='roll' value='\&{template:attack} {{name=@{attack-name}}} {{type=@{attack-type}}} {{attack=[[1d20 + [[@{attack-bonus}]] - [[@{bloodiedCondition} + @{woundedCondition}]]]]}} {{damage=[[1@{attack-damage-die} + [[@{attack-damage}]]]]}}' name='roll_attack' class='rollButton'>
 							</button>
 
 						</div>
@@ -564,8 +567,87 @@
 			<div class="header-table">
 				<div class="sectionHeader">SKILLS
 				</div>
-				<textarea name="attr_notes">
-				</textarea>
+
+				<div class="skill-row">
+					<div class="skill-roll"></div>
+					<div class="skill-name">
+						Name
+					</div>
+					<div class="skill-total">
+						Total
+					</div>
+					<div class="skill-mod">
+						Mod
+					</div>
+					<div class="skill-ranks">
+						Ranks
+					</div>
+					<div class="skill-misc">
+						Misc
+					</div>
+					<div class="skill-mod-select">
+						Ability
+					</div>
+				</div>
+
+
+				<% set skills = ["Acrobatics","Appraise","Bluff","Climb","Concentration","Decipher Script","Diplomacy","Disguise","Escape Artist","Fly","Forgery","Gather Information","Handle Animal","Heal","Intimidate","Perception","Ride","Search","Sense Motive","Sleight of Hand","Spellcraft","Stealth","Survival","Swim","Tamper"] %>
+
+				<% for skill in skills %>
+				<% set cleanSkill = skill.replace(" ","_") %>
+				<div class="base_skills skill-row">
+					<button type='roll' value='\&{template:default} {{name=<$ skill $> Check}} {{<$ skill $>=[[1d20 + [[@{skill_<$ cleanSkill $>}]]]]}}' name='roll_skill<$ cleanSkill $>' class='rollButton skill-roll'>
+					</button>
+					<div class="skill-name">
+						<$ skill $>
+					</div>
+					<input class="skill-total" type="number" value="@{attr_skill_mod_<$ cleanSkill $>} + @{attr_skill_ranks_<$ cleanSkill $>}+ @{attr_skill_misc_<$ cleanSkill $>} - [[@{bloodiedCondition} + @{woundedCondition}]]" name="attr_skill_<$ cleanSkill $>">
+					<input class="skill-mod" disabled="true" type="number" value="@{skill_mod_select_<$ cleanSkill $>}" name="attr_skill_mod_<$ cleanSkill $>">
+					<input class="skill-ranks" type="number" value="0" name="attr_skill_ranks_<$ cleanSkill $>">
+					<input class="skill-misc" type="number" value="0" name="attr_skill_misc_<$ cleanSkill $>">
+					<select class="skill-mod-select" name="attr_skill_mod_select_<$ cleanSkill $>">
+						<option value="0">None
+						</option>
+						<option value="@{STRMod}">Str
+						</option>
+						<option value="@{DEXMod}">Dex
+						</option>
+						<option value="@{CONMod}">Con
+						</option>
+						<option value="@{INTMod}">Int
+						</option>
+						<option value="@{WISMod}">Wis
+						</option>
+						<option value="@{CHAMod}">Cha
+						</option>
+					</select>
+				</div>
+				<% endfor %>
+				<fieldset class="repeating_skills skill-row">
+					<button type='roll' value='\&{template:default} {{name=@{skill_name} Check}} {{@{skill_name}=[[1d20 + [[@{skill}]]]]}}' name='roll_skill' class='rollButton skill-roll'>
+					</button>
+					<input class="skill-name" type="text" name="attr_skill_name">
+					<input class="skill-total" type="number" value="@{skill_mod} + @{skill_ranks} + @{skill_misc} - [[@{bloodiedCondition} + @{woundedCondition}]]" name="attr_skill">
+					<input class="skill-mod" disabled="true" type="number" value="@{skill_mod_select}" name="attr_skill_mod">
+					<input class="skill-ranks" type="number" value="0" name="attr_skill_ranks">
+					<input class="skill-misc" type="number" value="0" name="attr_skill_misc">
+					<select class="skill-mod-select" name="attr_skill_mod_select">
+						<option value="0">None
+						</option>
+						<option value="@{STRMod}">Str
+						</option>
+						<option value="@{DEXMod}">Dex
+						</option>
+						<option value="@{CONMod}">Con
+						</option>
+						<option value="@{INTMod}">Int
+						</option>
+						<option value="@{WISMod}">Wis
+						</option>
+						<option value="@{CHAMod}">Cha
+						</option>
+					</select>
+				</fieldset>
 			</div>
 		</div>
 	</div>

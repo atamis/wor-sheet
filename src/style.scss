@@ -5,6 +5,11 @@
   margin: 0 auto;
 }
 
+input:disabled {
+  text-align: center;
+  background-color: #F0F0F0
+}
+
 input, textarea {
   padding:0px;
   margin-bottom:0px;
@@ -159,16 +164,10 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
 	grid-area: Abilities;
 }
 
-.sheet-skills {
-  display: grid;
-  grid-template-columns: minmax(0,0.5fr) [Name] minmax(0,1.5fr) [Value] minmax(0,1fr);
-  grid-template-rows: minmax(0,2.5em);
-	grid-area: Skills;
-}
 
-.sheet-skills > .sheet-skill {
-  font-size: .8em;
-  align-self: center;
+
+.sheet-skill-disp {
+	grid-area: Skills;
 }
 
 .sheet-languages {
@@ -552,6 +551,36 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
 
 .sheet-belowLabel {
   font-size: .5em;
+}
+
+
+.sheet-skills-disp {
+  display: grid;
+  grid-template-columns: minmax(0,0.5fr) [Name] minmax(0,1.5fr) [Value] minmax(0,1fr);
+  grid-template-rows: minmax(0,2.5em);
+       grid-area: Skills;
+}
+
+.sheet-skills-disp > .sheet-skill {
+  font-size: .8em;
+  align-self: center;
+}
+
+// Skills page-specific stuff
+
+.sheet-skill-row {
+  display: grid;
+  grid-template-columns: [Button] minmax(0,0.5fr) 
+                        [Name] minmax(0,1.5fr) 
+                        [Total] minmax(0,1fr)
+                        [Mod] minmax(0,1fr)
+                        [Ranks] minmax(0,1fr)
+                        [Misc] minmax(0,1fr)
+                        [Select] minmax(0,2fr);
+}
+
+.sheet-skill-row > .sheet-skill-name {
+  align-self: center;
 }
 
 
