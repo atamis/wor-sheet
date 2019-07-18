@@ -190,13 +190,13 @@
 				<% set skills = ["Acrobatics","Appraise","Bluff","Climb","Concentration","Decipher Script","Diplomacy","Disguise","Escape Artist","Fly","Forgery","Gather Information","Handle Animal","Heal","Intimidate","Perception","Ride","Search","Sense Motive","Sleight of Hand","Spellcraft","Stealth","Survival","Swim","Tamper"] %>
 
 				<% for skill in skills %>
-				<% set cleanSkill = skill.replace(" ","_") %>
-				<button type='roll' value='\&{template:default} {{name=<$ skill $> Check}} {{<$ skill $>=[[1d20 + [[@{skill_<$ cleanSkill $>}]]]]}}' name='roll_skill<$ cleanSkill $>' class='rollButton'>
+				<% set cleanSkill = skill | replace(" ","_") %>
+				<button type='roll' value='\&{template:default} {{name=<$ skill $> Check}} {{<$ skill $>=[[1d20 + [[@{skill_<$ cleanSkill $>_tot}]]]]}}' name='roll_skill<$ cleanSkill $>' class='rollButton'>
 				</button>
 				<div class="skill">
 					<$ skill $>
 				</div>
-				<input type="number" disabled="true" name="attr_skill_<$ cleanSkill $>_disp" value="@{skill_<$ cleanSkill $>}">
+				<input type="number" disabled="true" name="attr_skill_<$ cleanSkill $>_disp" value="@{skill_<$ cleanSkill $>_tot}">
 				<% endfor %>
 			</div>
 
@@ -594,14 +594,14 @@
 				<% set skills = ["Acrobatics","Appraise","Bluff","Climb","Concentration","Decipher Script","Diplomacy","Disguise","Escape Artist","Fly","Forgery","Gather Information","Handle Animal","Heal","Intimidate","Perception","Ride","Search","Sense Motive","Sleight of Hand","Spellcraft","Stealth","Survival","Swim","Tamper"] %>
 
 				<% for skill in skills %>
-				<% set cleanSkill = skill.replace(" ","_") %>
+				<% set cleanSkill = skill | replace(" ","_") %>
 				<div class="base_skills skill-row">
 					<button type='roll' value='\&{template:default} {{name=<$ skill $> Check}} {{<$ skill $>=[[1d20 + [[@{skill_<$ cleanSkill $>}]]]]}}' name='roll_skill<$ cleanSkill $>' class='rollButton skill-roll'>
 					</button>
 					<div class="skill-name">
 						<$ skill $>
 					</div>
-					<input class="skill-total" type="number" value="@{attr_skill_mod_<$ cleanSkill $>} + @{attr_skill_ranks_<$ cleanSkill $>}+ @{attr_skill_misc_<$ cleanSkill $>} - [[@{bloodiedCondition} + @{woundedCondition}]]" name="attr_skill_<$ cleanSkill $>">
+					<input class="skill-total" type="number" value="@{attr_skill_mod_<$ cleanSkill $>} + @{attr_skill_ranks_<$ cleanSkill $>}+ @{attr_skill_misc_<$ cleanSkill $>} - [[@{bloodiedCondition} + @{woundedCondition}]]" name="attr_skill_<$ cleanSkill $>_tot">
 					<input class="skill-mod" disabled="true" type="number" value="@{skill_mod_select_<$ cleanSkill $>}" name="attr_skill_mod_<$ cleanSkill $>">
 					<input class="skill-ranks" type="number" value="0" name="attr_skill_ranks_<$ cleanSkill $>">
 					<input class="skill-misc" type="number" value="0" name="attr_skill_misc_<$ cleanSkill $>">
@@ -623,30 +623,32 @@
 					</select>
 				</div>
 				<% endfor %>
-				<fieldset class="repeating_skills skill-row">
-					<button type='roll' value='\&{template:default} {{name=@{skill_name} Check}} {{@{skill_name}=[[1d20 + [[@{skill}]]]]}}' name='roll_skill' class='rollButton skill-roll'>
-					</button>
-					<input class="skill-name" type="text" name="attr_skill_name">
-					<input class="skill-total" type="number" value="@{skill_mod} + @{skill_ranks} + @{skill_misc} - [[@{bloodiedCondition} + @{woundedCondition}]]" name="attr_skill">
-					<input class="skill-mod" disabled="true" type="number" value="@{skill_mod_select}" name="attr_skill_mod">
-					<input class="skill-ranks" type="number" value="0" name="attr_skill_ranks">
-					<input class="skill-misc" type="number" value="0" name="attr_skill_misc">
-					<select class="skill-mod-select" name="attr_skill_mod_select">
-						<option value="0">None
-						</option>
-						<option value="@{STRMod}">Str
-						</option>
-						<option value="@{DEXMod}">Dex
-						</option>
-						<option value="@{CONMod}">Con
-						</option>
-						<option value="@{INTMod}">Int
-						</option>
-						<option value="@{WISMod}">Wis
-						</option>
-						<option value="@{CHAMod}">Cha
-						</option>
-					</select>
+				<fieldset class="repeating_skills">
+					<div class="skill-row">
+						<button type='roll' value='\&{template:default} {{name=@{skill_name} Check}} {{@{skill_name}=[[1d20 + [[@{skill}]]]]}}' name='roll_skill' class='rollButton skill-roll'>
+						</button>
+						<input class="skill-name" type="text" name="attr_skill_name">
+						<input class="skill-total" type="number" value="@{skill_mod} + @{skill_ranks} + @{skill_misc} - [[@{bloodiedCondition} + @{woundedCondition}]]" name="attr_skill_tot">
+						<input class="skill-mod" disabled="true" type="number" value="@{skill_mod_select}" name="attr_skill_mod">
+						<input class="skill-ranks" type="number" value="0" name="attr_skill_ranks">
+						<input class="skill-misc" type="number" value="0" name="attr_skill_misc">
+						<select class="skill-mod-select" name="attr_skill_mod_select">
+							<option value="0">None
+							</option>
+							<option value="@{STRMod}">Str
+							</option>
+							<option value="@{DEXMod}">Dex
+							</option>
+							<option value="@{CONMod}">Con
+							</option>
+							<option value="@{INTMod}">Int
+							</option>
+							<option value="@{WISMod}">Wis
+							</option>
+							<option value="@{CHAMod}">Cha
+							</option>
+						</select>
+					</div>
 				</fieldset>
 			</div>
 		</div>
