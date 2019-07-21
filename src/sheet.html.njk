@@ -601,7 +601,7 @@
 					<div class="skill-name">
 						<$ skill $>
 					</div>
-					<input class="skill-total" type="number" value="@{attr_skill_mod_<$ cleanSkill $>} + @{attr_skill_ranks_<$ cleanSkill $>}+ @{attr_skill_misc_<$ cleanSkill $>} - [[@{bloodiedCondition} + @{woundedCondition}]]" name="attr_skill_<$ cleanSkill $>_tot">
+					<input class="skill-total" type="number" disabled="true" value="@{skill_mod_<$ cleanSkill $>} + @{skill_ranks_<$ cleanSkill $>}+ @{skill_misc_<$ cleanSkill $>} - [[@{bloodiedCondition} + @{woundedCondition}]]" name="attr_skill_<$ cleanSkill $>_tot">
 					<input class="skill-mod" disabled="true" type="number" value="@{skill_mod_select_<$ cleanSkill $>}" name="attr_skill_mod_<$ cleanSkill $>">
 					<input class="skill-ranks" type="number" value="0" name="attr_skill_ranks_<$ cleanSkill $>">
 					<input class="skill-misc" type="number" value="0" name="attr_skill_misc_<$ cleanSkill $>">
@@ -628,7 +628,7 @@
 						<button type='roll' value='\&{template:default} {{name=@{skill_name} Check}} {{@{skill_name}=[[1d20 + [[@{skill}]]]]}}' name='roll_skill' class='rollButton skill-roll'>
 						</button>
 						<input class="skill-name" type="text" name="attr_skill_name">
-						<input class="skill-total" type="number" value="@{skill_mod} + @{skill_ranks} + @{skill_misc} - [[@{bloodiedCondition} + @{woundedCondition}]]" name="attr_skill_tot">
+						<input class="skill-total" disabled="true" type="number" value="@{skill_mod} + @{skill_ranks} + @{skill_misc} - [[@{bloodiedCondition} + @{woundedCondition}]]" name="attr_skill_tot">
 						<input class="skill-mod" disabled="true" type="number" value="@{skill_mod_select}" name="attr_skill_mod">
 						<input class="skill-ranks" type="number" value="0" name="attr_skill_ranks">
 						<input class="skill-misc" type="number" value="0" name="attr_skill_misc">
