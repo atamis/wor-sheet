@@ -10,9 +10,14 @@ input:disabled {
   background-color: #F0F0F0
 }
 
-input, textarea {
+input, textarea, select {
   padding:0px;
   margin-bottom:0px;
+  display: block !important;
+  border-radius: 0px;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
 }
 
 div {
@@ -35,6 +40,9 @@ button {
 .sheet-rollbutton {
   max-width: 15px;
   max-height: 15px;
+  border-radius: 0px;
+  background: transparent;
+  border: none;
 }
 
 // Tabbing
@@ -75,13 +83,13 @@ input[type=radio].sheet-tab-skills:checked ~ .sheet-tab-skills
 
  input[type=radio].sheet-tab-main.sheet-tab,
 input[type=radio].sheet-tab-main.sheet-tab + span {
-    right: 191px;
+    right: 194px;
     width: 45px;
 }
 
  input[type=radio].sheet-tab-skills.sheet-tab,
 input[type=radio].sheet-tab-skills.sheet-tab + span {
-    right: 136px;
+    right: 138px;
     width: 50px;
 }
 
@@ -112,6 +120,7 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
   max-width:100vh;
   min-width:800px;
   min-height:1600px;
+  grid-gap:5px;
 }
 
 .sheet-full-sheet > * > div, .sheet-leftWrapper > div, .sheet-rightWrapper > div {
@@ -317,11 +326,7 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
 .sheet-attack-box > :nth-child(2) {flex-basis:15%}
 .sheet-attack-box > :nth-child(3) {flex-basis:12%}
 
-.sheet-attack-box > :nth-child(4) {
-  flex-basis:8%;
-  position: relative;
-  top:10px;
-}
+.sheet-attack-box > :nth-child(4) {flex-basis:14%}
 .sheet-attack-box > :nth-child(5) {flex-basis:10%}
 .sheet-attack-box > :nth-child(6) {flex-basis:5%}
 .sheet-attack-box > :nth-child(7) {flex-basis:25%}
@@ -383,19 +388,27 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
 .sheet-topbar-table {
   display:flex;
   flex-wrap: wrap;
-  padding-bottom:.5em;
+  padding: 0px;
 }
 
-.sheet-topbar-table > label > input, .sheet-topbar-table > label > textarea {
+.sheet-topbar-table > label > input, .sheet-topbar-table > label > textarea, .sheet-topbar-table > label > select {
   display:inline-block;
   position:relative;
   height:1.35em;
   width: 100% !important;
+  color: black;
 }
 
 .sheet-topbar-table > label {
   display:inline-block;
   font-size:.8em;
+  border: white 1px solid;
+  background: black;
+  color: white;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .sheet-topbar-table > * {
@@ -412,10 +425,6 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
   flex-basis:45%;
   font-size:1em;
   text-align: left;
-}
-
-.sheet-armor-box > :nth-child(1) > :first-child {
-  top:-.25em
 }
 
 .sheet-armor-box > :nth-child(2) {flex-basis:15%}

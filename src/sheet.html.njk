@@ -24,7 +24,7 @@
 
 <% macro saveTemplate(name) %>
 
-<button type='roll' value='\&{template:default} {{name=Roll <$ name $> Save}} {{<$ abbreviation $>=[[1d20 + [[@{save<$ name $>}]]]]}}' name='roll_save<$ name $>' class='save1st rollButton'>
+<button type='roll' value='&{template:default} {{name=Roll <$ name $> Save}} {{<$ abbreviation $>=[[1d20 + [[@{Save<$ name $>Tot}]]]]}}' name='roll_save<$ name $>' class='save1st rollButton'>
 </button>
 
 <div class="saveTitlecard save2nd">
@@ -41,7 +41,7 @@
 <% set value = 0 %>
 <% endif %>
 
-<input class="totSaveScore save3rd" type="number" name="attr_Save<$ name $>" value="@{save<$ name $>Base} + @{save<$ name $>Mod} + @{miscSaveMod<$ name $>}" disabled="true">
+<input class="totSaveScore save3rd" type="number" name="attr_Save<$ name $>Tot" value="@{save<$ name $>Base} + @{save<$ name $>Mod} + @{miscSaveMod<$ name $>}" disabled="true">
 <input class="saveBase save4th" type="number" name="attr_save<$ name $>Base" value="0">
 <input class="saveMod save5th" type="number" name="attr_save<$ name $>Mod" value="<$ value $>" disabled="true">
 <input class="miscMod save6th" type="number" name="attr_miscSaveMod<$ name $>" value="0">    
@@ -203,6 +203,7 @@
 			<div class="languages header-table">
 				<div class="sectionHeader">LANGUAGES
 				</div>
+				<br>
 				<textarea name="attr_languages">
 				</textarea>
 			</div>
@@ -507,22 +508,24 @@
 							<label>Damage
 								<input type="number"  value='0' name="attr_attack-damage" />
 							</label>
-							<select name="attr_attack-damage-die">
-								<option value="d4"> D4
-								</option>
-								<option value="d6"> D6
-								</option>
-								<option value="d8"> D8
-								</option>
-								<option value="d10"> D10
-								</option>
-								<option value="d12"> D12
-								</option>
-								<option value="d20"> D20
-								</option>
-								<option value="d0"> None
-								</option>
-							</select>
+							<label>Dam Die
+								<select name="attr_attack-damage-die">
+									<option value="d4"> D4
+									</option>
+									<option value="d6"> D6
+									</option>
+									<option value="d8"> D8
+									</option>
+									<option value="d10"> D10
+									</option>
+									<option value="d12"> D12
+									</option>
+									<option value="d20"> D20
+									</option>
+									<option value="d0"> None
+									</option>
+								</select>
+							</label>
 							<label>Type
 								<input type="text" name="attr_attack-type" />
 							</label>
@@ -533,7 +536,7 @@
 								<textarea name="attr_attack-notes">
 								</textarea>
 							</label>
-							<button type='roll' value='\&{template:attack} {{name=@{attack-name}}} {{type=@{attack-type}}} {{attack=[[1d20 + [[@{attack-bonus}]] - [[@{bloodiedCondition} + @{woundedCondition}]]]]}} {{damage=[[1@{attack-damage-die} + [[@{attack-damage}]]]]}}' name='roll_attack' class='rollButton'>
+							<button type='roll' value='&{template:attack} {{name=@{attack-name}}} {{type=@{attack-type}}} {{attack=[[1d20 + [[@{attack-bonus}]] - [[@{bloodiedCondition} + @{woundedCondition}]]]]}} {{damage=[[1@{attack-damage-die} + [[@{attack-damage}]]]]}} {{critDamage=[[[[1@{attack-damage-die} + [[@{attack-damage}]]]]+[[1@{attack-damage-die} + [[@{attack-damage}]]]]]]}}' name='roll_attack' class='rollButton'>
 							</button>
 
 						</div>
@@ -544,8 +547,19 @@
 			<div class="feats">
 				<div class="sectionHeader">FEATS
 				</div>
-				<textarea name="attr_feats">
-				</textarea>
+				<div class="repeating_feats_wrapper">
+					<fieldset class="repeating_feats">
+						<div class="feat-box topbar-table">
+							<button type="roll" value='&{template:special} {{name=@{feat-name}}} {{desc=@{feat-desc}}}' name="roll_feat" class="rollButton"></button>
+							<label>Name
+								<input type="text" name="feat-name" />
+							</label>
+							<label>Description
+
+							</label>
+						</div>
+					</fieldset>
+				</div>
 				<# Do something nice here. But may have to be just a js thing? Or whatever the click-button-to-extend thing is #>
 			</div>
 		</div>
@@ -557,6 +571,8 @@
 				<div class="sectionHeader">NOTES
 				</div>
 				<textarea name="attr_notes">
+				</textarea>
+				<textarea name="attr_feats">
 				</textarea>
 			</div>
 		</div>
@@ -596,12 +612,12 @@
 				<% for skill in skills %>
 				<% set cleanSkill = skill | replace(" ","_") %>
 				<div class="base_skills skill-row">
-					<button type='roll' value='\&{template:default} {{name=<$ skill $> Check}} {{<$ skill $>=[[1d20 + [[@{skill_<$ cleanSkill $>}]]]]}}' name='roll_skill<$ cleanSkill $>' class='rollButton skill-roll'>
+					<button type='roll' value='\&{template:default} {{name=<$ skill $> Check}} {{<$ skill $>=[[1d20 + [[@{skill_<$ cleanSkill $>_tot}]]]]}}' name='roll_skill<$ cleanSkill $>' class='rollButton skill-roll'>
 					</button>
 					<div class="skill-name">
 						<$ skill $>
 					</div>
-					<input class="skill-total" type="number" disabled="true" value="@{skill_mod_<$ cleanSkill $>} + @{skill_ranks_<$ cleanSkill $>}+ @{skill_misc_<$ cleanSkill $>} - [[@{bloodiedCondition} + @{woundedCondition}]]" name="attr_skill_<$ cleanSkill $>_tot">
+					<input class="skill-total" type="number" disabled="true" value="@{skill_mod_<$ cleanSkill $>} + @{skill_ranks_<$ cleanSkill $>}+ @{skill_misc_<$ cleanSkill $>} - @{bloodiedCondition} - @{woundedCondition}" name="attr_skill_<$ cleanSkill $>_tot">
 					<input class="skill-mod" disabled="true" type="number" value="@{skill_mod_select_<$ cleanSkill $>}" name="attr_skill_mod_<$ cleanSkill $>">
 					<input class="skill-ranks" type="number" value="0" name="attr_skill_ranks_<$ cleanSkill $>">
 					<input class="skill-misc" type="number" value="0" name="attr_skill_misc_<$ cleanSkill $>">
@@ -625,10 +641,10 @@
 				<% endfor %>
 				<fieldset class="repeating_skills">
 					<div class="skill-row">
-						<button type='roll' value='\&{template:default} {{name=@{skill_name} Check}} {{@{skill_name}=[[1d20 + [[@{skill}]]]]}}' name='roll_skill' class='rollButton skill-roll'>
+						<button type='roll' value='\&{template:default} {{name=@{skill_name} Check}} {{@{skill_name}=[[1d20 + [[@{skill_tot}]]]]}}' name='roll_skill' class='rollButton skill-roll'>
 						</button>
 						<input class="skill-name" type="text" name="attr_skill_name">
-						<input class="skill-total" disabled="true" type="number" value="@{skill_mod} + @{skill_ranks} + @{skill_misc} - [[@{bloodiedCondition} + @{woundedCondition}]]" name="attr_skill_tot">
+						<input class="skill-total" disabled="true" type="number" value="@{skill_mod} + @{skill_ranks} + @{skill_misc} - @{bloodiedCondition} - @{woundedCondition}" name="attr_skill_tot">
 						<input class="skill-mod" disabled="true" type="number" value="@{skill_mod_select}" name="attr_skill_mod">
 						<input class="skill-ranks" type="number" value="0" name="attr_skill_ranks">
 						<input class="skill-misc" type="number" value="0" name="attr_skill_misc">
@@ -678,9 +694,18 @@
 		</div>
 		{{#damage}}
 		<div>
-			<span class="tcat">Damage:
-			</span>{{damage}}
-		</div>
+			{{#rollWasCrit() attack}}
+			<div>
+				<span class="tcat">Crit Damage:
+				</span>{{critDamage}}
+			</div>
+			{{/rollWasCrit() attack}}
+			{{#^rollWasCrit() attack}}
+			<div>
+				<span class="tcat">Damage:
+				</span>{{damage}}
+			</div>
+			{{/^rollWasCrit() attack}}
 		{{/damage}}
 	</div>
 </rolltemplate>
