@@ -123,6 +123,14 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
   grid-gap:5px;
 }
 
+.sheet-rollButton {
+    border-radius: 0;
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
 .sheet-full-sheet > * > div, .sheet-leftWrapper > div, .sheet-rightWrapper > div {
 	//border: 2px dashed black;
 	margin: 2px;
@@ -258,6 +266,7 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
 	grid-area: Conditions;
   display: grid;
   grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  grid-template-rows: 3em;
   grid-auto-flow:column; 
   align-self: start;
   min-height: 50%;
@@ -314,7 +323,7 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
 }
 
 .sheet-attack-box {
-  margin-bottom: 5px;
+  margin-top: 25px;
 
 }
 .sheet-attack-box > :nth-child(1) {
@@ -439,14 +448,20 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
   grid-area: Feats;
   display: grid;
   align-items: stretch;
-  grid-template-rows: 2em 1fr;
+  grid-template-rows: 2.75em 1fr;
 }
 
 .sheet-feats > .sheet-sectionHeader {
   grid-row-start: 1;
 }
 
-.sheet-feats > textarea { grid-row-start: 2}
+.sheet-feats-box > .sheet-rollButton {
+  flex-basis: 20%;
+}
+
+.sheet-feats-box.sheet-topbar-table > :nth-child(2) {
+  flex-basis:30%;
+}
 
 .sheet-saving-throws {
   display: grid;
