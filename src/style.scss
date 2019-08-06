@@ -5,7 +5,10 @@
   margin: 0 auto;
 }
 
-input:disabled {
+input[disabled="true"] {
+  background: transparent;
+  border: 0;
+  font-family: fantasy;
   text-align: center;
   background-color: #F0F0F0
 }
@@ -76,14 +79,28 @@ input[type=radio].sheet-tab {
 
 input[type=radio].sheet-tab-main:checked ~ .sheet-tab-main,
 input[type=radio].sheet-tab-notes:checked ~ .sheet-tab-notes,
+input[type=radio].sheet-tab-spells:checked ~ .sheet-tab-spells,
+input[type=radio].sheet-tab-equipment:checked ~ .sheet-tab-equipment,
 input[type=radio].sheet-tab-skills:checked ~ .sheet-tab-skills
 {
     display: block;
 }
 
+ input[type=radio].sheet-tab-spells.sheet-tab,
+input[type=radio].sheet-tab-spells.sheet-tab + span {
+    right: 243px;
+    width: 52px;
+}
+
+ input[type=radio].sheet-tab-equipment.sheet-tab,
+input[type=radio].sheet-tab-equipment.sheet-tab + span {
+    right: 193px;
+    width: 45px;
+}
+
  input[type=radio].sheet-tab-main.sheet-tab,
 input[type=radio].sheet-tab-main.sheet-tab + span {
-    right: 194px;
+    right: 299px;
     width: 45px;
 }
 
@@ -115,7 +132,7 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
   display: grid;
   grid-template-columns: 1.35fr 0.83fr 0.7fr 1.2fr;
   // grid-template-rows: 0.7fr 0.8fr 1fr 0.6fr 0.6fr 2.4fr 1.2fr 0.4fr 1.4fr;
-  grid-template-areas: "Header Header Header Portrait" "Abilities Skills Languages Portrait" "Abilities Skills Hit-Points Hit-Points" "Conditions Skills Hit-Points Hit-Points" "Conditions Skills Armor-Class Armor-Class" "Attacks Attacks Armor-Class Armor-Class" "Attacks Attacks Saving-Throws Saving-Throws" "Feats Feats Saving-Throws Saving-Throws" "Feats Feats Special-Abilities Special-Abilities";
+  grid-template-areas: "Header Header Header NONE" "Abilities Skills Hit-Points Hit-Points" "Abilities Skills Hit-Points Hit-Points" "Conditions Skills Armor-Class Armor-Class" "Languages Skills Armor-Class Armor-Class" "Attacks Attacks Saving-Throws Saving-Throws" "Attacks Attacks Saving-Throws Saving-Throws" "Feats Feats Special-Abilities Special-Abilities" "Feats Feats Special-Abilities Special-Abilities";
   max-height:200vh;
   max-width:100vh;
   min-width:800px;
@@ -170,15 +187,12 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
   flex-grow:1;
 }
 
-.sheet-portrait {
-	grid-area: Portrait;
-}
-
 .sheet-abilities{
   display: grid;
   grid-template-columns: minmax(0,0.6fr) [Ability-Name] minmax(0,0.8fr) [Total-Score] minmax(0,0.8fr) [Mod] minmax(0,0.8fr) [Base-Score] minmax(0,.8fr) [Temp-Mod] minmax(0,.8fr);
   grid-template-rows: minmax(0,2.5em) .5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-area: Abilities;
+  max-height: 420px;
 }
 
 
@@ -189,7 +203,7 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
 
 .sheet-languages {
 	grid-area: Languages;
-  min-height: 5em;
+  min-height: 3em;
 	display: grid;
 	align-items: stretch;
 	grid-template-rows: minmax(0,2.3em) 1fr;
@@ -469,6 +483,7 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
   grid-template-rows: minmax(0,2.5em) .5fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas: ". . . . . . ." ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods" ". . . . . . Conditional-Mods";
   grid-area: Saving-Throws;
+  max-height: 250px;
 }
 
 .sheet-saving-throws > .sheet-totSaveScore, .sheet-saving-throws > .sheet-saveMod, .sheet-saving-throws > .sheet-saveBase, .sheet-saving-throws > .sheet-miscMod {
@@ -583,6 +598,7 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
   grid-template-columns: minmax(0,0.5fr) [Name] minmax(0,1.5fr) [Value] minmax(0,1fr);
   grid-template-rows: minmax(0,2.5em);
        grid-area: Skills;
+  max-height: 650px;
 }
 
 .sheet-skills-disp > .sheet-skill {

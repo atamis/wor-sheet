@@ -56,8 +56,10 @@
 	<input type="hidden" name="attr_initiative" value="@{bcb} + @{DexMod}" disabled="true"/>
 	<input type="hidden" name="attr_zero_val" value="0" disabled="true"/>
 	<input type="radio" name="attr_page" class="sheet-tab tab-main" value="1" checked="checked"><span>MAIN</span>
-	<input type="radio" name="attr_page" class="sheet-tab tab-skills" value="2"><span>SKILLS</span>
-	<input type="radio" name="attr_page" class="sheet-tab tab-notes" value="3"><span>NOTES</span>
+	<input type="radio" name="attr_page" class="sheet-tab tab-equipment" value="2"><span>EQUIP</span>
+	<input type="radio" name="attr_page" class="sheet-tab tab-spells" value="3"><span>SPELLS</span>
+	<input type="radio" name="attr_page" class="sheet-tab tab-skills" value="4"><span>SKILLS</span>
+	<input type="radio" name="attr_page" class="sheet-tab tab-notes" value="5"><span>NOTES</span>
 
 	<div class="tab-main page">
 		<div class="page-main">
@@ -95,10 +97,6 @@
 				<label class="skin">Skin
 					<input type="text" name="attr_skin" />
 				</label>
-			</div>
-
-			<div class="portrait">
-				<input type="file" name="attr_portrait" accept="image/png image/jpg"/>
 			</div>
 
 			<div class="abilities header-table">
@@ -670,6 +668,14 @@
 				</fieldset>
 			</div>
 		</div>
+	</div>
+
+	<div class="tab-equipment page">
+
+	</div>
+
+	<div class="tab-spells page">
+
 	</div>
 
 </div>
