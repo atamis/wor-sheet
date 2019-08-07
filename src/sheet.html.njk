@@ -671,11 +671,44 @@
 	</div>
 
 	<div class="tab-equipment page">
+		<div class="page-equipment">
 
+		</div>
 	</div>
 
-	<div class="tab-spells page">
+<% macro spellTemplate(level) %>
 
+<div class="spells-box"> 
+	<div class="sectionHeader"><$ level $>
+	</div>
+	<div class="spells-wrapper">
+		<fieldset class="repeating_spells-<$ level $>">
+			<div class="spell-box topbar-table">
+				<button type="roll" value="&{template:spell} {{name=@{spell-name}}} {{desc=@{spell-desc}}} {{action=[[@{spell-action}]] + 1d0}} " name="roll-spell" class="rollButton"></button>
+				<label>Name
+					<input type="text" name="attr_spell-name">
+				</label>
+				<label>Action
+					<input type="text" name="attr_spell-action" class="tooltip">
+					<span class="tooltiptext">/roll 1d20 or DC 15 for example</span>
+				</label>
+				<label>Description
+					<input type="text" name="attr_spell-desc">
+				</label>
+			</div>
+		</fieldset>
+	</div>
+</div>
+ 
+<% endmacro %>
+
+	<div class="tab-spells page">
+		<div class="page-spells">
+			<% set spells=["Cantrips","Level 1","Level 2","Level 3","Special"] %>
+			<% for spell in spells %>
+			<$ spellTemplate(spell) $>
+			<% endfor %>
+		</div>
 	</div>
 
 </div>
@@ -715,5 +748,22 @@
 			</div>
 			{{/^rollWasCrit() attack}}
 		{{/damage}}
+	</div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-spell">
+	<div class="container">
+		<div>
+			<h1>{{name}}
+			</h1>
+		</div>
+		<div class="rowcolor">
+			<span class="tcat">Action
+			</span>{{action}}
+		</div>
+		<div >
+			<span class="tcat">Description
+			</span>{{desc}}
+		</div>
 	</div>
 </rolltemplate>

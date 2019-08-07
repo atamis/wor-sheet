@@ -624,8 +624,54 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
   width:90%;
 }
 
+// Spells page stuff
+
+.sheet-page-spells {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px; 
+  justify-items:center;
+}
+
+.sheet-spells-box {
+  grid-column-end: span 1;
+  width:100%;
+}
+
+.sheet-spell-box {display:flex}
+.sheet-spell-box > * {flex-grow: 1}
+.sheet-spell-box > :nth-child(1) {flex-basis: 10%}
+.sheet-spell-box > :nth-child(2) {flex-basis: 40%}
+.sheet-spell-box > :nth-child(3) {flex-basis: 20%}
+.sheet-spell-box > :nth-child(4) {flex-basis: 95%}
 
 
+/* Tooltip container */
+.sheet-tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.sheet-tooltip .sheet-tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  width: 120px;
+  bottom: 100%;
+  left: 50%; 
+  margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.sheet-tooltip:hover .sheet-tooltiptext {
+  visibility: visible;
+}
 
 // Thanks to the roll20 official 5e character sheet, whose buttons I'm a huge fan of
 .repcontrol {
@@ -778,8 +824,6 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
     color: #4A57ED;
     border: none;
 }
-
-
 
 // Only to be used for override of roll20 things 
 
