@@ -445,8 +445,7 @@
 				<div class="grapple">
 
 					<div class="grapple-calc addition-wrapper">
-						<label>Grapple
-						</label>
+						<button class="text-button" type="roll" value="&{template:attack} {{name=Grapple}} {{miscAttack=[[1d20+[[@{grapple-total}]]]]}}">Grapple</button>	
 						<label>Total
 							<input type="number" name="attr_grapple-total" value="@{grapple-bcb} + @{grapple-str} + @{grapple-misc}" disabled="true" />
 						</label>
@@ -547,16 +546,11 @@
 				</div>
 				<div class="repeating_feats_wrapper">
 					<fieldset class="repeating_feats">
-						<div class="feats-box topbar-table">
-							<button type="roll" value='&{template:special} {{name=@{feat-name}}} {{desc=@{feat-desc}}}' name="roll_feat" class="rollButton"></button>
-							<label>Name
-								<input type="text" name="feat-name" />
-							</label>
-							<label>Description
-								<textarea name="feat-desc">
-									
-								</textarea>
-							</label>
+						<div class="feats-box">
+							<button type="roll" value='&{template:simple} {{name=@{feat-name}}} {{content=@{feat-desc}}}' name="roll_feat" class="rollButton"></button>
+							<input type="text" name="attr_feat-name" title="Name" class="feat-name"/>
+							<textarea name="attr_feat-desc">
+							</textarea>
 						</div>
 					</fieldset>
 				</div>
@@ -682,19 +676,139 @@
 	<div class="sectionHeader"><$ level $>
 	</div>
 	<div class="spells-wrapper">
-		<fieldset class="repeating_spells-<$ level $>">
-			<div class="spell-box topbar-table">
-				<button type="roll" value="&{template:spell} {{name=@{spell-name}}} {{desc=@{spell-desc}}} {{action=[[@{spell-action}]] + 1d0}} " name="roll-spell" class="rollButton"></button>
-				<label>Name
-					<input type="text" name="attr_spell-name">
-				</label>
-				<label>Action
-					<input type="text" name="attr_spell-action" class="tooltip">
-					<span class="tooltiptext">/roll 1d20 or DC 15 for example</span>
-				</label>
-				<label>Description
-					<input type="text" name="attr_spell-desc">
-				</label>
+		<fieldset class="repeating_spells-<$ level | replace(" ","_") $>">
+			<div class="spell-box">
+				<input type="checkbox" class="spell-toggle editButton" name="attr_spell-editing" value="1">
+				<span disabled="true" value="@{spell-name}" name="attr_spell-name_r" class="spell-toggle spell-title"> 
+					<button type="roll" value="&{template:spell} {{name=@{spell-name}}} {{desc=@{spell-desc}}} {{action=[[@{spell-roll}]]}} " name="roll-spell" class="spell-toggle rollButton">
+					</button>
+				</span>
+				<div class="display">
+                    <input type="hidden" name="attr_rollcontent" value="&{template:spell} {{level=@{spellschool} @{spelllevel}}}  {{name=@{spellname}}} {{castingtime=@{spellcastingtime}}} {{range=@{spellrange}}} {{target=@{spelltarget}}} @{spellcomp_v} @{spellcomp_s} @{spellcomp_m} {{material=@{spellcomp_materials}}} {{duration=@{spellduration}}} {{description=@{spelldescription}}} {{athigherlevels=@{spellathigherlevels}}} @{spellritual} {{innate=@{innate}}} @{spellconcentration} @{charname_output}">
+                    <button class="spellcard" type="roll" name="roll_spell" value="@{rollcontent}">
+                        <input type="hidden" name="attr_spellprepared"><span class="prep"></span>
+                        <span class="spellname" name="attr_spellname"></span>
+                    </button>
+                    <input type="hidden" class="spellritual" name="attr_spellritual" value="0">
+                    <input type="hidden" class="spellconcentration" name="attr_spellconcentration" value="0">
+                    <span class="spellritual">R</span>
+                    <span class="spellconcentration">C</span>
+                </div>	
+
+                <div class="spell-toggle spell-editgroup spell">
+                    <div class="row">
+                        <span  >NAME:</span>
+                        <input type="text" name="attr_spellname">
+                    </div>
+<!--                     <div class="row">
+                        <span  >SCHOOL:</span>
+                        <select name="attr_spellschool">
+                            <option value="abjuration"  >Abjuration</option>
+                            <option value="conjuration"  >Conjuration</option>
+                            <option value="divination"  >Divination</option>
+                            <option value="enchantment"  >Enchantment</option>
+                            <option value="evocation"  >Evocation</option>
+                            <option value="illusion"  >Illusion</option>
+                            <option value="necromancy"  >Necromancy</option>
+                            <option value="transmutation"  >Transmutation</option>
+                        </select>
+                        <input type="checkbox" name="attr_spellritual" value="{{ritual=1}}">
+                        <span  >RITUAL</span>
+                    </div> -->
+<!--                     <div class="row">
+                        <span  >CASTING TIME:</span>
+                        <input type="text" name="attr_spellcastingtime">
+                    </div>-->
+	                <div class="row">
+                        <span  >RANGE:</span><input type="text" name="attr_spellrange">
+                    </div>
+                    <div class="row">
+                        <span  >TARGET:</span><input type="text" name="attr_spelltarget">
+                    </div>
+                    <input type="hidden" name="attr_spellcomp">
+                    <div class="row">
+                        <span  >COMPONENTS:</span><input type="checkbox" name="attr_spellcomp_v" value="{{v=1}}" checked="checked">
+                        <span  >V</span><input type="checkbox" name="attr_spellcomp_s" value="{{s=1}}" checked="checked"><span  >S</span><input type="checkbox" name="attr_spellcomp_m" value="{{m=1}}" checked="checked"><span  >M</span><input type="text" name="attr_spellcomp_materials" style="margin-left: 17px;" placeholder="ruby dust worth 50gp" data-i18n-placeholder="ruby-dust-place">
+                    </div>
+                    <div class="row">
+                        <input type="checkbox" name="attr_spellconcentration" value="{{concentration=1}}"><span  >CONCENTRATION</span>
+                    </div>
+                    <div class="row">
+                        <span  >DURATION:</span><input type="text" name="attr_spellduration">
+                    </div>
+<!--                     <div class="row">
+                        <span  >INNATE:</span>
+                        <input type="text" name="attr_innate" placeholder="1/day" value="">
+                    </div>
+ -->                <div class="row attack-toggle">
+                        <span  >ATTACK</span><input type="checkbox" name="attr_spelloutput">
+                    </div>
+                    <input type="hidden" class="spellattackinfoflag" name="attr_spelloutput">
+                    <div class="spellattackinfo attack-toggle">
+                        <div class="row">
+                            <span  >SPELL ATTACK:</span><select name="attr_spellattack">
+                                <option value="None"  >None</option>
+                                <option value="Melee"  >Melee</option>
+                                <option value="Melee"  >Ranged</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <span  >DAMAGE:</span><input type="text" name="attr_spelldamage" style="width: 50px;"><span  >TYPE:</span><input type="text" name="attr_spelldamagetype" style="width: 103px;">
+                        </div>
+                        <div class="row">
+                            <span  >DAMAGE2:</span><input type="text" name="attr_spelldamage2" style="width: 45px;"><span  >TYPE:</span><input type="text" name="attr_spelldamagetype2" style="width: 103px;">
+                        </div>
+                        <div class="row">
+                            <span  >HEALING:</span><input type="text" name="attr_spellhealing" style="width: 45px;">
+                        </div>
+                        <div class="row">
+                            <input type="checkbox" name="attr_spelldmgmod" value="Yes"><span>ADD ABILITY MOD TO DAMAGE OR HEALING</span>
+                        </div>
+                        <div class="row">
+                            <span  >SAVING THROW:</span><select name="attr_spellsave">
+                                <option value="" selected="selected"  >NONE</option>
+                                <option value="Strength"  >STR</option>
+                                <option value="Dexterity"  >DEX</option>
+                                <option value="Constitution"  >CON</option>
+                                <option value="Intelligence"  >INT</option>
+                                <option value="Wisdom"  >WIS</option>
+                                <option value="Charisma"  >CHA</option>
+                            </select><span  >EFFECT:</span><input type="text" name="attr_spellsavesuccess" style="width: 78px;" placeholder="Half damage" data-i18n-placeholder="npc-atk-effect-place">
+                        </div>
+                        <div class="row">
+                            <span  >HIGHER LVL CAST DMG:</span><input type="text" name="attr_spellhldie" placeholder="1" style="width: 15px; text-align: right;"><select name="attr_spellhldietype">
+                                <option value="" selected="selected"  >NONE</option>
+                                <option value="d4">d4</option>
+                                <option value="d6">d6</option>
+                                <option value="d8">d8</option>
+                                <option value="d10">d10</option>
+                                <option value="d12">d12</option>
+                                <option value="d20">d20</option>
+                            </select><span>+</span><input type="text" name="attr_spellhlbonus" placeholder="0" style="width: 15px; text-align: center;">
+                        </div>
+                        <div class="row">
+                            <span  >INCLUDE SPELL DESCRIPTION IN ATTACK:</span><select name="attr_includedesc">
+                                <option value="on"  >On</option>
+                                <option value="off" selected="selected"  >Off</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span  >DESCRIPTION:</span>
+                    </div>
+                    <div class="row">
+                        <textarea name="attr_spelldescription"></textarea>
+                    </div>
+                    <div class="row">
+                        <span  >AT HIGHER LEVELS:</span>
+                    </div>
+                    <div class="row">
+                        <textarea name="attr_spellathigherlevels" style="height: 36px; min-height: 36px;"></textarea>
+                    </div>
+                    <input type="hidden" name="attr_spellattackid">
+                    <input type="hidden" name="attr_spelllevel">
+                    <input type="hidden" name="attr_rollbase">
+                </div>
 			</div>
 		</fieldset>
 	</div>
@@ -715,24 +829,47 @@
 
 
 <!-- ROLL TEMPLATES -->
+
+<rolltemplate class="sheet-rolltemplate-simple">
+	<div class="container">
+		<div>
+			<h1>{{name}}
+			</h1>	
+		</div>
+		<span class="rolltemplate-simple-content">
+			{{content}}
+		</span>
+	</div>
+</rolltemplate>
+
 <rolltemplate class="sheet-rolltemplate-attack">
 	<div class="container">
 		<div>
 			<h1>{{name}}
 			</h1>
 		</div>
+		{{#type}}
 		<div>
 			<span class="subheader">{{type}}
 			</span>
 		</div>
+		{{/type}}
 		<div class="arrow-container">
 			<div class="arrow-right">
 			</div>
 		</div>
+		{{#attack}}
 		<div class="rowcolor">
 			<span class="tcat">Attack:
 			</span>{{attack}} vs AC
 		</div>
+		{{/attack}}
+		{{#miscAttack}}
+		<div class="rowcolor">
+			<span class="tcat">
+			</span>{{miscAttack}}
+		</div>
+		{{/miscAttack}}		
 		{{#damage}}
 		<div>
 			{{#rollWasCrit() attack}}
@@ -747,6 +884,7 @@
 				</span>{{damage}}
 			</div>
 			{{/^rollWasCrit() attack}}
+		</div>
 		{{/damage}}
 	</div>
 </rolltemplate>
