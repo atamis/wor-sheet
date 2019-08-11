@@ -116,6 +116,7 @@ standalone CSS file. For example, `_partial.scss` can be imported with
 ```
 
 This is relative to the `src` directory. Also note the lack of extension.
+Note that Roll20 does not permit ID CSS selectors.
 
 
 ## Compatability Notes
@@ -133,8 +134,7 @@ Note that Roll20 prepends `sheet-` all non-permited class names. Permitted class
 names start with `attr`, `roll`, or `repeating_`. To make Roll20-less
 development easier, `full.html` includes Javascript which makes the same changes
 to the sheet. Additionally note that Roll20 converts all `id` selectors found in
-your stylesheets to class selectors, so this project is configured to do the
-same, although somewhat crudely.
+your stylesheets to class selectors.
 
 Note that, although a `r20` Javascript module has been supplied, it is currently
 a very thin wrapper over Roll20's provided functions. At this time, it provides
