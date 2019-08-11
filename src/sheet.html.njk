@@ -666,7 +666,42 @@
 
 	<div class="tab-equipment page">
 		<div class="page-equipment">
-
+			<div class="money-wrapper">
+                <div class="coin">
+                    <span class="label">CP</span>
+                    <input type="text" name="attr_cp" title="@{cp}">
+                </div>
+                <div class="coin">
+                    <span class="label">SP</span>
+                    <input type="text" name="attr_sp" title="@{sp}">
+                </div>
+                <div class="coin">
+                    <span class="label">EP</span>
+                    <input type="text" name="attr_ep" title="@{ep}">
+                </div>
+                <div class="coin">
+                    <span class="label">GP</span>
+                    <input type="text" name="attr_gp" title="@{gp}">
+                </div>
+                <div class="coin">
+                    <span class="label">PP</span>
+                    <input type="text" name="attr_pp" title="@{pp}">
+                </div>
+			</div>
+			<div class="items-wrapper">
+				<div class="items-row">
+					<label>QTY</label>
+					<label>Description</label>
+					<label>WT</label>
+				</div>
+				<fieldset class="repeating_equipment">
+					<div class="items-row">
+						<input type="number" name="attr_equipment-num">				
+						<input type="text" name="attr_equipment-desc">
+						<input type="number" name="attr_equipment-wt">
+					</div>
+				</fieldset>
+			</div>
 		</div>
 	</div>
 
@@ -739,10 +774,8 @@
 <!--                     <div class="row">
                         <span  >INNATE:</span>
                         <input type="text" name="attr_innate" placeholder="1/day" value="">
-                    </div>
- -->                <div class="row attack-toggle">
-                        <span  >ATTACK</span><input type="checkbox" name="attr_spelloutput">
-                    </div>
+                    </div> -->
+                    <input type="checkbox" name="attr_spelloutput">Attack</input>
                     <input type="hidden" class="spellattackinfoflag" name="attr_spelloutput">
                     <div class="spellattackinfo attack-toggle">
                         <div class="row">

@@ -10,7 +10,6 @@ input[disabled="true"] {
   border: 0;
   font-family: fantasy;
   text-align: center;
-  background-color: #F0F0F0
 }
 
 input, textarea, select {
@@ -633,6 +632,92 @@ button[type=roll].sheet-text-button::before { content: ''; }
   align-self: center;
 }
 
+// Equipment page stuff
+
+.sheet-page-equipment {
+  display: grid;
+  grid-template-columns:1fr 3fr;
+}
+
+.sheet-money-wrapper {
+  grid-column-end:2;
+}
+
+.sheet-items-wrapper {
+  grid-column-start:2;
+  grid-column-end:4;
+}
+
+.sheet-items-row {
+  display:flex;
+}
+
+.sheet-items-row > :nth-child(1) {
+  flex-basis: 15%;
+}
+
+.sheet-items-row > :nth-child(2) {
+  flex-basis: 60%;
+}
+
+.sheet-items-row > :nth-child(3) {
+  flex-basis: 15%;
+}
+
+div .sheet-coin {
+    background-image: url(/images/dndstyling/copper.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    border-radius: 0;
+    margin: 5px 0;
+    background-color: transparent;
+    position: relative;
+    left: -9px;
+    height: 30px;
+    width: 75px;
+}
+
+div .sheet-coin .sheet-label {
+    position: relative;
+    margin: 0;
+    top: 5px;
+    left: 22px;
+    width: 15px;
+    height: 20px;
+    text-indent: -40px;
+    font-size: 6px;
+    line-height: 20px;
+    vertical-align: middle;
+    background-image: url(/images/dndstyling/copper.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+div .sheet-coin input {
+    position: relative;
+    top: 5px;
+    left: 17px;
+    width: 35px;
+    display: inline-block;
+    font-size: 12px;
+    padding: 0px;
+    border-radius: 0px;
+    color: black;
+    border: none;
+    background: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+    text-align: center;
+}
+
+.charsheet .sheet-coin span {
+    display: inline-block;
+    color: #A0A0A0;
+}
+
 // Skills page-specific stuff
 
 .sheet-skill-row {
@@ -733,7 +818,7 @@ button[type=roll].sheet-text-button::before { content: ''; }
 }
 
 .sheet-row {
-  display: block;
+  display: flex !important;
   width: 100%;
 }
 
@@ -751,7 +836,7 @@ button[type=roll].sheet-text-button::before { content: ''; }
   margin-top: 5px;
 }
 
-.sheet-editButton .sheet-editButton:before {
+.sheet-editButton .sheet-editButton::before {
   content: 'y';
   font-family: pictos;
 }
