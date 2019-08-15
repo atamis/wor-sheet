@@ -194,6 +194,8 @@ input[type=radio].sheet-tab-notes.sheet-tab + span {
   max-height: 420px;
 }
 
+.sheet-grapple .sheet-text-button {font-size: .8em !important;}
+
 button[type=roll].sheet-text-button::before { content: ''; }
 
 .sheet-text-button {
@@ -203,7 +205,6 @@ button[type=roll].sheet-text-button::before { content: ''; }
   box-shadow: none;
   color: none;
   border: none;
-  font-size: .8em !important;
 }
 
 .sheet-skill-disp {
@@ -664,6 +665,13 @@ button[type=roll].sheet-text-button::before { content: ''; }
   flex-basis: 15%;
 }
 
+div .sheet-copper .sheet-label{background-image: url(https://i.imgur.com/SE3D5Ia.png)}
+div .sheet-copper{background-image: url(https://app.roll20.net/images/dndstyling/copper.svg)}
+div .sheet-silver .sheet-label{background-image: url(https://i.imgur.com/b38oXC0.png)}
+div .sheet-silver{background-image: url(https://app.roll20.net/images/dndstyling/silver.svg)}
+div .sheet-gold .sheet-label{background-image: url(https://i.imgur.com/Kjryf6T.png)}
+div .sheet-gold{background-image: url(https://app.roll20.net/images/dndstyling/gold.svg)}
+
 div .sheet-coin {
     background-image: url(/images/dndstyling/copper.svg);
     background-position: center center;
@@ -686,11 +694,11 @@ div .sheet-coin .sheet-label {
     left: 22px;
     width: 15px;
     height: 20px;
-    text-indent: -40px;
+    text-indent: -16px;
     font-size: 6px;
     line-height: 20px;
     vertical-align: middle;
-    background-image: url(/images/dndstyling/copper.png);
+    float: left;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;

@@ -667,25 +667,17 @@
 	<div class="tab-equipment page">
 		<div class="page-equipment">
 			<div class="money-wrapper">
-                <div class="coin">
+                <div class="coin copper">
                     <span class="label">CP</span>
                     <input type="text" name="attr_cp" title="@{cp}">
                 </div>
-                <div class="coin">
+                <div class="coin silver">
                     <span class="label">SP</span>
                     <input type="text" name="attr_sp" title="@{sp}">
                 </div>
-                <div class="coin">
+                <div class="coin gold">
                     <span class="label">EP</span>
                     <input type="text" name="attr_ep" title="@{ep}">
-                </div>
-                <div class="coin">
-                    <span class="label">GP</span>
-                    <input type="text" name="attr_gp" title="@{gp}">
-                </div>
-                <div class="coin">
-                    <span class="label">PP</span>
-                    <input type="text" name="attr_pp" title="@{pp}">
                 </div>
 			</div>
 			<div class="items-wrapper">
@@ -714,20 +706,12 @@
 		<fieldset class="repeating_spells-<$ level | replace(" ","_") $>">
 			<div class="spell-box">
 				<input type="checkbox" class="spell-toggle editButton" name="attr_spell-editing" value="1">
-				<span disabled="true" value="@{spell-name}" name="attr_spell-name_r" class="spell-toggle spell-title"> 
-					<button type="roll" value="&{template:spell} {{name=@{spell-name}}} {{desc=@{spell-desc}}} {{action=[[@{spell-roll}]]}} " name="roll-spell" class="spell-toggle rollButton">
-					</button>
-				</span>
-				<div class="display">
+				<div class="display spell-title">
                     <input type="hidden" name="attr_rollcontent" value="&{template:spell} {{level=@{spellschool} @{spelllevel}}}  {{name=@{spellname}}} {{castingtime=@{spellcastingtime}}} {{range=@{spellrange}}} {{target=@{spelltarget}}} @{spellcomp_v} @{spellcomp_s} @{spellcomp_m} {{material=@{spellcomp_materials}}} {{duration=@{spellduration}}} {{description=@{spelldescription}}} {{athigherlevels=@{spellathigherlevels}}} @{spellritual} {{innate=@{innate}}} @{spellconcentration} @{charname_output}">
-                    <button class="spellcard" type="roll" name="roll_spell" value="@{rollcontent}">
+                    <button class="spellcard text-button" type="roll" name="roll_spell" value="@{rollcontent}">
                         <input type="hidden" name="attr_spellprepared"><span class="prep"></span>
                         <span class="spellname" name="attr_spellname"></span>
                     </button>
-                    <input type="hidden" class="spellritual" name="attr_spellritual" value="0">
-                    <input type="hidden" class="spellconcentration" name="attr_spellconcentration" value="0">
-                    <span class="spellritual">R</span>
-                    <span class="spellconcentration">C</span>
                 </div>	
 
                 <div class="spell-toggle spell-editgroup spell">
