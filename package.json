@@ -10,7 +10,7 @@
   "license": "GPL-3.0-or-later",
   "repository": "https://github.com/atamis/wor-sheet",
   "dependencies": {
-    "browserify": "^16.5.0",
+    "browserify": "^16.5.1",
     "del": "^5.1.0",
     "elementify": "^1.4.2",
     "event-stream": "^4.0.1",
@@ -23,7 +23,7 @@
     "gulp-terser": "^1.2.0",
     "gulp-uglify": "^3.0.2",
     "node-sass": "^4.13.1",
-    "nunjucks": "^3.2.0",
+    "nunjucks": "^3.2.1",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
   }
